@@ -1,4 +1,4 @@
-# FORM — Personal training log
+# AB-29 Training — Personal training log
 
 A self-contained black-and-gold training tracker. Upload `index.html` to GitHub Pages; no installation or build is needed.
 
@@ -55,3 +55,16 @@ New running sessions: Recovery 25, Easy 40, 6 × 400 m, Tempo blocks, and Long e
 Background references: [HYROX race format](https://hyrox.com/about-race/) and [Boston Athletic Association training guidance](https://www.baa.org/races/boston-marathon/info-for-athletes/boston-marathon-training/). The individual added workouts are not represented as official plans from either organisation.
 
 Replace the existing `index.html` in the same GitHub Pages repository to update. On opening the updated page, missing new templates are added automatically; saved history, an active workout and edited sessions are preserved. Refreshing does not add duplicates. Older backups still restore, with the new session library added. Export a backup before updating as a precaution.
+
+
+## Automatic workout emails
+
+Your supplied Web3Forms access key is configured. When you finish a session, the tracker saves it locally and submits a report to Web3Forms. The recipient is the address registered to that key, intended to be adam.brook94@gmail.com. The HTML cannot verify or override that recipient.
+
+Reports include exercise targets, every set (including uncompleted rows), weights, reps, time, distance, RPE, timestamps, elapsed duration, notes, screenshot references and the complete session as JSON in the email body. No paid attachment feature is required.
+
+Open History → Workout emails to change the key or switch automatic sending off. Keep the page open until submission finishes. History shows Web3Forms acceptance rather than claiming inbox delivery. Failed submissions can be retried. For unconfirmed network failures, check your inbox first to avoid duplicates. Refreshing never automatically resends old sessions.
+
+The default form key is included in the HTML for GitHub Pages use. Any override is saved in the browser separately from workout backups. Sending requires internet access and a valid Web3Forms form configuration.
+
+Automatic submission, full report content, error handling, retries and duplicate prevention were checked using simulated Web3Forms responses. Actual inbox delivery has not been verified.
