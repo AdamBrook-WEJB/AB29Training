@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="AB29 Training">
-<meta name="description" content="AB29 Training — a black and gold training log. Pick a session, work through it, and it remembers what you did last time.">
+<meta name="description" content="AB29 Training: a black and gold training log. Pick a session, work through it, and it remembers what you did last time.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%230B0A08%27/%3E%3Ctext x=%2732%27 y=%2745%27 text-anchor=%27middle%27 font-family=%27Impact,Arial Narrow,sans-serif%27 font-size=%2730%27 fill=%27%23F2C230%27%3EAB%3C/text%3E%3C/svg%3E">
 <title>AB29 Training</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap">
@@ -283,7 +283,7 @@ pre.example { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Conso
 <body>
 <div class="app" id="app">
   <header class="top">
-    <div class="wordmark"><h1>AB29</h1><span class="rule" aria-hidden="true"></span><span class="sub">Training</span></div>
+    <div class="wordmark"><h1>AB29</h1><span class="sub">Training</span></div>
     <div class="sync local" id="sync" title="Where your history is saved"><span class="dot"></span><span id="syncLabel">Saving on this device</span></div>
   </header>
 
@@ -330,7 +330,7 @@ const KINDS = {
   carry:  { label: 'Weight × metres', fields: [ { key:'kg', label:'kg', type:'num', step:'0.5' }, { key:'m', label:'m', type:'num', step:'5' } ] },
 };
 
-const TYPES = { strength:'Gym', run:'Run', hybrid:'Hybrid', home:'Home', other:'Other' };
+const TYPES = { strength:'Gym', run:'Run', bike:'Bike', hybrid:'Hybrid', home:'Home', other:'Other' };
 
 function ex(name, kind, sets, target, rest, extra) {
   return Object.assign({ id: slug(name), name, kind, sets, target: target || '', rest: rest == null ? 90 : rest, note: '' }, extra || {});
@@ -431,41 +431,69 @@ const BUILTIN_SESSIONS = [
   ]},
 
   /* ---- Running ---- */
-  { id:'run-easy', program:'Running', name:'Easy Run', type:'run', focus:'Zone 2 · conversational pace', exercises:[
+  { id:'run-easy', program:'Running', name:'Easy Run', type:'run', focus:'Zone 2 · conversational pace · Garmin: AB29 Easy Run', exercises:[
     ex('Easy Run','cardio',1,'30–45 min, easy enough to talk',0,{dist:5}),
   ]},
-  { id:'run-1k', program:'Running', name:'1km Repeats · HYROX Pace', type:'run', focus:'5 × 1km at race pace — the exact rep you do 8 times on race day', exercises:[
+  { id:'run-1k', program:'Running', name:'1km Repeats · HYROX Pace', type:'run', focus:'5 × 1km at race pace · Garmin: AB29 1km Repeats', exercises:[
     ex('Warm-Up Jog','cardio',1,'10 min easy + drills',0,{dist:1.5}),
     ex('1km Repeat','cardio',5,'HYROX race pace · 90s walk/jog between',90,{dist:1,note:'Aim for even splits — the last one should feel like the first'}),
     ex('Cool-Down Jog','cardio',1,'10 min easy',0,{dist:1.5}),
   ]},
-  { id:'run-intervals', program:'Running', name:'400m Repeats', type:'run', focus:'Speed · 6–8 × 400m', exercises:[
+  { id:'run-intervals', program:'Running', name:'400m Repeats', type:'run', focus:'Speed · 6–8 × 400m · Garmin: AB29 400m Repeats', exercises:[
     ex('Warm-Up Jog','cardio',1,'10 min easy + drills',0,{dist:1.5}),
     ex('400m Repeat','cardio',8,'400m hard · 90s jog between',90,{dist:0.4,note:'Start at 6 reps, build to 8 over the block'}),
     ex('Cool-Down Jog','cardio',1,'10 min easy',0,{dist:1.5}),
   ]},
-  { id:'run-tempo', program:'Running', name:'Tempo Run', type:'run', focus:'20 min comfortably hard', exercises:[
+  { id:'run-tempo', program:'Running', name:'Tempo Run', type:'run', focus:'20 min comfortably hard · Garmin: AB29 Tempo Run', exercises:[
     ex('Warm-Up','cardio',1,'10 min easy',0,{dist:1.5}),
     ex('Tempo Block','cardio',1,'20 min at roughly 10k pace',0,{dist:4}),
     ex('Cool-Down','cardio',1,'10 min easy',0,{dist:1.5}),
   ]},
-  { id:'run-fartlek', program:'Running', name:'Fartlek 30', type:'run', focus:'10 × 1 min hard / 2 min easy', exercises:[
+  { id:'run-fartlek', program:'Running', name:'Fartlek 30', type:'run', focus:'10 × 1 min hard / 2 min easy · Garmin: AB29 Fartlek 30', exercises:[
     ex('Warm-Up','cardio',1,'10 min easy',0,{dist:1.5}),
     ex('Fartlek Block','cardio',1,'30 min: 1 min hard / 2 min easy × 10',0,{dist:5.5}),
     ex('Cool-Down','cardio',1,'5 min easy',0,{dist:0.8}),
   ]},
-  { id:'run-hills', program:'Running', name:'Hill Repeats', type:'run', focus:'Strength · 8 × 45s uphill', exercises:[
+  { id:'run-hills', program:'Running', name:'Hill Repeats', type:'run', focus:'Strength · 8 × 45s uphill · Garmin: AB29 Hill Repeats', exercises:[
     ex('Warm-Up','cardio',1,'10 min easy',0,{dist:1.5}),
     ex('Hill Repeat','time',8,'45s hard uphill · walk back down',90),
     ex('Cool-Down','cardio',1,'10 min easy',0,{dist:1.5}),
   ]},
-  { id:'run-long', program:'Running', name:'Long Run', type:'run', focus:'Steady · 60–90 min', exercises:[
+  { id:'run-long', program:'Running', name:'Long Run', type:'run', focus:'Steady · 60–90 min · Garmin: AB29 Long Run', exercises:[
     ex('Long Run','cardio',1,'60–90 min steady, fuel after 45',0,{dist:12}),
   ]},
-  { id:'run-5k', program:'Running', name:'5k Time Trial', type:'run', focus:'Benchmark — repeat every 6–8 weeks', exercises:[
+  { id:'run-5k', program:'Running', name:'5k Time Trial', type:'run', focus:'Benchmark every 6–8 weeks · Garmin: AB29 5k Time Trial', exercises:[
     ex('Warm-Up','cardio',1,'10 min easy + 3 × 20s pick-ups',0,{dist:1.5}),
     ex('5k Time Trial','cardio',1,'All out · flat route or treadmill',0,{dist:5}),
     ex('Cool-Down','cardio',1,'5–10 min walk/jog',0,{dist:1}),
+  ]},
+
+  /* ---- Bike (matches the AB29 Garmin bike workouts) ---- */
+  { id:'bike-z2', program:'Bike', name:'Zone 2 Spin', type:'bike', focus:'40 min steady · Garmin: AB29 Zone 2 Spin', exercises:[
+    ex('Warm-Up','time',1,'5 min easy',0),
+    ex('Steady Zone 2','cardio',1,'40 min in Zone 2',0,{dist:20}),
+    ex('Cool-Down','time',1,'5 min easy',0),
+  ]},
+  { id:'bike-threshold', program:'Bike', name:'Threshold 3 × 10', type:'bike', focus:'3 × 10 min at threshold · Garmin: AB29 Threshold 3x10', exercises:[
+    ex('Warm-Up','time',1,'10 min building to Zone 2',0),
+    ex('Threshold Block','cardio',1,'3 × 10 min Zone 4 / 5 min easy',0,{dist:20}),
+    ex('Cool-Down','time',1,'5 min easy',0),
+  ]},
+  { id:'bike-vo2', program:'Bike', name:'VO2 6 × 3', type:'bike', focus:'6 × 3 min hard · Garmin: AB29 VO2 6x3', exercises:[
+    ex('Warm-Up','time',1,'10 min building to Zone 2',0),
+    ex('VO2 Block','cardio',1,'6 × 3 min Zone 5 / 3 min easy',0,{dist:15}),
+    ex('Cool-Down','time',1,'10 min easy',0),
+  ]},
+  { id:'bike-3030', program:'Bike', name:'30/30s', type:'bike', focus:'2 × 10 × (30s hard / 30s easy) · Garmin: AB29 30-30s', exercises:[
+    ex('Warm-Up','time',1,'10 min building to Zone 2',0),
+    ex('30/30 Set 1','cardio',1,'10 × (30s hard / 30s easy)',300,{dist:6}),
+    ex('30/30 Set 2','cardio',1,'10 × (30s hard / 30s easy)',0,{dist:6}),
+    ex('Cool-Down','time',1,'5 min easy',0),
+  ]},
+  { id:'bike-pyramid', program:'Bike', name:'Pyramid', type:'bike', focus:'1-2-3-4-3-2-1 min hard · Garmin: AB29 Pyramid', exercises:[
+    ex('Warm-Up','time',1,'10 min building to Zone 2',0),
+    ex('Pyramid Block','cardio',1,'1-2-3-4-3-2-1 min Zone 4, equal easy between',0,{dist:18}),
+    ex('Cool-Down','time',1,'5 min easy',0),
   ]},
 
   /* ---- HYROX (Men's Open standards) ---- */
@@ -599,7 +627,7 @@ const BUILTIN_SESSIONS = [
   { id:'free', program:'Other', name:'Free Session', type:'other', focus:'Blank — add exercises as you go', exercises:[] },
 ];
 
-const PROGRAM_ORDER = ['Push / Pull / Legs','Upper / Lower','Full Body','Running','HYROX','Conditioning','Home / Bodyweight','Other'];
+const PROGRAM_ORDER = ['Push / Pull / Legs','Upper / Lower','Full Body','Running','Bike','HYROX','Conditioning','Home / Bodyweight','Other'];
 /* ================= Utilities ================= */
 const $ = (sel, root) => (root || document).querySelector(sel);
 const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
@@ -1646,7 +1674,7 @@ function parsePaste(text) {
   }
   return out;
 }
-function guessType(s) { s = s.toLowerCase(); if (/run|cardio/.test(s)) return 'run'; if (/hybrid|hyrox|cross|condition/.test(s)) return 'hybrid'; if (/home|body/.test(s)) return 'home'; if (/gym|strength|weight/.test(s)) return 'strength'; return 'other'; }
+function guessType(s) { s = s.toLowerCase(); if (/bike|cycle|cycling|spin|turbo|wattbike/.test(s)) return 'bike'; if (/run|cardio/.test(s)) return 'run'; if (/hybrid|hyrox|cross|condition/.test(s)) return 'hybrid'; if (/home|body/.test(s)) return 'home'; if (/gym|strength|weight/.test(s)) return 'strength'; return 'other'; }
 
 /* ----- editor ----- */
 function openEditor(session, draftFromPaste) {
