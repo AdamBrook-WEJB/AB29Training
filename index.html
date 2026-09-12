@@ -698,7 +698,7 @@ const Beeper = { ctx: null, prime() { try { if (!Beeper.ctx) Beeper.ctx = new (w
 const S = {
   sessions: {},   // id -> session override / custom session / {id, deleted:true}
   logs: {},       // id -> completed session log
-  prefs: { units: 'kg', beep: true, setRpe: true, lastPick: '', updatedAt: 0 },
+  prefs: { units: 'kg', beep: true, setRpe: true, lastPick: '', emailOn: true, emailTo: 'adam.brook94@gmail.com', emailKey: 'e2d1ba2a-cbe0-4212-b7ae-69ece96d96e2', updatedAt: 0 },
   active: null,   // in-progress session
   tab: 'today',
   ui: { historyFilter: 'all', progressEx: '', editing: null, importOpen: false, libOpen: {} , expanded: {} },
@@ -709,6 +709,11 @@ const S = {
 const LS_KEY = 'graft.v1';
 const Store = {
   db: null,
+  mcp: null,
+  async connectMcp() {
+    if (!(window.claude && typeof window.claude.use === 'function')) return;
+    try { this.mcp = await window.claude.use('mcp'); } catch (e) { this.mcp = null; }
+  },
   loadLocal() {
     try { const raw = localStorage.getItem(LS_KEY); if (!raw) return; const d = JSON.parse(raw);
       S.sessions = d.sessions || {}; S.logs = d.logs || {}; S.prefs = Object.assign(S.prefs, d.prefs || {}); S.active = d.active || null;
@@ -974,6 +979,87 @@ function openModal(content) {
   return sheet;
 }
 function closeModal() { $('#modalRoot').innerHTML = ''; document.body.style.overflow = ''; }
+/* ================= Email a session summary =================
+   Inside the Claude link: sends through the viewer's Gmail connector (mcp capability).
+   On the GitHub copy (or anywhere fetch is allowed): posts to Web3Forms with the access key in Settings. */
+function sessionSubject(log) {
+  const bits = [fmtDur(log.duration), logHeadline(log)].filter(Boolean).join(', ');
+  return `AB29 Training: ${log.name} — ${fmtDate(log.finishedAt, { weekday: 'short', day: 'numeric', month: 'short' })} (${bits})`;
+}
+function sessionSummaryText(log, pbs) {
+  const lines = [];
+  lines.push(`AB29 TRAINING — ${String(log.name || '').toUpperCase()}`);
+  lines.push(`${log.program || ''}`.trim());
+  lines.push(`${fmtDate(log.finishedAt, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} · ${fmtTimeOfDay(log.startedAt)}–${fmtTimeOfDay(log.finishedAt)} · ${fmtDur(log.duration)}${log.rpe ? ` · RPE ${log.rpe}` : ''}`);
+  const vol = volumeOf(log), dist = distanceOf(log);
+  const totals = [];
+  if (vol > 0) totals.push(`${fmtNum(vol, 0)} ${S.prefs.units} lifted`);
+  if (dist > 0) totals.push(`${fmtNum(dist, 2)} km covered`);
+  const setsDone = (log.exercises || []).reduce((n, e) => n + (e.sets || []).length, 0);
+  totals.push(`${setsDone} set${setsDone === 1 ? '' : 's'}`);
+  lines.push(totals.join(' · '));
+  lines.push('');
+  (log.exercises || []).filter(e => (e.sets || []).length).forEach((e, i) => {
+    const sets = e.sets.map(s => fmtSet(e.kind, s, true)).join(', ');
+    lines.push(`${i + 1}. ${e.name}${e.target ? ` (${e.target})` : ''}`);
+    lines.push(`   ${sets}${e.note ? ` — ${e.note}` : ''}`);
+  });
+  if (pbs && pbs.length) {
+    lines.push('');
+    lines.push(pbs.length === 1 ? 'PERSONAL BEST' : 'PERSONAL BESTS');
+    pbs.forEach(p => lines.push(`• ${p.name} — ${p.label} ${p.value} (was ${p.prev})`));
+  }
+  if (log.notes) { lines.push(''); lines.push(`Notes: ${log.notes}`); }
+  lines.push('');
+  lines.push('Sent by AB29 Training');
+  return lines.join('\n');
+}
+function gmailErrorText(e) {
+  const code = e && e.code;
+  if (code === 'needs_reauth') return 'Email not sent — reconnect Gmail in claude.ai Settings → Connectors';
+  if (code === 'server_not_connected' || code === 'server_not_found') return 'Email not sent — add Gmail in claude.ai Settings → Connectors';
+  if (code === 'selection_required') return 'Email not sent — choose which Gmail account this page may use';
+  if (code === 'not_in_manifest' || code === 'consent_required') return 'Email not sent — Gmail access was declined for this page';
+  if (code === 'blocked_by_policy' || code === 'approval_required') return 'Email not sent — Gmail is blocked for this page by policy';
+  if (code === 'tool_error') return 'Gmail reported an error — session saved, email not sent';
+  if (code === 'server_unavailable' || code === 'upstream_error') return 'Gmail didn’t answer — the session is saved, try again from History';
+  if (code === 'cancelled') return 'Email cancelled';
+  return 'Email not sent — the session is saved';
+}
+async function emailSession(log, pbs, opts) {
+  opts = opts || {};
+  if (S.prefs.emailOn === false && !opts.force) return;
+  const to = String(S.prefs.emailTo || '').trim();
+  if (!to || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) { toast('Add a valid email address in Library → Settings first'); return; }
+  const subject = opts.subject || sessionSubject(log);
+  const body = opts.body || sessionSummaryText(log, pbs);
+  if (Store.mcp) {
+    try {
+      await Store.mcp.callTool('Gmail', 'send_message', { to: [to], subject, body });
+      toast(`Emailed to ${to}`);
+    } catch (e) { console.warn('gmail send failed', e); toast(gmailErrorText(e)); }
+    return;
+  }
+  const key = String(S.prefs.emailKey || '').trim();
+  if (!key) { toast('Add your Web3Forms key in Library → Settings to email sessions'); return; }
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ access_key: key, subject, from_name: 'AB29 Training', message: body }),
+    });
+    let j = {}; try { j = await r.json(); } catch (e) {}
+    if (r.ok && j && j.success) toast(`Emailed to ${to}`);
+    else toast('Email failed: ' + ((j && j.message) || ('HTTP ' + r.status)));
+  } catch (e) {
+    console.warn('web3forms send failed', e);
+    toast('Email couldn’t be sent from this page — the session is saved');
+  }
+}
+function sendTestEmail() {
+  const now = new Date().toISOString();
+  const sample = { name: 'Test', program: 'AB29 Training', startedAt: now, finishedAt: now, duration: 0, rpe: null, notes: 'If you can read this, session emails are working.', exercises: [] };
+  emailSession(sample, [], { force: true, subject: 'AB29 Training — test email', body: `This is a test from AB29 Training.\n\nSession summaries will arrive here each time you tap Save session.\n\nSent ${fmtDate(now, { weekday: 'long', day: 'numeric', month: 'long' })} at ${fmtTimeOfDay(now)}.` });
+}
 /* ================= Rendering ================= */
 function render() {
   ['today', 'history', 'progress', 'library'].forEach(t => {
@@ -1287,6 +1373,7 @@ function saveSession(rpe, notes, duration) {
     }
   }
   Store.putLog(log);
+  emailSession(log, pbs);
   S.active = null; Rest.stop(); Store.putActive(true);
   closeModal();
   const body = [el('div', { class: 'eyebrow' }, 'Saved'), el('h2', null, pbs.length ? (pbs.length === 1 ? 'New personal best' : `${pbs.length} personal bests`) : 'Session logged')];
@@ -1332,7 +1419,7 @@ function renderHistory() {
       const del = el('button', { class: 'btn ghost sm', type: 'button' }, 'Delete');
       let armed = false;
       del.addEventListener('click', () => { if (!armed) { armed = true; del.textContent = 'Tap again to delete'; del.classList.add('danger'); setTimeout(() => { armed = false; del.textContent = 'Delete'; del.classList.remove('danger'); }, 3000); return; } Store.delLog(l.id); toast('Session deleted'); renderHistory(); });
-      body.appendChild(el('div', { class: 'row between' }, el('span', { class: 'small faint' }, `${fmtTimeOfDay(l.startedAt)}–${fmtTimeOfDay(l.finishedAt)}`), del));
+      body.appendChild(el('div', { class: 'row between' }, el('span', { class: 'small faint' }, `${fmtTimeOfDay(l.startedAt)}–${fmtTimeOfDay(l.finishedAt)}`), el('div', { class: 'row' }, el('button', { class: 'btn ghost sm', type: 'button', onclick: () => emailSession(l, [], { force: true }) }, 'Email this session'), del)));
       item.appendChild(body);
     }
     list.appendChild(item);
@@ -1641,6 +1728,9 @@ function settings() {
   units.addEventListener('change', () => { S.prefs.units = units.value; Store.putPrefs(); toast(`Showing weights in ${units.value}`); });
   const beep = el('input', { type: 'checkbox', id: 'prefBeep', checked: !!S.prefs.beep }); beep.addEventListener('change', () => { S.prefs.beep = beep.checked; Store.putPrefs(); });
   const setRpe = el('input', { type: 'checkbox', id: 'prefSetRpe', checked: S.prefs.setRpe !== false }); setRpe.addEventListener('change', () => { S.prefs.setRpe = setRpe.checked; Store.putPrefs(); });
+  const emailOn = el('input', { type: 'checkbox', id: 'prefEmailOn', checked: S.prefs.emailOn !== false }); emailOn.addEventListener('change', () => { S.prefs.emailOn = emailOn.checked; Store.putPrefs(); });
+  const emailTo = el('input', { type: 'text', inputmode: 'email', autocomplete: 'email', id: 'prefEmailTo', value: S.prefs.emailTo || '', placeholder: 'you@example.com' }); emailTo.addEventListener('change', () => { S.prefs.emailTo = emailTo.value.trim(); Store.putPrefs(); });
+  const emailKey = el('input', { type: 'text', id: 'prefEmailKey', value: S.prefs.emailKey || '', placeholder: 'Web3Forms access key', autocomplete: 'off', spellcheck: 'false' }); emailKey.addEventListener('change', () => { S.prefs.emailKey = emailKey.value.trim(); Store.putPrefs(); });
   const importBox = el('textarea', { id: 'importBox', placeholder: 'Paste an AB29 Training backup (JSON) here', style: 'min-height:80px' });
   const fileIn = el('input', { type: 'file', id: 'importFile', accept: 'application/json,.json', style: 'display:none' });
   fileIn.addEventListener('change', () => { const f = fileIn.files[0]; if (!f) return; f.text().then(t => importJSON(t)); });
@@ -1657,6 +1747,13 @@ function settings() {
     ),
     importBox,
     el('button', { class: 'btn sm', type: 'button', onclick: () => importJSON(importBox.value) }, 'Import pasted backup'),
+    el('div', { class: 'divider' }),
+    el('h3', null, 'Email each session'),
+    el('p', { class: 'small muted' }, Store.mcp ? 'On this link, summaries are sent through your Gmail connector — claude.ai will ask you to allow it the first time.' : (Store.db ? 'Gmail sending isn’t available in this view, so the Web3Forms key below is used instead.' : 'On this copy, summaries are sent with your Web3Forms access key to the address that key was created for.')),
+    el('label', { class: 'check' }, emailOn, el('span', null, 'Email me a summary when I save a session')),
+    el('label', { class: 'field' }, el('span', null, 'Send to'), emailTo),
+    el('label', { class: 'field' }, el('span', null, 'Web3Forms access key'), emailKey),
+    el('div', { class: 'row' }, el('button', { class: 'btn sm', type: 'button', onclick: sendTestEmail }, 'Send test email')),
   );
 }
 function backupPayload() { return JSON.stringify({ app: 'graft', version: 1, exportedAt: new Date().toISOString(), sessions: S.sessions, logs: S.logs, prefs: S.prefs }); }
@@ -1694,6 +1791,7 @@ function start() {
   render();
   setInterval(clockTick, 1000);
   Store.connect().then(ok => { updateSync(); if (ok && !(S.tab === 'today' && S.active && document.activeElement && document.activeElement.tagName === 'INPUT')) render(); });
+  Store.connectMcp();
 }
 if (window.claude && window.claude.hot && typeof window.claude.hot.ready === 'function') window.claude.hot.ready(start); else start();
 </script>
