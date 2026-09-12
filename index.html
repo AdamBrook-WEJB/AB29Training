@@ -1,1493 +1,1701 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#10110f"><meta name="description" content="Your sessions, your pace. A personal training log with saved workouts and editable programmes."><title>AB-29 Training</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310110f'/%3E%3Cpath d='M5 25L13 7h6l8 18h-6l-1-4h-9l-1 4zM13 17h5l-2-6z' fill='%23edcc55'/%3E%3C/svg%3E"><style>
-:root{color-scheme:dark;--bg:#10110f;--panel:#191b17;--line:#34372d;--gold:#edcc55;--muted:#acae9f;--ink:#f5ebbe}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-offset:5px}button{cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}button,.button{border:1px solid var(--line);border-radius:8px;padding:11px 18px;background:transparent;color:var(--ink);font-weight:650;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}button:hover,.button:hover{background:#292c22}button.primary{background:var(--gold);color:#14160d;border-color:var(--gold)}button.primary:hover{background:#ffe486}.small{padding:7px 12px;font-size:14px}.muted{color:var(--muted)}.eyebrow{font-size:12px;font-weight:750;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}.shell{max-width:1240px;margin:auto;padding:0 40px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0;border-bottom:1px solid var(--line)}.brand{font-size:30px;font-weight:900;letter-spacing:-2px;color:var(--gold)}.brand span{display:inline-block;width:15px;height:25px;border-left:5px solid var(--gold);border-top:5px solid var(--gold);transform:skew(-14deg);margin-right:12px}nav{display:flex;gap:6px}nav button{border:0;color:var(--muted)}nav button[aria-current=page]{color:var(--gold);background:#27291d}.intro{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:38px 0 26px}h1{font-size:clamp(32px,5vw,48px);line-height:1.13;letter-spacing:-1.8px;margin:8px 0 12px}h2{font-size:24px;line-height:1.2;letter-spacing:-.6px;margin:8px 0 18px}h3{margin:0;font-size:18px}p{margin:8px 0 16px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:24px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:20px}.accent{border-top:3px solid var(--gold)}.row{display:flex;align-items:center;justify-content:space-between;gap:16px}.wrap{flex-wrap:wrap}.badge{font-size:12px;color:var(--gold);border:1px solid #615a31;border-radius:30px;padding:4px 10px;text-transform:uppercase;letter-spacing:1px}.field{display:block;font-size:14px;color:var(--muted);margin-bottom:16px}.field input,.field select,.field textarea{margin-top:7px}input,select,textarea{width:100%;min-width:0;background:#11130f;border:1px solid #474a3c;border-radius:7px;padding:12px;color:var(--ink)}textarea{resize:vertical;min-height:95px}select{color:var(--gold)}.session-list{margin:22px 0}.exercise{display:flex;gap:16px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line)}.number{color:var(--gold);font:700 14px ui-monospace,monospace;border:1px solid #4d4c30;border-radius:50%;height:34px;width:34px;display:grid;place-items:center;flex:none}.exercise .muted{font-size:14px}.exercise .done{background:var(--gold);color:#111}.exercise>div:nth-child(2){flex:1}.stat{font-size:48px;line-height:1.2;font-weight:750;letter-spacing:-2px;color:var(--gold)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:22px 0}.stats>div+div{border-left:1px solid var(--line);padding-left:20px}.hint{font-size:14px;color:var(--muted)}.large-num{font-size:72px;line-height:1;letter-spacing:-4px;font-weight:800;color:var(--gold)}progress{width:100%;height:5px;accent-color:var(--gold);margin:18px 0}progress::-webkit-progress-bar{background:#373a2c;border-radius:10px}progress::-webkit-progress-value{background:var(--gold);border-radius:10px}.set-grid{display:grid;grid-template-columns:45px 1fr 1fr 52px;gap:10px;align-items:center;margin-top:10px}.set-grid .field{margin:0}.check{padding:10px;font-size:20px}.checked{background:var(--gold);color:#111}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.history-item{padding:20px 0;border-bottom:1px solid var(--line)}.history-item:last-child{border:0}.history-item summary{cursor:pointer}.history-item p{white-space:pre-wrap}.history-item ul{padding-left:22px;color:var(--muted)}.notice{padding:12px 18px;border:1px solid #7d6630;background:#302913;color:var(--gold);border-radius:8px;margin:20px 0}.edit-grid{display:grid;grid-template-columns:2fr 2fr 60px;gap:10px;margin-bottom:12px}.edit-grid label{margin:0}.hidden,[hidden]{display:none!important}footer{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 30px;font-size:13px;color:var(--muted)}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--gold);color:#111;padding:12px 22px;border-radius:9px;z-index:5;max-width:90vw;box-shadow:0 5px 30px #0008}dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;max-width:440px;padding:28px}dialog::backdrop{background:#000a}.empty{padding:30px 0}.timer{font:700 35px ui-monospace,monospace;color:var(--gold)}@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px}.shell{padding:0 24px}.sidebar .panel{margin:0}}@media(max-width:560px){.shell{padding:0 16px}header{padding:18px 0;display:block}.brand{margin-bottom:14px}nav{justify-content:space-between}nav button{padding:9px 12px}.intro{margin:26px 0 20px}.intro>.muted{display:none}.panel{padding:20px}.sidebar{grid-template-columns:1fr}.set-grid{grid-template-columns:30px 1fr 1fr 46px;gap:7px}.edit-grid{grid-template-columns:1fr 1fr 48px}.edit-grid input{padding:10px}.row{gap:10px}.large-num{font-size:56px}}
-.reference{margin:12px 0;font-size:14px;color:var(--muted)}.reference summary{cursor:pointer;color:var(--gold)}.ref-scroll{overflow:auto}.reference table{border-collapse:collapse;width:100%;margin:12px 0;text-align:left}.reference td,.reference th{padding:8px;border-bottom:1px solid var(--line)}.extra-fields{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin:10px 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}.extra-fields .field{flex:1;min-width:95px;margin:0}.extra-fields input{padding:9px}.exercise>div:nth-child(2){min-width:0}.reference button{margin:0}</style></head><body><div class="shell"><header><div class="brand"><span aria-hidden="true"></span>AB-29<span style="border:0;transform:none;width:auto;height:auto;font-size:12px;letter-spacing:2px;margin-left:18px;font-weight:500;color:var(--muted)">Training</span></div><nav aria-label="Main navigation"><button data-view="train" aria-current="page">Train</button><button data-view="programmes">Sessions</button><button data-view="history">History</button></nav></header><div id="storage-warning" class="notice" hidden></div><main id="app"></main><footer class="row wrap"><span>AB-29 Training / Your personal training log</span><span>Saved in this browser · Back up in History</span></footer></div><div id="toast" class="toast" role="status" hidden></div><dialog id="confirm"><h2 id="confirm-title"></h2><p id="confirm-text"></p><div class="actions"><button id="cancel-confirm">Cancel</button><button class="primary" id="accept-confirm">Continue</button></div></dialog><script>
-'use strict';
-const KEY='form-training-v1';
-const make=(id,name,type,minutes,items)=>({id,name,type,minutes,exercises:items.map(([name,target,sets=1,kind='strength'])=>({name,target,sets,kind}))});
-const defaults=[
-make('full','Full body · A','Strength',45,[['Goblet squat','3 × 8–10 reps',3],['Dumbbell bench press','3 × 8–10 reps',3],['Dumbbell row','3 × 10 each side',3],['Romanian deadlift','3 × 8–10 reps',3],['Plank','3 × 30 seconds',3,'timed']]),
-make('upper','Upper body','Strength',40,[['Dumbbell shoulder press','3 × 8–10 reps',3],['Lat pulldown','3 × 10 reps',3],['Incline dumbbell press','3 × 10 reps',3],['Cable row','3 × 10 reps',3],['Biceps curl','2 × 12 reps',2]]),
-make('lower','Lower body','Strength',45,[['Goblet squat','3 × 10 reps',3],['Romanian deadlift','3 × 10 reps',3],['Reverse lunge','3 × 8 each side',3],['Calf raise','3 × 15 reps',3]]),
-make('run','Easy run','Running',30,[['Warm up','5 minutes walking',1,'cardio'],['Easy run','20 minutes at a conversational pace',1,'cardio'],['Cool down','5 minutes walking',1,'cardio']]),
-make('cycle','Steady ride','Cycling',40,[['Warm up','5 minutes easy',1,'cardio'],['Steady ride','30 minutes at a comfortable effort',1,'cardio'],['Cool down','5 minutes easy',1,'cardio']]),
-make('mobility','Move & reset','Mobility',15,[['Easy movement','3 minutes gentle walking',1,'timed'],['Hip mobility','4 minutes comfortable movement',1,'timed'],['Shoulder mobility','4 minutes comfortable movement',1,'timed'],['Gentle stretching','4 minutes',1,'timed']])];
-const addedSessions = [
-  {
-    "id": "personal-push",
-    "name": "Push",
-    "type": "Strength",
-    "minutes": 65,
-    "exercises": [
-      {
-        "name": "Barbell Bench Press",
-        "target": "4 sets · See screenshot reference below",
-        "sets": 4,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 60,
-            "reps": 8,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 70,
-            "reps": 5,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 70,
-            "reps": 6,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 70,
-            "reps": 5,
-            "rpe": 7.5,
-            "rest": 180
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Seated Dumbbell Shoulder Press",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 17.5,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          },
-          {
-            "weight": 17.5,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          },
-          {
-            "weight": 20,
-            "reps": 10,
-            "rpe": 8.5,
-            "rest": 150
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Incline Dumbbell Chest Press",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 27.5,
-            "reps": 8,
-            "rpe": 8,
-            "rest": 180
-          },
-          {
-            "weight": 27.5,
-            "reps": 8,
-            "rpe": 8,
-            "rest": 180
-          },
-          {
-            "weight": 27.5,
-            "reps": 8,
-            "rpe": 8,
-            "rest": 180
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Cable Lateral Raises",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 7.5,
-            "reps": 13,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 7.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 7.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Cable Tricep Push Down Bar Attachment",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 22.5,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 25,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 25,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Overhead Tricep Extensions Rope",
-        "target": "2 sets · See screenshot reference below",
-        "sets": 2,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 15,
-            "reps": 8,
-            "rpe": null,
-            "rest": 90
-          },
-          {
-            "weight": null,
-            "reps": 12,
-            "rpe": null,
-            "rest": 90
-          }
-        ],
-        "referenceNote": "Set 2 weight and both RPE values are blank in the screenshot."
-      }
-    ],
-    "note": "Your screenshot values are reference results, not new completed sets. Log what you do today. Weights are copied exactly as shown; the screenshots do not specify whether dumbbell values are per hand or combined. Warm up and build up to your working sets."
-  },
-  {
-    "id": "personal-pull",
-    "name": "Pull",
-    "type": "Strength",
-    "minutes": 65,
-    "exercises": [
-      {
-        "name": "Wide Grip Lat Pulldown",
-        "target": "4 sets · See screenshot reference below",
-        "sets": 4,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 55,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 55,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 55,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 55,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 180
-          }
-        ],
-        "referenceNote": "IMG_8939: 55 kg × 10 for all four sets, RPE 7.5, rest 3:00. Alternate screenshot IMG_8938: 60 kg × 8 for all four sets, RPE 7.5; rest 3:00 / 3:30 / 2:30 / 3:00. Dates are not visible, so neither is treated as more recent."
-      },
-      {
-        "name": "Chest Supported Rows",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 60,
-            "reps": 12,
-            "rpe": 7.5,
-            "rest": 150
-          },
-          {
-            "weight": 65,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          },
-          {
-            "weight": 70,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          }
-        ],
-        "referenceNote": "IMG_8940 values shown below. Alternate screenshot IMG_8938: 3 × 10 at 70 kg, RPE 7.5, rest 2:30."
-      },
-      {
-        "name": "Single Arm Rows",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 27.5,
-            "reps": 10,
-            "rpe": 8,
-            "rest": 150
-          },
-          {
-            "weight": 27.5,
-            "reps": 10,
-            "rpe": 8,
-            "rest": 150
-          },
-          {
-            "weight": 27.5,
-            "reps": 10,
-            "rpe": 8,
-            "rest": 150
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Rear Delt Cable Fly",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 50,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 50,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 50,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          }
-        ],
-        "referenceNote": "50 kg is transcribed exactly as displayed; machine resistance and cable ratios vary."
-      },
-      {
-        "name": "Wide Grip EZ Bar Curls",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 25,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 90
-          },
-          {
-            "weight": 25,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 90
-          },
-          {
-            "weight": 25,
-            "reps": 9,
-            "rpe": 8,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Seated Alternating Hammer Curls",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 15,
-            "reps": 10,
-            "rpe": 9,
-            "rest": 90
-          },
-          {
-            "weight": 15,
-            "reps": 10,
-            "rpe": 9,
-            "rest": 90
-          },
-          {
-            "weight": 15,
-            "reps": 9,
-            "rpe": 9,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      }
-    ],
-    "note": "Your screenshot values are reference results, not new completed sets. Log what you do today. Weights are copied exactly as shown; the screenshots do not specify whether dumbbell values are per hand or combined. Warm up and build up to your working sets."
-  },
-  {
-    "id": "personal-upper",
-    "name": "Upper",
-    "type": "Strength",
-    "minutes": 80,
-    "exercises": [
-      {
-        "name": "Barbell Bench Press",
-        "target": "4 sets · See screenshot reference below · Tempo 2-0-1-0",
-        "sets": 4,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 60,
-            "reps": 8,
-            "rpe": null,
-            "rest": 180
-          },
-          {
-            "weight": 60,
-            "reps": 8,
-            "rpe": null,
-            "rest": 180
-          },
-          {
-            "weight": 70,
-            "reps": 6,
-            "rpe": null,
-            "rest": 180
-          },
-          {
-            "weight": 70,
-            "reps": 6,
-            "rpe": null,
-            "rest": 180
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Weighted Pull Ups",
-        "target": "4 sets · See screenshot reference below",
-        "sets": 4,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": null,
-            "reps": 8,
-            "rpe": 8.5,
-            "rest": 150
-          },
-          {
-            "weight": null,
-            "reps": 7,
-            "rpe": 9,
-            "rest": 150
-          },
-          {
-            "weight": null,
-            "reps": 8,
-            "rpe": 9,
-            "rest": 150
-          },
-          {
-            "weight": null,
-            "reps": 8,
-            "rpe": 9,
-            "rest": 150
-          }
-        ],
-        "referenceNote": "Added weight is blank in the screenshot; it has not been assumed to be zero."
-      },
-      {
-        "name": "Seated Row Machine",
-        "target": "3 sets · See screenshot reference below · Tempo 2-0-1-0",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 65,
-            "reps": 10,
-            "rpe": null,
-            "rest": 120
-          },
-          {
-            "weight": 65,
-            "reps": 10,
-            "rpe": null,
-            "rest": 120
-          },
-          {
-            "weight": 70,
-            "reps": 10,
-            "rpe": null,
-            "rest": 120
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Incline Dumbbell Chest Press",
-        "target": "3 sets · See screenshot reference below · Tempo 2-0-1-0",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 27.5,
-            "reps": 8,
-            "rpe": null,
-            "rest": 150
-          },
-          {
-            "weight": 25,
-            "reps": 9,
-            "rpe": null,
-            "rest": 240
-          },
-          {
-            "weight": 25,
-            "reps": 9,
-            "rpe": null,
-            "rest": 150
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Seated Dumbbell Shoulder Press",
-        "target": "3 sets · See screenshot reference below · Tempo 2-0-1-0",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 15,
-            "reps": 10,
-            "rpe": null,
-            "rest": 120
-          },
-          {
-            "weight": 15,
-            "reps": 10,
-            "rpe": null,
-            "rest": 120
-          },
-          {
-            "weight": 15,
-            "reps": 9,
-            "rpe": null,
-            "rest": 120
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Rotating Alternate Incline Bicep Curls",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 12.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 12.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 12.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Cable Tricep Push Down Bar Attachment",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 22.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 27.5,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 25,
-            "reps": 12,
-            "rpe": 8.5,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      }
-    ],
-    "note": "Your screenshot values are reference results, not new completed sets. Log what you do today. Weights are copied exactly as shown; the screenshots do not specify whether dumbbell values are per hand or combined. Warm up and build up to your working sets."
-  },
-  {
-    "id": "personal-legs",
-    "name": "Legs",
-    "type": "Strength",
-    "minutes": 65,
-    "exercises": [
-      {
-        "name": "Heel Elevated Barbell Back Squat",
-        "target": "4 sets · See screenshot reference below",
-        "sets": 4,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 40,
-            "reps": 8,
-            "rpe": 5,
-            "rest": 180
-          },
-          {
-            "weight": 60,
-            "reps": 8,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 60,
-            "reps": 6,
-            "rpe": 7.5,
-            "rest": 180
-          },
-          {
-            "weight": 60,
-            "reps": 6,
-            "rpe": 7.5,
-            "rest": 180
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Narrow Stance Dumbbell Romanian Deadlifts",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 30,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          },
-          {
-            "weight": 40,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          },
-          {
-            "weight": 40,
-            "reps": 10,
-            "rpe": 7.5,
-            "rest": 150
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Leg Press",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 50,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 150
-          },
-          {
-            "weight": 60,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 150
-          },
-          {
-            "weight": 60,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 150
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Dumbbell Walking Lunges",
-        "target": "2 sets · See screenshot reference below",
-        "sets": 2,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 25,
-            "reps": 12,
-            "rpe": 6,
-            "rest": 120
-          },
-          {
-            "weight": 25,
-            "reps": 10,
-            "rpe": 6,
-            "rest": 120
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Seated Leg Curl",
-        "target": "3 sets · See screenshot reference below",
-        "sets": 3,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 40,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 120
-          },
-          {
-            "weight": 40,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 120
-          },
-          {
-            "weight": 40,
-            "reps": 12,
-            "rpe": 8,
-            "rest": 120
-          }
-        ],
-        "referenceNote": ""
-      },
-      {
-        "name": "Standing Calf Raise Machine",
-        "target": "4 sets · See screenshot reference below",
-        "sets": 4,
-        "kind": "strength",
-        "reference": [
-          {
-            "weight": 30,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 30,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 30,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          },
-          {
-            "weight": 30,
-            "reps": 15,
-            "rpe": 8.5,
-            "rest": 90
-          }
-        ],
-        "referenceNote": ""
-      }
-    ],
-    "note": "Your screenshot values are reference results, not new completed sets. Log what you do today. Weights are copied exactly as shown; the screenshots do not specify whether dumbbell values are per hand or combined. Warm up and build up to your working sets."
-  },
-  {
-    "id": "run-recovery",
-    "name": "Run · Recovery 25",
-    "type": "Running",
-    "minutes": 25,
-    "exercises": [
-      {
-        "name": "Ease in",
-        "target": "5 min brisk walking or very easy jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery run",
-        "target": "15 min easy, conversational running, RPE 2–3.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Ease out",
-        "target": "5 min walking.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Choose effort over pace: easy = conversational, RPE 2–3/10; steady = 4–5; hard but controlled = 7–8. Use these as alternatives, not extra sessions to stack on top of every lifting day. Take an easy or rest day between hard sessions; shorten the session if running volume is new to you."
-  },
-  {
-    "id": "run-aerobic",
-    "name": "Run · Easy 40",
-    "type": "Running",
-    "minutes": 40,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "5 min easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Easy run",
-        "target": "30 min conversational running, RPE 2–3.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5 min easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Choose effort over pace: easy = conversational, RPE 2–3/10; steady = 4–5; hard but controlled = 7–8. Use these as alternatives, not extra sessions to stack on top of every lifting day. Take an easy or rest day between hard sessions; shorten the session if running volume is new to you."
-  },
-  {
-    "id": "run-400",
-    "name": "Run · 6 × 400 m",
-    "type": "Running",
-    "minutes": 40,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "10 min easy jog; finish with a few relaxed strides if comfortable. RPE 2–3/10.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "400 m rep 1 / 6",
-        "target": "400 m hard but controlled, RPE 7–8. Aim for consistent repeats, not a sprint.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 1",
-        "target": "90 sec easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "400 m rep 2 / 6",
-        "target": "400 m hard but controlled, RPE 7–8. Aim for consistent repeats, not a sprint.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 2",
-        "target": "90 sec easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "400 m rep 3 / 6",
-        "target": "400 m hard but controlled, RPE 7–8. Aim for consistent repeats, not a sprint.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 3",
-        "target": "90 sec easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "400 m rep 4 / 6",
-        "target": "400 m hard but controlled, RPE 7–8. Aim for consistent repeats, not a sprint.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 4",
-        "target": "90 sec easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "400 m rep 5 / 6",
-        "target": "400 m hard but controlled, RPE 7–8. Aim for consistent repeats, not a sprint.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 5",
-        "target": "90 sec easy walking/jogging.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "400 m rep 6 / 6",
-        "target": "400 m hard but controlled, RPE 7–8. Aim for consistent repeats, not a sprint.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5–10 min easy jog or walk. Let your breathing settle.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Choose effort over pace: easy = conversational, RPE 2–3/10; steady = 4–5; hard but controlled = 7–8. Use these as alternatives, not extra sessions to stack on top of every lifting day. Take an easy or rest day between hard sessions; shorten the session if running volume is new to you."
-  },
-  {
-    "id": "run-tempo",
-    "name": "Run · Tempo blocks",
-    "type": "Running",
-    "minutes": 40,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "10 min easy jog; finish with a few relaxed strides if comfortable. RPE 2–3/10.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Tempo block 1 / 3",
-        "target": "6 min comfortably hard, RPE 6–7; controlled breathing, short phrases.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 1",
-        "target": "2 min easy jog.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Tempo block 2 / 3",
-        "target": "6 min comfortably hard, RPE 6–7; controlled breathing, short phrases.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Recovery 2",
-        "target": "2 min easy jog.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Tempo block 3 / 3",
-        "target": "6 min comfortably hard, RPE 6–7; controlled breathing, short phrases.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5–10 min easy jog or walk. Let your breathing settle.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Choose effort over pace: easy = conversational, RPE 2–3/10; steady = 4–5; hard but controlled = 7–8. Use these as alternatives, not extra sessions to stack on top of every lifting day. Take an easy or rest day between hard sessions; shorten the session if running volume is new to you."
-  },
-  {
-    "id": "run-long",
-    "name": "Run · Long easy 60",
-    "type": "Running",
-    "minutes": 60,
-    "exercises": [
-      {
-        "name": "Ease in",
-        "target": "10 min very easy running.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Easy endurance",
-        "target": "40 min conversational, RPE 2–3. Shorten to match your current running base.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Ease out",
-        "target": "10 min easy run or walk.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Choose effort over pace: easy = conversational, RPE 2–3/10; steady = 4–5; hard but controlled = 7–8. Use these as alternatives, not extra sessions to stack on top of every lifting day. Take an easy or rest day between hard sessions; shorten the session if running volume is new to you."
-  },
-  {
-    "id": "hyrox-engine",
-    "name": "HYROX · Engine builder",
-    "type": "HYROX",
-    "minutes": 45,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "8–10 min easy jog/row, then practise today’s stations with light loads.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Run",
-        "target": "400 m at RPE 5–6.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Row",
-        "target": "500 m at RPE 6; smooth strokes.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Farmers carry",
-        "target": "100 m with a manageable load. Break before grip or posture fails.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Wall balls",
-        "target": "15 controlled reps. Choose a ball and target you can use consistently.",
-        "sets": 1,
-        "kind": "strength"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min walking/rest.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Run",
-        "target": "400 m at RPE 5–6.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Row",
-        "target": "500 m at RPE 6; smooth strokes.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Farmers carry",
-        "target": "100 m with a manageable load. Break before grip or posture fails.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Wall balls",
-        "target": "15 controlled reps. Choose a ball and target you can use consistently.",
-        "sets": 1,
-        "kind": "strength"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min walking/rest.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Run",
-        "target": "400 m at RPE 5–6.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Row",
-        "target": "500 m at RPE 6; smooth strokes.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Farmers carry",
-        "target": "100 m with a manageable load. Break before grip or posture fails.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Wall balls",
-        "target": "15 controlled reps. Choose a ball and target you can use consistently.",
-        "sets": 1,
-        "kind": "strength"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5 min gentle walking and easy movement.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Original HYROX-style training session, not an official race prescription. Choose loads you can move with sound technique at the stated effort. Record load in kg (total including sled for sled work, per hand for carries), distance in km and reps where relevant. Keep hard days separated by an easy or rest day. Station technique and steady pacing come before speed."
-  },
-  {
-    "id": "hyrox-sled",
-    "name": "HYROX · Sled & legs",
-    "type": "HYROX",
-    "minutes": 45,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "8–10 min easy jog/row, then practise today’s stations with light loads.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Run",
-        "target": "500 m controlled, RPE 6–7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Sled push",
-        "target": "12.5 m with smooth, repeatable steps; use a manageable total sled load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Sled pull",
-        "target": "12.5 m controlled; reset before technique breaks down.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Sandbag lunges",
-        "target": "20 m controlled lunges; choose a manageable load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min easy recovery.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Run",
-        "target": "500 m controlled, RPE 6–7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Sled push",
-        "target": "12.5 m with smooth, repeatable steps; use a manageable total sled load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Sled pull",
-        "target": "12.5 m controlled; reset before technique breaks down.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Sandbag lunges",
-        "target": "20 m controlled lunges; choose a manageable load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min easy recovery.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Run",
-        "target": "500 m controlled, RPE 6–7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Sled push",
-        "target": "12.5 m with smooth, repeatable steps; use a manageable total sled load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Sled pull",
-        "target": "12.5 m controlled; reset before technique breaks down.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Sandbag lunges",
-        "target": "20 m controlled lunges; choose a manageable load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min easy recovery.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · Run",
-        "target": "500 m controlled, RPE 6–7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · Sled push",
-        "target": "12.5 m with smooth, repeatable steps; use a manageable total sled load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · Sled pull",
-        "target": "12.5 m controlled; reset before technique breaks down.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · Sandbag lunges",
-        "target": "20 m controlled lunges; choose a manageable load.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5 min gentle walking and easy movement.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Original HYROX-style training session, not an official race prescription. Choose loads you can move with sound technique at the stated effort. Record load in kg (total including sled for sled work, per hand for carries), distance in km and reps where relevant. Keep hard days separated by an easy or rest day. Station technique and steady pacing come before speed."
-  },
-  {
-    "id": "hyrox-hard",
-    "name": "HYROX · Run under fatigue",
-    "type": "HYROX",
-    "minutes": 55,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "8–10 min easy jog/row, then practise today’s stations with light loads.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Run",
-        "target": "800 m at RPE 7; keep the last round as controlled as the first.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · SkiErg",
-        "target": "500 m at RPE 7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 1 · Burpee broad jumps",
-        "target": "10 m smooth and controlled; step down/up if needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min easy walking/rest.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Run",
-        "target": "800 m at RPE 7; keep the last round as controlled as the first.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · SkiErg",
-        "target": "500 m at RPE 7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 2 · Burpee broad jumps",
-        "target": "10 m smooth and controlled; step down/up if needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min easy walking/rest.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Run",
-        "target": "800 m at RPE 7; keep the last round as controlled as the first.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · SkiErg",
-        "target": "500 m at RPE 7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 3 · Burpee broad jumps",
-        "target": "10 m smooth and controlled; step down/up if needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round recovery",
-        "target": "2 min easy walking/rest.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · Run",
-        "target": "800 m at RPE 7; keep the last round as controlled as the first.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · SkiErg",
-        "target": "500 m at RPE 7.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Round 4 · Burpee broad jumps",
-        "target": "10 m smooth and controlled; step down/up if needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5 min gentle walking and easy movement.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Original HYROX-style training session, not an official race prescription. Choose loads you can move with sound technique at the stated effort. Record load in kg (total including sled for sled work, per hand for carries), distance in km and reps where relevant. Keep hard days separated by an easy or rest day. Station technique and steady pacing come before speed."
-  },
-  {
-    "id": "hyrox-half",
-    "name": "HYROX · Half-distance simulation",
-    "type": "HYROX",
-    "minutes": 65,
-    "exercises": [
-      {
-        "name": "Warm-up",
-        "target": "8–10 min easy jog/row, then practise today’s stations with light loads.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before skierg",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "SkiErg",
-        "target": "500 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before sled push",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Sled push",
-        "target": "25 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before sled pull",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Sled pull",
-        "target": "25 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before burpee broad jumps",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Burpee broad jumps",
-        "target": "40 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before row",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Row",
-        "target": "500 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before farmers carry",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Farmers carry",
-        "target": "100 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before sandbag lunges",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Sandbag lunges",
-        "target": "50 m · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Run before wall balls",
-        "target": "500 m at RPE 6–7. Settle your breathing before the station.",
-        "sets": 1,
-        "kind": "cardio"
-      },
-      {
-        "name": "Wall balls",
-        "target": "50 reps · Use a manageable load and take breaks as needed.",
-        "sets": 1,
-        "kind": "strength"
-      },
-      {
-        "name": "Cool-down",
-        "target": "5 min gentle walking and easy movement.",
-        "sets": 1,
-        "kind": "cardio"
-      }
-    ],
-    "note": "Original HYROX-style training session, not an official race prescription. Choose loads you can move with sound technique at the stated effort. Record load in kg (total including sled for sled work, per hand for carries), distance in km and reps where relevant. Keep hard days separated by an easy or rest day. Station technique and steady pacing come before speed. Eight 500 m runs with scaled stations in race order. A demanding option for when you are recovered; shorten or stop rounds when technique fades."
-  }
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B0A08">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AB29 Training">
+<meta name="description" content="AB29 Training — a black and gold training log. Pick a session, work through it, and it remembers what you did last time.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%230B0A08%27/%3E%3Ctext x=%2732%27 y=%2745%27 text-anchor=%27middle%27 font-family=%27Impact,Arial Narrow,sans-serif%27 font-size=%2730%27 fill=%27%23F2C230%27%3EAB%3C/text%3E%3C/svg%3E">
+<title>AB29 Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap">
+<style>
+/* AB29 Training — black & gold training log
+   Palette: warm black ground, gold writing. Single deliberate dark theme (client's brief).
+   Type: Bebas Neue (display, numbers that matter) + Barlow (everything else). */
+:root {
+  --bg: #0B0A08;
+  --surface: #141210;
+  --surface-2: #1C1915;
+  --surface-3: #262119;
+  --line: #2B2619;
+  --line-strong: #4A3F22;
+  --gold: #F2C230;
+  --gold-bright: #FFD84D;
+  --gold-dim: #B8933A;
+  --gold-faint: #75612F;
+  --gold-wash: rgba(242, 194, 48, 0.08);
+  --gold-wash-2: rgba(242, 194, 48, 0.16);
+  --ink-on-gold: #110E08;
+  --good: #8BD17C;
+  --danger: #E0603F;
+  --display: 'Bebas Neue', 'Oswald', Impact, 'Arial Narrow', sans-serif;
+  --body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --radius: 6px;
+  --tabbar-h: 64px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--gold);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.45;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--focus, var(--gold-bright)); outline-offset: 2px; }
+::selection { background: var(--gold); color: var(--ink-on-gold); }
+h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-wrap: balance; color: var(--gold-bright); }
+h1 { font-size: 40px; line-height: 1; }
+h2 { font-size: 28px; line-height: 1.05; }
+h3 { font-size: 22px; line-height: 1.1; }
+p { margin: 0; }
+a { color: var(--gold-bright); }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--gold-dim); }
+.faint { color: var(--gold-faint); }
+.small { font-size: 13px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dim); font-weight: 600; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[hidden] { display: none !important; }
+
+/* ---- Shell ---- */
+.app { max-width: 720px; margin: 0 auto; padding-inline: 16px; padding-block: 0 calc(var(--tabbar-h) + 32px + env(safe-area-inset-bottom)); }
+.top {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 12px 10px;
+  background: linear-gradient(var(--bg) 82%, rgba(11, 10, 8, 0));
+}
+.wordmark { display: flex; align-items: baseline; gap: 10px; }
+.wordmark h1 { font-size: 34px; letter-spacing: 0.06em; }
+.wordmark .rule { width: 22px; height: 3px; background: var(--gold); transform: translateY(-6px); }
+.wordmark .sub { font-family: var(--display); font-size: 22px; letter-spacing: 0.14em; color: var(--gold-dim); text-transform: uppercase; }
+.sync { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-dim); font-weight: 600; }
+.sync .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-faint); box-shadow: 0 0 0 2px var(--surface-2); }
+.sync.on .dot { background: var(--good); }
+.sync.local .dot { background: var(--gold); }
+
+.view { display: grid; gap: 18px; padding-top: 6px; }
+.section { display: grid; gap: 10px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.divider { height: 1px; background: var(--line); }
+
+/* ---- Cards ---- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.card.lift { border-color: var(--line-strong); background: var(--surface-2); }
+.card.gold { background: var(--gold); color: var(--ink-on-gold); border-color: var(--gold); }
+.card.gold h2, .card.gold h3, .card.gold .eyebrow, .card.gold .muted { color: var(--ink-on-gold); }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.row.between { justify-content: space-between; }
+.stack { display: grid; gap: 8px; }
+
+/* ---- Pills ---- */
+.pill { display: inline-block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; padding: 3px 8px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--gold-dim); line-height: 1.3; }
+.pill.solid { background: var(--gold); border-color: var(--gold); color: var(--ink-on-gold); }
+.pill.good { border-color: var(--good); color: var(--good); }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 16px;
+  border: 1px solid var(--gold-dim); border-radius: var(--radius);
+  background: transparent; color: var(--gold);
+  font-weight: 600; letter-spacing: 0.02em; white-space: nowrap;
+}
+.btn:hover { border-color: var(--gold); background: var(--gold-wash); }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: var(--gold); border-color: var(--gold); color: var(--ink-on-gold); font-family: var(--display); font-size: 22px; letter-spacing: 0.08em; min-height: 52px; }
+.btn.primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+.btn.ghost { border-color: transparent; color: var(--gold-dim); padding: 0 10px; }
+.btn.ghost:hover { color: var(--gold); border-color: transparent; }
+.btn.danger { border-color: var(--danger); color: var(--danger); }
+.btn.danger:hover { background: rgba(224, 96, 63, 0.12); }
+.btn.sm { min-height: 36px; padding: 0 12px; font-size: 14px; }
+.btn.block { width: 100%; }
+.btn:disabled { opacity: 0.45; cursor: default; transform: none; }
+.icon-btn { width: 44px; height: 44px; padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--gold); font-size: 20px; line-height: 1; }
+.icon-btn:hover { border-color: var(--gold); }
+
+/* ---- Fields ---- */
+label.field { display: grid; gap: 5px; }
+label.field > span { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); font-weight: 600; }
+.input, select, textarea, input[type="text"], input[type="number"], input[type="search"] {
+  width: 100%; min-height: 44px; padding: 8px 12px;
+  background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--radius);
+  color: var(--gold-bright);
+}
+textarea { min-height: 96px; resize: vertical; line-height: 1.4; }
+select { appearance: none; -webkit-appearance: none; padding-right: 38px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
+select.big { font-family: var(--display); font-size: 24px; letter-spacing: 0.04em; min-height: 56px; border-color: var(--gold-dim); }
+input:focus, select:focus, textarea:focus { border-color: var(--gold); outline: none; }
+input::placeholder, textarea::placeholder { color: var(--gold-faint); }
+input[type="number"] { -moz-appearance: textfield; }
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+.check input { width: 20px; height: 20px; accent-color: var(--gold); }
+
+/* ---- Today ---- */
+.today-head { display: grid; gap: 4px; }
+.today-head .date { font-family: var(--display); font-size: 30px; letter-spacing: 0.04em; color: var(--gold-bright); line-height: 1; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; display: grid; gap: 2px; }
+.stat .v { font-family: var(--display); font-size: 28px; line-height: 1; color: var(--gold-bright); }
+.stat .k { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); font-weight: 600; }
+@media (max-width: 460px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.preview-list { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.preview-list .item { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 9px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.preview-list .item .n { font-weight: 600; color: var(--gold); }
+.preview-list .item .t { color: var(--gold-dim); font-size: 14px; }
+.preview-list .item .last { grid-column: 1 / -1; font-size: 13px; color: var(--gold-faint); }
+.resume { border-left: 4px solid var(--gold); }
+.recent { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.recent .item { display: grid; grid-template-columns: 74px 1fr auto; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: center; }
+.recent .d { font-family: var(--display); font-size: 20px; letter-spacing: 0.03em; color: var(--gold-bright); line-height: 1; }
+.recent .d small { display: block; font-family: var(--body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); margin-top: 3px; }
+.recent .m { color: var(--gold-dim); font-size: 13px; }
+
+/* ---- Workout ---- */
+.wo-head { display: grid; gap: 10px; }
+.wo-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.wo-title h2 { font-size: 34px; }
+.wo-meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.wo-meta .clock { font-family: var(--display); font-size: 28px; letter-spacing: 0.06em; color: var(--gold-bright); line-height: 1; }
+.progress { height: 4px; background: var(--surface-3); border-radius: 2px; overflow: hidden; }
+.progress > div { height: 100%; background: var(--gold); transition: width 0.3s ease; }
+.ex-list { display: grid; gap: 12px; }
+.ex { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px 12px; display: grid; gap: 10px; border-left: 4px solid var(--line-strong); }
+.ex.done { border-left-color: var(--good); }
+.ex.done .ex-name { color: var(--gold-dim); }
+.ex.skipped { opacity: 0.55; }
+.ex-head { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: start; }
+.ex-name { font-family: var(--display); font-size: 24px; letter-spacing: 0.03em; color: var(--gold-bright); line-height: 1.05; }
+.ex-target { font-size: 14px; color: var(--gold-dim); margin-top: 3px; }
+.ex-last { font-size: 13px; color: var(--gold-faint); }
+.ex-last b { color: var(--gold-dim); font-weight: 600; }
+.sets { display: grid; gap: 6px; }
+.set { display: grid; grid-template-columns: 32px 1fr 1fr 44px; gap: 6px; align-items: center; }
+.set .idx { font-family: var(--display); font-size: 20px; color: var(--gold-dim); letter-spacing: 0.04em; text-align: center; }
+.set.head { min-height: 0; margin-bottom: -2px; }
+.set.head span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-faint); font-weight: 600; text-align: center; }
+.set .fld input { padding: 8px 6px; text-align: center; font-variant-numeric: tabular-nums; font-weight: 600; }
+.set .fld.narrow input { color: var(--gold-dim); font-weight: 400; }
+.set.done .fld input { border-color: var(--line); color: var(--gold-dim); background: var(--surface); }
+.tick { width: 44px; height: 44px; border-radius: var(--radius); border: 1px solid var(--line-strong); background: var(--surface-2); color: transparent; display: inline-flex; align-items: center; justify-content: center; }
+.tick::before { content: ''; width: 12px; height: 7px; border-left: 3px solid currentColor; border-bottom: 3px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
+.tick.on { background: var(--gold); border-color: var(--gold); color: var(--ink-on-gold); }
+.ex-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.ex-note { font-size: 14px; color: var(--gold-dim); font-style: italic; }
+.rest-bar {
+  position: fixed; left: 0; right: 0; bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom)); z-index: 30;
+  display: flex; justify-content: center; padding: 0 16px 8px;
+  pointer-events: none;
+}
+.rest-bar .inner { pointer-events: auto; width: 100%; max-width: 688px; display: grid; grid-template-columns: auto 1fr auto auto; gap: 10px; align-items: center; background: var(--gold); color: var(--ink-on-gold); border-radius: var(--radius); padding: 8px 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+.rest-bar .lbl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+.rest-bar .t { font-family: var(--display); font-size: 34px; letter-spacing: 0.06em; line-height: 1; font-variant-numeric: tabular-nums; }
+.rest-bar .btn { border-color: var(--ink-on-gold); color: var(--ink-on-gold); min-height: 38px; }
+.rest-bar .btn:hover { background: rgba(0, 0, 0, 0.1); }
+
+/* ---- Finish / summary ---- */
+.rpe { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.rpe button { min-height: 40px; border: 1px solid var(--line-strong); background: var(--surface-2); border-radius: 4px; color: var(--gold-dim); font-family: var(--display); font-size: 18px; }
+.rpe button.on { background: var(--gold); border-color: var(--gold); color: var(--ink-on-gold); }
+.pb-list { display: grid; gap: 6px; }
+.pb { display: flex; justify-content: space-between; gap: 10px; padding: 8px 10px; border: 1px solid var(--gold-dim); border-radius: 4px; background: var(--gold-wash); }
+.pb b { font-family: var(--display); font-size: 20px; letter-spacing: 0.03em; color: var(--gold-bright); font-weight: 400; }
+
+/* ---- History ---- */
+.hist { display: grid; gap: 8px; }
+.hist .item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.hist .item > button.head { width: 100%; text-align: left; display: grid; grid-template-columns: 74px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; background: transparent; border: 0; color: inherit; }
+.hist .item .body { padding: 0 14px 14px; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
+.hist .d { font-family: var(--display); font-size: 22px; letter-spacing: 0.03em; color: var(--gold-bright); line-height: 1; }
+.hist .d small { display: block; font-family: var(--body); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); margin-top: 3px; }
+.hist .n { font-weight: 600; }
+.hist .m { color: var(--gold-dim); font-size: 13px; }
+.hist .v { font-family: var(--display); font-size: 20px; color: var(--gold); letter-spacing: 0.03em; text-align: right; }
+.log-ex { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.log-ex:last-child { border-bottom: 0; }
+.log-ex .sets-str { color: var(--gold-dim); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---- Progress ---- */
+.chart-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 8px 6px; position: relative; }
+.chart-wrap svg { display: block; width: 100%; height: auto; }
+.chart-wrap .tip { position: absolute; pointer-events: none; background: var(--surface-3); border: 1px solid var(--line-strong); border-radius: 4px; padding: 6px 8px; font-size: 12px; color: var(--gold); white-space: nowrap; transform: translate(-50%, -110%); display: none; }
+.chart-wrap .tip b { color: var(--gold-bright); }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th { text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dim); font-weight: 600; padding: 6px 0; border-bottom: 1px solid var(--line-strong); }
+.table td { padding: 8px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.table td.r, .table th.r { text-align: right; }
+
+/* ---- Library ---- */
+.lib-group { display: grid; gap: 0; }
+.lib-group .item { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.lib-group .item .n { font-weight: 600; }
+.lib-group .item .m { font-size: 13px; color: var(--gold-dim); }
+.ed-ex { display: grid; gap: 8px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-2); }
+.ed-ex .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ed-ex .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.ed-ex .tools { display: flex; gap: 4px; justify-content: flex-end; }
+.help { font-size: 13px; color: var(--gold-dim); line-height: 1.5; }
+.help code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; background: var(--surface-3); padding: 1px 5px; border-radius: 3px; color: var(--gold); }
+pre.example { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; line-height: 1.5; color: var(--gold-dim); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; overflow-x: auto; }
+
+/* ---- Toast ---- */
+.toast { position: fixed; left: 50%; bottom: calc(var(--tabbar-h) + 16px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); background: var(--gold-bright); color: var(--ink-on-gold); padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; opacity: 0; transition: opacity 0.2s, transform 0.2s; z-index: 40; pointer-events: none; max-width: calc(100% - 32px); text-align: center; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- Tab bar ---- */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 25;
+  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom);
+  background: var(--surface); border-top: 1px solid var(--line-strong);
+  display: flex; justify-content: center;
+}
+.tabbar .inner { width: 100%; max-width: 720px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.tab { border: 0; background: transparent; color: var(--gold-faint); font-family: var(--display); font-size: 18px; letter-spacing: 0.1em; display: grid; gap: 2px; place-items: center; padding-top: 6px; position: relative; }
+.tab .bar { width: 26px; height: 3px; background: transparent; border-radius: 2px; }
+.tab.on { color: var(--gold-bright); }
+.tab.on .bar { background: var(--gold); }
+.tab .badge { position: absolute; top: 8px; right: calc(50% - 30px); width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+
+/* ---- Modal ---- */
+.modal { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.7); display: flex; align-items: flex-end; justify-content: center; padding: 16px; }
+.modal .sheet { width: 100%; max-width: 560px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 10px; padding: 18px 16px; display: grid; gap: 14px; max-height: calc(100vh - 32px); overflow: auto; }
+@media (min-width: 600px) { .modal { align-items: center; } }
+
+.empty { text-align: center; color: var(--gold-dim); padding: 24px 12px; border: 1px dashed var(--line-strong); border-radius: var(--radius); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="top">
+    <div class="wordmark"><h1>AB29</h1><span class="rule" aria-hidden="true"></span><span class="sub">Training</span></div>
+    <div class="sync local" id="sync" title="Where your history is saved"><span class="dot"></span><span id="syncLabel">Saving on this device</span></div>
+  </header>
+
+  <main>
+    <section class="view" id="view-today"></section>
+    <section class="view" id="view-history" hidden></section>
+    <section class="view" id="view-progress" hidden></section>
+    <section class="view" id="view-library" hidden></section>
+  </main>
+</div>
+
+<div class="rest-bar" id="restBar" hidden>
+  <div class="inner">
+    <span class="lbl">Rest</span>
+    <span class="t num" id="restTime">1:30</span>
+    <button class="btn sm" id="restPlus" type="button">+30s</button>
+    <button class="btn sm" id="restSkip" type="button">Skip</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="modalRoot"></div>
+
+<nav class="tabbar" aria-label="Sections">
+  <div class="inner">
+    <button class="tab on" data-tab="today" id="tab-today" type="button"><span>Today</span><span class="bar"></span></button>
+    <button class="tab" data-tab="history" id="tab-history" type="button"><span>History</span><span class="bar"></span></button>
+    <button class="tab" data-tab="progress" id="tab-progress" type="button"><span>Progress</span><span class="bar"></span></button>
+    <button class="tab" data-tab="library" id="tab-library" type="button"><span>Library</span><span class="bar"></span></button>
+  </div>
+</nav>
+<script>
+/* ---------- Built-in session library ----------
+   kinds: weight (kg × reps) · reps · time · cardio (km + time) · rounds (rounds + time) · carry (kg × metres)
+   rest is seconds between sets. dist is the default km per set for cardio.
+   lowerIsBetter marks "for time" efforts where a faster time is the PB.
+*/
+const KINDS = {
+  weight: { label: 'Weight × reps', fields: [ { key:'kg', label:'kg', type:'num', step:'0.5' }, { key:'reps', label:'reps', type:'num', step:'1' } ] },
+  reps:   { label: 'Reps only',     fields: [ { key:'reps', label:'reps', type:'num', step:'1' } ] },
+  time:   { label: 'Time',          fields: [ { key:'time', label:'m:ss', type:'time' } ] },
+  cardio: { label: 'Distance + time', fields: [ { key:'km', label:'km', type:'num', step:'0.01' }, { key:'time', label:'m:ss', type:'time' } ] },
+  rounds: { label: 'Rounds + time', fields: [ { key:'rounds', label:'rounds', type:'num', step:'1' }, { key:'time', label:'m:ss', type:'time' } ] },
+  carry:  { label: 'Weight × metres', fields: [ { key:'kg', label:'kg', type:'num', step:'0.5' }, { key:'m', label:'m', type:'num', step:'5' } ] },
+};
+
+const TYPES = { strength:'Gym', run:'Run', hybrid:'Hybrid', home:'Home', other:'Other' };
+
+function ex(name, kind, sets, target, rest, extra) {
+  return Object.assign({ id: slug(name), name, kind, sets, target: target || '', rest: rest == null ? 90 : rest, note: '' }, extra || {});
+}
+function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+
+const BUILTIN_SESSIONS = [
+  /* ---- Push / Pull / Legs (gym) ---- */
+  /* Adam's Push — taken from his logged session (Sept 2026) */
+  { id:'ppl-push', program:'Push / Pull / Legs', name:'Push', type:'strength', focus:'Chest, shoulders, triceps — Adam’s session', exercises:[
+    ex('Barbell Bench Press','weight',4,'5–8',180,{note:'Set 1 lighter, then work at the top weight'}),
+    ex('Seated Dumbbell Shoulder Press','weight',3,'10',150),
+    ex('Incline Dumbbell Chest Press','weight',3,'8',180),
+    ex('Cable Lateral Raises','weight',3,'12–15',90),
+    ex('Cable Tricep Push Down (Bar)','weight',3,'15',90),
+    ex('Overhead Tricep Extension (Rope)','weight',3,'12',90,{note:'You rated these “rank” last time — swap for dips or skull crushers if they still aren’t working'}),
+  ]},
+  /* Adam's Pull — taken from his logged session (Sept 2026) */
+  { id:'ppl-pull', program:'Push / Pull / Legs', name:'Pull', type:'strength', focus:'Back, rear delts, biceps — Adam’s session', exercises:[
+    ex('Wide Grip Lat Pulldown','weight',4,'10',180),
+    ex('Chest Supported Rows','weight',3,'10–12',150,{note:'Build up across the three sets'}),
+    ex('Single Arm Rows','weight',3,'10 per arm',150),
+    ex('Rear Delt Cable Fly','weight',3,'12',90),
+    ex('Wide Grip EZ Bar Curls','weight',3,'12',90),
+    ex('Seated Alternating Hammer Curls','weight',3,'10 per arm',90),
+  ]},
+  /* Adam's Legs — taken from his logged session (Sept 2026) */
+  { id:'ppl-legs', program:'Push / Pull / Legs', name:'Legs', type:'strength', focus:'Quads, hamstrings, glutes, calves — Adam’s session', exercises:[
+    ex('Heel Elevated Barbell Back Squat','weight',4,'6–8',180,{note:'Set 1 lighter, then three at the working weight'}),
+    ex('Narrow Stance Dumbbell Romanian Deadlifts','weight',3,'10',150),
+    ex('Leg Press','weight',3,'12',150),
+    ex('Dumbbell Walking Lunges','weight',3,'10–12',120,{note:'Reps per leg · dumbbell in each hand'}),
+    ex('Seated Leg Curl','weight',3,'12',120),
+    ex('Standing Calf Raise Machine','weight',4,'15',90),
+  ]},
+
+  /* ---- Upper / Lower (gym) ---- */
+  /* Adam's Upper — taken from his logged session (Sept 2026) */
+  { id:'ul-upper-a', program:'Upper / Lower', name:'Upper', type:'strength', focus:'Full upper body — Adam’s session', exercises:[
+    ex('Barbell Bench Press','weight',4,'6–8',180,{note:'Tempo 2-0-1-0 · two lighter sets, two at the top weight'}),
+    ex('Weighted Pull Ups','weight',4,'7–8',150,{note:'kg = added weight; 0 for bodyweight'}),
+    ex('Seated Row Machine','weight',3,'10',120,{note:'Tempo 2-0-1-0'}),
+    ex('Incline Dumbbell Chest Press','weight',3,'8–9',150,{note:'Tempo 2-0-1-0'}),
+    ex('Seated Dumbbell Shoulder Press','weight',3,'10',120,{note:'Tempo 2-0-1-0'}),
+    ex('Rotating Alternate Incline Bicep Curls','weight',3,'12',90),
+    ex('Cable Tricep Push Down (Bar)','weight',3,'12',90),
+  ]},
+  { id:'ul-lower-a', program:'Upper / Lower', name:'Lower A · Strength', type:'strength', focus:'Heavy squat pattern and hinge', exercises:[
+    ex('Front Squat','weight',4,'5–6',180),
+    ex('Hip Thrust','weight',3,'8–10',120),
+    ex('Bulgarian Split Squat','weight',3,'8 per leg',90),
+    ex('Leg Extension','weight',3,'12',60),
+    ex('Hanging Leg Raise','reps',3,'10–12',60),
+    ex('Plank','time',3,'45s',45),
+  ]},
+  { id:'ul-upper-b', program:'Upper / Lower', name:'Upper B · Volume', type:'strength', focus:'Higher reps, shorter rests', exercises:[
+    ex('Incline Barbell Press','weight',3,'8–10',120),
+    ex('Lat Pulldown','weight',3,'10–12',90),
+    ex('Machine Chest Press','weight',3,'12',75,{note:'Push-ups at home'}),
+    ex('Seated Cable Row','weight',3,'12',75),
+    ex('Dumbbell Lateral Raise','weight',3,'15',45),
+    ex('Rear Delt Fly','weight',3,'15',45),
+    ex('Cable Curl','weight',3,'12',45,{note:'Superset with pushdowns'}),
+    ex('Cable Tricep Pushdown','weight',3,'12',60),
+  ]},
+  { id:'ul-lower-b', program:'Upper / Lower', name:'Lower B · Volume', type:'strength', focus:'Legs and core, pump work', exercises:[
+    ex('Goblet Squat','weight',3,'12',90),
+    ex('Dumbbell Romanian Deadlift','weight',3,'12',90),
+    ex('Leg Press','weight',3,'15',75),
+    ex('Reverse Lunge','weight',3,'10 per leg',75),
+    ex('Seated Leg Curl','weight',3,'15',60),
+    ex('Seated Calf Raise','weight',3,'15–20',45),
+    ex('Cable Crunch','weight',3,'15',45),
+  ]},
+
+  /* ---- Full Body (gym or home) ---- */
+  { id:'fb-a', program:'Full Body', name:'Full Body A', type:'strength', focus:'Squat, bench, row', exercises:[
+    ex('Back Squat','weight',3,'5',180),
+    ex('Bench Press','weight',3,'5',150),
+    ex('Barbell Row','weight',3,'8',120),
+    ex("Farmer's Carry",'carry',3,'40m',90),
+    ex('Ab Wheel Rollout','reps',3,'10–12',60),
+  ]},
+  { id:'fb-b', program:'Full Body', name:'Full Body B', type:'strength', focus:'Deadlift, press, pulldown', exercises:[
+    ex('Deadlift','weight',3,'5',180),
+    ex('Overhead Press','weight',3,'6',150),
+    ex('Lat Pulldown','weight',3,'10',90),
+    ex('Dumbbell Lunge','weight',3,'10 per leg',90),
+    ex('Hanging Knee Raise','reps',3,'12',60),
+  ]},
+  { id:'fb-c', program:'Full Body', name:'Full Body C · Dumbbells', type:'strength', focus:'Dumbbells only — works at home', exercises:[
+    ex('Dumbbell Goblet Squat','weight',4,'10',90),
+    ex('Dumbbell Floor Press','weight',4,'10',90),
+    ex('Dumbbell Romanian Deadlift','weight',3,'12',90),
+    ex('Dumbbell Bent-Over Row','weight',3,'12',75),
+    ex('Dumbbell Push Press','weight',3,'10',75),
+    ex('Dumbbell Curl to Press','weight',3,'12',60),
+  ]},
+
+  /* ---- Running ---- */
+  { id:'run-easy', program:'Running', name:'Easy Run', type:'run', focus:'Zone 2 · conversational pace', exercises:[
+    ex('Easy Run','cardio',1,'30–45 min, easy enough to talk',0,{dist:5}),
+  ]},
+  { id:'run-1k', program:'Running', name:'1km Repeats · HYROX Pace', type:'run', focus:'5 × 1km at race pace — the exact rep you do 8 times on race day', exercises:[
+    ex('Warm-Up Jog','cardio',1,'10 min easy + drills',0,{dist:1.5}),
+    ex('1km Repeat','cardio',5,'HYROX race pace · 90s walk/jog between',90,{dist:1,note:'Aim for even splits — the last one should feel like the first'}),
+    ex('Cool-Down Jog','cardio',1,'10 min easy',0,{dist:1.5}),
+  ]},
+  { id:'run-intervals', program:'Running', name:'400m Repeats', type:'run', focus:'Speed · 6–8 × 400m', exercises:[
+    ex('Warm-Up Jog','cardio',1,'10 min easy + drills',0,{dist:1.5}),
+    ex('400m Repeat','cardio',8,'400m hard · 90s jog between',90,{dist:0.4,note:'Start at 6 reps, build to 8 over the block'}),
+    ex('Cool-Down Jog','cardio',1,'10 min easy',0,{dist:1.5}),
+  ]},
+  { id:'run-tempo', program:'Running', name:'Tempo Run', type:'run', focus:'20 min comfortably hard', exercises:[
+    ex('Warm-Up','cardio',1,'10 min easy',0,{dist:1.5}),
+    ex('Tempo Block','cardio',1,'20 min at roughly 10k pace',0,{dist:4}),
+    ex('Cool-Down','cardio',1,'10 min easy',0,{dist:1.5}),
+  ]},
+  { id:'run-fartlek', program:'Running', name:'Fartlek 30', type:'run', focus:'10 × 1 min hard / 2 min easy', exercises:[
+    ex('Warm-Up','cardio',1,'10 min easy',0,{dist:1.5}),
+    ex('Fartlek Block','cardio',1,'30 min: 1 min hard / 2 min easy × 10',0,{dist:5.5}),
+    ex('Cool-Down','cardio',1,'5 min easy',0,{dist:0.8}),
+  ]},
+  { id:'run-hills', program:'Running', name:'Hill Repeats', type:'run', focus:'Strength · 8 × 45s uphill', exercises:[
+    ex('Warm-Up','cardio',1,'10 min easy',0,{dist:1.5}),
+    ex('Hill Repeat','time',8,'45s hard uphill · walk back down',90),
+    ex('Cool-Down','cardio',1,'10 min easy',0,{dist:1.5}),
+  ]},
+  { id:'run-long', program:'Running', name:'Long Run', type:'run', focus:'Steady · 60–90 min', exercises:[
+    ex('Long Run','cardio',1,'60–90 min steady, fuel after 45',0,{dist:12}),
+  ]},
+  { id:'run-5k', program:'Running', name:'5k Time Trial', type:'run', focus:'Benchmark — repeat every 6–8 weeks', exercises:[
+    ex('Warm-Up','cardio',1,'10 min easy + 3 × 20s pick-ups',0,{dist:1.5}),
+    ex('5k Time Trial','cardio',1,'All out · flat route or treadmill',0,{dist:5}),
+    ex('Cool-Down','cardio',1,'5–10 min walk/jog',0,{dist:1}),
+  ]},
+
+  /* ---- HYROX (Men's Open standards) ---- */
+  { id:'hx-full', program:'HYROX', name:'HYROX Full Sim', type:'hybrid', focus:'The race: 8 × 1km run + 8 stations · Men’s Open weights · your finish time is the session clock', exercises:[
+    ex('Run 1km','cardio',1,'Settle in — not a sprint',0,{id:'run-1',dist:1}),
+    ex('SkiErg 1000m','cardio',1,'Long pulls, steady damper',0,{dist:1}),
+    ex('Run 1km','cardio',1,'',0,{id:'run-2',dist:1}),
+    ex('Sled Push 50m','carry',1,'152kg incl. sled · 4 × 12.5m',0,{metres:50,note:'Log the plates + sled you actually used'}),
+    ex('Run 1km','cardio',1,'',0,{id:'run-3',dist:1}),
+    ex('Sled Pull 50m','carry',1,'103kg incl. sled · 4 × 12.5m',0,{metres:50}),
+    ex('Run 1km','cardio',1,'',0,{id:'run-4',dist:1}),
+    ex('Burpee Broad Jumps 80m','time',1,'For time · chest to floor, two-foot jump',0,{lowerIsBetter:true}),
+    ex('Run 1km','cardio',1,'',0,{id:'run-5',dist:1}),
+    ex('Row 1000m','cardio',1,'',0,{dist:1}),
+    ex('Run 1km','cardio',1,'',0,{id:'run-6',dist:1}),
+    ex('Farmers Carry 200m','carry',1,'2 × 24kg kettlebells',0,{metres:200}),
+    ex('Run 1km','cardio',1,'',0,{id:'run-7',dist:1}),
+    ex('Sandbag Lunges 100m','carry',1,'20kg sandbag on shoulders',0,{metres:100}),
+    ex('Run 1km','cardio',1,'Empty the tank',0,{id:'run-8',dist:1}),
+    ex('Wall Balls','reps',1,'100 reps · 6kg to 3m target',0),
+  ]},
+  { id:'hx-half', program:'HYROX', name:'HYROX Half Sim', type:'hybrid', focus:'Half distance everything · same order, same weights · ~35–45 min', exercises:[
+    ex('Run 500m','cardio',1,'',0,{id:'run-1',dist:0.5}),
+    ex('SkiErg 500m','cardio',1,'',0,{dist:0.5}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-2',dist:0.5}),
+    ex('Sled Push 25m','carry',1,'152kg incl. sled',0,{metres:25}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-3',dist:0.5}),
+    ex('Sled Pull 25m','carry',1,'103kg incl. sled',0,{metres:25}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-4',dist:0.5}),
+    ex('Burpee Broad Jumps 40m','time',1,'For time',0,{lowerIsBetter:true}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-5',dist:0.5}),
+    ex('Row 500m','cardio',1,'',0,{dist:0.5}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-6',dist:0.5}),
+    ex('Farmers Carry 100m','carry',1,'2 × 24kg',0,{metres:100}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-7',dist:0.5}),
+    ex('Sandbag Lunges 50m','carry',1,'20kg',0,{metres:50}),
+    ex('Run 500m','cardio',1,'',0,{id:'run-8',dist:0.5}),
+    ex('Wall Balls','reps',1,'50 reps · 6kg',0),
+  ]},
+  { id:'hx-compromised', program:'HYROX', name:'Compromised Running', type:'hybrid', focus:'Run on heavy legs — 4 × (1km run + station), no rest between', exercises:[
+    ex('Warm-Up','cardio',1,'1km easy + mobility',0,{id:'wu',dist:1}),
+    ex('Run 1km','cardio',1,'Race pace',0,{id:'run-1',dist:1}),
+    ex('SkiErg 500m','cardio',1,'',0,{dist:0.5}),
+    ex('Run 1km','cardio',1,'Race pace',0,{id:'run-2',dist:1}),
+    ex('Sled Push 25m','carry',1,'Race weight',0,{metres:25}),
+    ex('Run 1km','cardio',1,'Race pace',0,{id:'run-3',dist:1}),
+    ex('Row 500m','cardio',1,'',0,{dist:0.5}),
+    ex('Run 1km','cardio',1,'Race pace — hold it',0,{id:'run-4',dist:1}),
+    ex('Wall Balls','reps',1,'30 reps · 6kg',0),
+  ]},
+  { id:'hx-stations', program:'HYROX', name:'Station Strength', type:'hybrid', focus:'Heavier than race weight, full rest — no running', exercises:[
+    ex('Sled Push 25m','carry',5,'Race weight + 20–40kg',120,{metres:25}),
+    ex('Sled Pull 25m','carry',5,'Race weight + 10–20kg',120,{metres:25}),
+    ex('Farmers Carry 100m','carry',4,'2 × 28–32kg',120,{metres:100}),
+    ex('Sandbag Lunges 50m','carry',4,'20–30kg',120,{metres:50}),
+    ex('Wall Balls','reps',4,'25 unbroken · 6kg',90),
+  ]},
+  { id:'hx-erg', program:'HYROX', name:'Erg Engine', type:'hybrid', focus:'5 × (500m SkiErg → 500m Row) · rest 90s after each pair', exercises:[
+    ex('Warm-Up','time',1,'5 min easy on either erg',0),
+    ex('SkiErg 500m','cardio',5,'Hard · straight onto the rower',0,{dist:0.5}),
+    ex('Row 500m','cardio',5,'Hard · then rest 90s',90,{dist:0.5}),
+  ]},
+  { id:'hx-grind', program:'HYROX', name:'Burpee & Lunge Grind', type:'hybrid', focus:'4 rounds of the stations everyone hates · rest 90s between rounds', exercises:[
+    ex('Burpee Broad Jumps 20m','time',4,'For time each round',0,{lowerIsBetter:true}),
+    ex('Sandbag Lunges 50m','carry',4,'20kg',0,{metres:50}),
+    ex('Wall Balls','reps',4,'25 · 6kg',0),
+    ex('Run 400m','cardio',4,'Then rest 90s',90,{dist:0.4}),
+  ]},
+  { id:'hx-sleds', program:'HYROX', name:'Sled Day', type:'hybrid', focus:'6 rounds: push → pull → 400m run · rest 90s', exercises:[
+    ex('Sled Push 25m','carry',6,'Race weight',0,{metres:25}),
+    ex('Sled Pull 25m','carry',6,'Race weight',0,{metres:25}),
+    ex('Run 400m','cardio',6,'Then rest 90s',90,{dist:0.4}),
+  ]},
+
+  /* ---- Conditioning ---- */
+  { id:'hyb-emom', program:'Conditioning', name:'Engine EMOM 30', type:'hybrid', focus:'Every minute on the minute · 30 min', exercises:[
+    ex('Warm-Up','time',1,'5 min easy bike or row',0),
+    ex('EMOM 30','rounds',1,'Min 1: 12 KB swings · Min 2: 10 burpees · Min 3: 15 cal row or ski · repeat × 10',0,{note:'Log rounds completed'}),
+    ex('Cool-Down Walk','time',1,'5 min',0),
+  ]},
+  { id:'hyb-kb-complex', program:'Conditioning', name:'Kettlebell Complex', type:'hybrid', focus:'5 rounds · one bell', exercises:[
+    ex('Warm-Up','time',1,'5 min easy + 10 light swings',0),
+    ex('Kettlebell Complex','rounds',1,'5 rounds: 10 swings · 8 goblet squats · 6 clean & press per arm · 20m suitcase carry per side · rest 90s',0,{note:'Write the bell weight in the note'}),
+  ]},
+  { id:'hyb-21-15-9', program:'Conditioning', name:'21-15-9 Thrusters & Pull-Ups', type:'hybrid', focus:'For time', exercises:[
+    ex('Warm-Up','time',1,'5 min row + empty-bar thrusters',0),
+    ex('21-15-9 Thrusters & Pull-Ups','time',1,'Thrusters 40/30kg · pull-ups · for time',0,{lowerIsBetter:true}),
+    ex('Cool-Down','time',1,'5 min walk + stretch',0),
+  ]},
+  { id:'hyb-row-run', program:'Conditioning', name:'Row & Run Ladder', type:'hybrid', focus:'Rest 1 min between pieces', exercises:[
+    ex('Row 250m','cardio',1,'',60,{dist:0.25}),
+    ex('Run 200m','cardio',1,'',60,{dist:0.2}),
+    ex('Row 500m','cardio',1,'',60,{dist:0.5}),
+    ex('Run 400m','cardio',1,'',60,{dist:0.4}),
+    ex('Row 750m','cardio',1,'',60,{dist:0.75}),
+    ex('Run 600m','cardio',1,'',0,{dist:0.6}),
+  ]},
+
+  /* ---- Home / Bodyweight ---- */
+  { id:'home-circuit', program:'Home / Bodyweight', name:'Bodyweight Circuit', type:'home', focus:'4 rounds · rest 60s after each round', exercises:[
+    ex('Push-Ups','reps',4,'15',0),
+    ex('Air Squats','reps',4,'20',0),
+    ex('Inverted Rows or Pull-Ups','reps',4,'10',0),
+    ex('Reverse Lunges','reps',4,'10 per leg',0),
+    ex('Plank','time',4,'30–45s',0),
+    ex('Mountain Climbers','reps',4,'20',60),
+  ]},
+  { id:'home-db', program:'Home / Bodyweight', name:'Dumbbell Full Body', type:'home', focus:'One pair of dumbbells', exercises:[
+    ex('Dumbbell Thruster','weight',3,'10',75),
+    ex('Renegade Row','weight',3,'8 per side',75),
+    ex('Dumbbell Step-Up','weight',3,'10 per leg',75),
+    ex('Dumbbell Lateral Raise','weight',3,'15',45),
+    ex('Dumbbell Hammer Curl','weight',3,'12',45),
+    ex('Overhead Tricep Extension','weight',3,'12',45),
+  ]},
+  { id:'home-kb', program:'Home / Bodyweight', name:'Kettlebell 200', type:'home', focus:'200 reps for time', exercises:[
+    ex('Warm-Up','time',1,'5 min easy + hip openers',0),
+    ex('Kettlebell 200','time',1,'50 swings · 40 goblet squats · 30 cleans · 20 push press · 20 snatches · 40 sit-ups · for time',0,{lowerIsBetter:true,note:'Write the bell weight in the note'}),
+  ]},
+  { id:'home-core', program:'Home / Bodyweight', name:'Core & Mobility', type:'home', focus:'Recovery day · 20 min', exercises:[
+    ex('Dead Bug','reps',3,'10 per side',30),
+    ex('Bird Dog','reps',3,'10 per side',30),
+    ex('Side Plank','time',3,'30s per side',30),
+    ex('Glute Bridge','reps',3,'15',30),
+    ex('90/90 Hip Switch','time',2,'60s',0),
+    ex('Couch Stretch','time',2,'60s per side',0),
+    ex('Cat-Cow','reps',2,'10 slow',0),
+  ]},
+
+  /* ---- Free ---- */
+  { id:'free', program:'Other', name:'Free Session', type:'other', focus:'Blank — add exercises as you go', exercises:[] },
 ];
-let state={version:1,programmes:[...addedSessions,...defaults],history:[],active:null},view='train',selected='personal-push',editing=null,restUntil=0,restTick=null;
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function validProgramme(p){return p&&typeof p.id==='string'&&typeof p.name==='string'&&p.name.length>0&&p.name.length<=120&&typeof p.type==='string'&&Number.isFinite(p.minutes)&&p.minutes>0&&Array.isArray(p.exercises)&&p.exercises.length>0&&p.exercises.length<=100&&p.exercises.every(e=>typeof e.name==='string'&&e.name.length>0&&typeof e.target==='string'&&Number.isInteger(e.sets)&&e.sets>=1&&e.sets<=30&&['strength','timed','cardio'].includes(e.kind));}
-function validWorkout(a){return a&&typeof a.id==='string'&&validProgramme(a.programme)&&Number.isFinite(a.started)&&Number.isInteger(a.index)&&a.index>=0&&a.index<a.programme.exercises.length&&typeof a.notes==='string'&&Array.isArray(a.logs)&&a.logs.length===a.programme.exercises.length&&a.logs.every((r,i)=>Array.isArray(r)&&r.length===a.programme.exercises[i].sets&&r.every(s=>typeof s.done==='boolean'&&['string','number'].includes(typeof s.weight)&&['string','number'].includes(typeof s.reps)&&['string','number'].includes(typeof s.minutes)&&['string','number'].includes(typeof s.distance)));}
-function validData(d){return d&&d.version===1&&Array.isArray(d.programmes)&&d.programmes.length>0&&d.programmes.every(validProgramme)&&new Set(d.programmes.map(p=>p.id)).size===d.programmes.length&&Array.isArray(d.history)&&d.history.every(h=>validWorkout(h)&&Number.isFinite(h.finished))&&(!d.active||validWorkout(d.active));}
-function warn(t){$('#storage-warning').hidden=false;$('#storage-warning').textContent=t;}
-let storageBlocked=false;
-try{const raw=localStorage.getItem(KEY);if(raw){const d=JSON.parse(raw);if(!validData(d))throw Error('Invalid saved data');state=d;}}catch(e){storageBlocked=true;warn('Saved data could not be read. Existing storage has not been changed. Use Export backup to save this session, or restore a valid backup in History.');}
-function save(){if(storageBlocked)return false;try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch(e){warn('This browser could not save your changes. Keep this page open and export a backup from History.');return false;}}
-function mergeSessionLibrary(){const ids=new Set(state.programmes.map(p=>p.id));state.programmes=[...addedSessions.filter(p=>!ids.has(p.id)).map(p=>JSON.parse(JSON.stringify(p))),...state.programmes];}
-function toast(t){$('#toast').textContent=t;$('#toast').hidden=false;setTimeout(()=>$('#toast').hidden=true,3200);}
-function ask(title,text,action){$('#confirm-title').textContent=title;$('#confirm-text').textContent=text;$('#confirm').showModal();$('#accept-confirm').onclick=()=>{$('#confirm').close();action();};}
-$('#cancel-confirm').onclick=()=>$('#confirm').close();
-const clone=o=>JSON.parse(JSON.stringify(o)),date=n=>new Date(n).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
-function switchView(v){view=v;editing=null;render();}
-document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
-function sidebar(){const week=state.history.filter(h=>Date.now()-h.finished<7*86400000),last=state.history.at(-1);return `<aside class="sidebar"><section class="panel"><div class="eyebrow">Last 7 days</div><div class="stats"><div><div class="stat">${week.length}</div><div class="hint">sessions</div></div><div><div class="stat">${week.reduce((s,h)=>s+Math.round((h.finished-h.started)/60000),0)}</div><div class="hint">minutes elapsed</div></div></div><p class="hint">${week.length?'Every session adds to your story.':'Your next session starts here.'}</p></section><section class="panel"><div class="eyebrow">Last session</div>${last?`<h2>${esc(last.programme.name)}</h2><p class="hint">${date(last.finished)} · ${last.logs.flat().filter(s=>s.done).length} sets / steps logged</p><button class="small" onclick="switchView('history')">View history ↗</button>`:'<h2>A fresh start.</h2><p class="hint">Your completed sessions will appear here, ready to build on next time.</p>'}</section><section class="panel"><div class="eyebrow">Your training, saved</div><p class="hint">Sessions and progress stay in this browser, including a workout in progress. Export a backup before switching devices or clearing browser data.</p></section></aside>`;}
-function intro(label,title){return `<div class="intro"><div><div class="eyebrow">${label}</div><h1>${title}</h1></div><div class="muted">${date(Date.now())}</div></div>`;}
-function render(){document.querySelectorAll('[data-view]').forEach(b=>{if(b.dataset.view===view)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});$('#app').innerHTML=view==='train'?training():view==='history'?historyView():programmesView();bind();}
-function training(){return intro('Show up. Build on it.','Make today count.')+`<div class="layout"><div>${state.active?activeView():pickView()}</div>${sidebar()}</div>`;}
-function pickView(){const p=state.programmes.find(p=>p.id===selected)||state.programmes[0];selected=p.id;return `<section class="panel accent"><div class="row"><h2>Choose your session</h2><span class="badge">Ready when you are</span></div><label class="field">Today's session<select id="session-select">${[...new Set(state.programmes.map(q=>q.type))].map(type=>`<optgroup label="${esc(type)}">${state.programmes.filter(q=>q.type===type).map(q=>`<option value="${esc(q.id)}" ${q.id===selected?'selected':''}>${esc(q.name)}</option>`).join('')}</optgroup>`).join('')}</select></label><div class="row wrap"><span class="muted">${esc(p.type)} · About ${p.minutes} min · ${p.exercises.length} exercises / steps</span><button class="small" id="edit-selected">Edit session</button></div><div class="session-list">${p.exercises.map((e,i)=>`<div class="exercise"><div class="number">${String(i+1).padStart(2,'0')}</div><div><h3>${esc(e.name)}</h3><div class="muted">${esc(e.target)}</div>${referenceView(e)}</div></div>`).join('')}</div><p class="hint">${esc(p.note||'Editable template. Adjust the session to suit you and warm up before starting.')}</p><button class="primary" id="start">Start session →</button></section>`;}
-function start(id){if(state.active)throw Error('A session is already active.');const p=state.programmes.find(p=>p.id===id);if(!p)throw Error('Session not found.');state.active={id:crypto.randomUUID(),programme:clone(p),started:Date.now(),index:0,notes:'',logs:p.exercises.map(e=>Array.from({length:e.sets},()=>({weight:'',reps:'',minutes:'',distance:'',done:false})))};save();view='train';render();}
-function restLabel(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');}
-function referenceView(e){if(!Array.isArray(e.reference))return '';return `<details class="reference"><summary>Screenshot reference · ${e.reference.length} sets</summary><div class="ref-scroll"><table><thead><tr><th>Set</th><th>kg</th><th>Reps</th><th>RPE</th><th>Rest</th></tr></thead><tbody>${e.reference.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.weight??'—')}</td><td>${esc(r.reps??'—')}</td><td>${esc(r.rpe??'—')}</td><td>${restLabel(r.rest)}</td></tr>`).join('')}</tbody></table></div>${e.referenceNote?`<p class="hint">${esc(e.referenceNote)}</p>`:''}<p class="hint">Copied from your screenshots. Blank values stay blank. These are not logged as a completed workout.</p></details>`;}
-function extraFields(e,s,i){return `<div class="extra-fields">${e.kind!=='strength'?`<label class="field">Load (kg, optional)<input type="number" min="0" max="100000" step="any" inputmode="decimal" data-set="${i}" data-key="weight" value="${esc(s.weight)}"></label><label class="field">Reps (optional)<input type="number" min="0" max="100000" step="1" inputmode="numeric" data-set="${i}" data-key="reps" value="${esc(s.reps)}"></label>`:''}<label class="field">RPE (1–10, optional)<input type="number" min="1" max="10" step="0.5" inputmode="decimal" data-set="${i}" data-key="rpe" value="${esc(s.rpe??'')}"></label>${e.reference?.[i]?`<button class="small" data-rest="${Number(e.reference[i].rest)}">Rest ${restLabel(e.reference[i].rest)}</button>`:''}</div>`;}
-function activeView(){const a=state.active,e=a.programme.exercises[a.index],done=a.logs.flat().filter(s=>s.done).length,total=a.logs.flat().length,previous=state.history.slice().reverse().find(h=>h.programme.exercises.some(q=>q.name.toLowerCase()===e.name.toLowerCase())),pi=previous?.programme.exercises.findIndex(q=>q.name.toLowerCase()===e.name.toLowerCase());const prev=previous?.logs[pi]?.filter(s=>s.done);return `<section class="panel accent"><div class="row wrap"><div><div class="eyebrow">Session in progress</div><h2>${esc(a.programme.name)}</h2></div><span class="badge">${done} / ${total} logged</span></div><progress value="${done}" max="${total}" aria-label="Session progress"></progress><div class="row"><div><div class="eyebrow">Exercise / step ${a.index+1} of ${a.programme.exercises.length}</div><h2 style="margin-top:16px">${esc(e.name)}</h2><p class="muted">${esc(e.target)}</p></div><div class="large-num">${String(a.index+1).padStart(2,'0')}</div></div>${referenceView(e)}<p class="hint">${prev?.length?`Last time · ${date(previous.finished)} · ${prev.map(s=>e.kind==='strength'?`${esc(s.weight||'—')} kg × ${esc(s.reps||'—')}`:`${esc(s.minutes||'—')} min${s.distance?' · '+esc(s.distance)+' km':''}${s.weight!==''?' · '+esc(s.weight)+' kg':''}${s.reps!==''?' · '+esc(s.reps)+' reps':''}${s.rpe?' · RPE '+esc(s.rpe):''}`).join(' / ')}`:'Your first log for this exercise. Set your baseline.'}</p>${a.logs[a.index].map((s,i)=>`<div class="set-grid"><span class="hint">${i+1}</span><label class="field">${e.kind==='strength'?'Weight (kg)':'Time (min)'}<input type="number" min="0" max="100000" step="any" inputmode="decimal" data-set="${i}" data-key="${e.kind==='strength'?'weight':'minutes'}" value="${esc(e.kind==='strength'?s.weight:s.minutes)}" placeholder="—"></label><label class="field">${e.kind==='strength'?'Reps':'Distance (km)'}<input type="number" min="0" max="100000" step="${e.kind==='strength'?'1':'any'}" inputmode="${e.kind==='strength'?'numeric':'decimal'}" data-set="${i}" data-key="${e.kind==='strength'?'reps':'distance'}" value="${esc(e.kind==='strength'?s.reps:s.distance)}" placeholder="${e.kind==='strength'?'—':'Optional'}"></label><button class="check ${s.done?'checked':''}" style="align-self:end" data-check="${i}" aria-label="Mark set or step ${i+1} ${s.done?'incomplete':'complete'}" aria-pressed="${s.done}">${s.done?'✓':'○'}</button></div>${extraFields(e,s,i)}`).join('')}<div class="actions"><button id="prev" ${a.index===0?'disabled':''}>← Previous</button><button class="primary" id="next" ${a.index===a.programme.exercises.length-1?'disabled':''}>Next exercise →</button></div><div class="row wrap" style="border-top:1px solid var(--line);margin-top:24px;padding-top:20px"><span class="hint">Rest timer <span id="timer" class="timer" style="display:block">${restText()}</span></span><div class="actions" style="margin:0"><button class="small" data-rest="60">60 sec</button><button class="small" data-rest="90">90 sec</button><button class="small" data-rest="0">Reset</button></div></div></section><section class="panel"><label class="field">Session notes<textarea id="notes" placeholder="How did it feel? Anything to remember for next time?">${esc(a.notes)}</textarea></label><div class="row wrap"><button class="primary" id="finish" ${done===0?'disabled':''}>Finish & save session</button><button class="small" id="discard">Discard session</button></div><p class="hint" style="margin:14px 0 0">Progress saves as you go. Finish whenever you’re ready; unfinished sets stay unmarked.</p></section>`;}
 
-const EMAIL_SETTINGS_KEY='ab29-web3forms-settings';
-const DEFAULT_WEB3FORMS_KEY='e2d1ba2a-cbe0-4212-b7ae-69ece96d96e2';
-let emailSettings={key:DEFAULT_WEB3FORMS_KEY,enabled:true};
-try{const settings=JSON.parse(localStorage.getItem(EMAIL_SETTINGS_KEY)||'null');if(settings&&typeof settings.key==='string')emailSettings={key:settings.key||DEFAULT_WEB3FORMS_KEY,enabled:settings.enabled!==false};}catch{}
-const sendingEmails=new Set();
-function emailSettingsView(){return `<details class="panel"><summary style="cursor:pointer;color:var(--gold)">Workout emails · ${emailSettings.key?(emailSettings.enabled?'Automatic sending on':'Automatic sending off'):'Setup needed'}</summary><p class="hint">Send finished workouts to adam.brook94@gmail.com through Web3Forms. The access key must belong to the form registered to that address; it controls the recipient.</p><form id="email-settings"><label class="field">Web3Forms form access key<input id="email-key" type="password" autocomplete="off" value="${esc(emailSettings.key)}" placeholder="Paste your form access key"></label><label style="display:flex;gap:10px;align-items:center"><input id="email-enabled" type="checkbox" style="width:auto" ${emailSettings.enabled?'checked':''}>Email each session when I finish</label><button class="small" style="margin-top:14px" type="submit">Save email settings</button></form><p class="hint">Your key is saved in this browser, separate from workout backups. Keep the page open until sending finishes. Your workout is saved here even if the email fails.</p></details>`;}
-function emailStatus(h){if(sendingEmails.has(h.id))return 'Sending to Web3Forms…';return ({sent:'Accepted by Web3Forms',failed:'Email failed — retry available',unknown:'Delivery unconfirmed — check your inbox before retrying',sending:'Delivery unconfirmed — check your inbox before retrying',unconfigured:'Email not sent — add your access key',off:'Automatic email was off'})[h.emailDelivery?.status]||'Not emailed';}
-function emailControls(h){return `<div class="row wrap" style="margin-top:16px"><span class="hint">${emailStatus(h)}${h.emailDelivery?.acceptedAt?' · '+esc(new Date(h.emailDelivery.acceptedAt).toLocaleString()):''}</span><button class="small" data-email-id="${esc(h.id)}" ${sendingEmails.has(h.id)||h.emailDelivery?.status==='sent'?'disabled':''}>${h.emailDelivery?.status==='sent'?'Submitted':'Email this session'}</button></div>`;}
-function sessionEmailText(h){const value=v=>v===''||v===undefined||v===null?'Not recorded':String(v);const lines=['AB-29 Training — session report','Session: '+h.programme.name,'Type: '+h.programme.type,'Session ID: '+h.id,'Started: '+new Date(h.started).toLocaleString()+' ('+new Date(h.started).toISOString()+')','Finished: '+new Date(h.finished).toLocaleString()+' ('+new Date(h.finished).toISOString()+')','Elapsed minutes: '+((h.finished-h.started)/60000).toFixed(1),'Completed sets / steps: '+h.logs.flat().filter(x=>x.done).length+' / '+h.logs.flat().length,''];h.programme.exercises.forEach((e,i)=>{lines.push((i+1)+'. '+e.name,'Target / instructions: '+e.target,'Log type: '+e.kind);h.logs[i].forEach((r,j)=>{lines.push('Set / step '+(j+1)+' — '+(r.done?'COMPLETED':'NOT MARKED COMPLETE')+' | Weight (kg): '+value(r.weight)+' | Reps: '+value(r.reps)+' | Time (min): '+value(r.minutes)+' | Distance (km): '+value(r.distance)+' | RPE: '+value(r.rpe));});if(e.reference){lines.push('Screenshot reference (not today’s results):');e.reference.forEach((r,j)=>lines.push('Reference set '+(j+1)+': '+value(r.weight)+' kg | '+value(r.reps)+' reps | RPE '+value(r.rpe)+' | Rest '+restLabel(r.rest)));}if(e.referenceNote)lines.push('Reference note: '+e.referenceNote);lines.push('');});lines.push('Session notes:',h.notes||'None','', 'Complete session data (JSON):',JSON.stringify({id:h.id,programme:h.programme,started:h.started,finished:h.finished,index:h.index,notes:h.notes,logs:h.logs},null,2));return lines.join('\n');}
-async function sendWorkoutEmail(id){const h=state.history.find(h=>h.id===id);if(!h||sendingEmails.has(id)||h.emailDelivery?.status==='sent')return;if(!emailSettings.key.trim()){h.emailDelivery={status:'unconfigured'};save();render();toast('Add your Web3Forms access key in History to send emails.');return;}
-sendingEmails.add(id);h.emailDelivery={status:'sending',attemptedAt:Date.now()};save();render();const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),20000);
-try{const response=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:emailSettings.key.trim(),subject:'AB-29 Training | '+h.programme.name+' | '+date(h.finished),from_name:'AB-29 Training',message:sessionEmailText(h),botcheck:false}),signal:controller.signal});const result=await response.json();if(!response.ok||result.success!==true){h.emailDelivery={status:'failed',attemptedAt:Date.now()};toast('Email was not accepted. Your workout is saved; retry from History.');}else{h.emailDelivery={status:'sent',acceptedAt:Date.now()};toast('Workout accepted by Web3Forms. Check your inbox.');}}
-catch{h.emailDelivery={status:'unknown',attemptedAt:Date.now()};toast('Email delivery is unconfirmed. Check your inbox before retrying.');}
-finally{clearTimeout(timeout);sendingEmails.delete(id);save();if(view==='history')render();}}
-function bindEmail(){if($('#email-settings'))$('#email-settings').onsubmit=e=>{e.preventDefault();const key=$('#email-key').value.trim();if(key&&!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(key)){toast('Enter a valid Web3Forms form access key.');return;}emailSettings={key,enabled:$('#email-enabled').checked};try{localStorage.setItem(EMAIL_SETTINGS_KEY,JSON.stringify(emailSettings));toast('Email settings saved.');}catch{toast('Settings apply while this page is open; browser storage is unavailable.');}render();};document.querySelectorAll('[data-email-id]').forEach(b=>b.onclick=()=>{const h=state.history.find(h=>h.id===b.dataset.emailId);if(['unknown','sending'].includes(h?.emailDelivery?.status))ask('Retry this email?','The previous attempt may have arrived. Check your inbox first to avoid a duplicate.',()=>sendWorkoutEmail(h.id));else sendWorkoutEmail(b.dataset.emailId);});}
+const PROGRAM_ORDER = ['Push / Pull / Legs','Upper / Lower','Full Body','Running','HYROX','Conditioning','Home / Bodyweight','Other'];
+/* ================= Utilities ================= */
+const $ = (sel, root) => (root || document).querySelector(sel);
+const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+function el(tag, attrs, ...children) {
+  const n = document.createElement(tag);
+  if (attrs) for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === 'class') n.className = v;
+    else if (k === 'html') n.innerHTML = v;
+    else if (k.startsWith('on') && typeof v === 'function') n.addEventListener(k.slice(2), v);
+    else if (k === 'value') n.value = v;
+    else if (k === 'checked') n.checked = !!v;
+    else if (k === 'disabled') n.disabled = !!v;
+    else n.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of children.flat(Infinity)) {
+    if (c == null || c === false) continue;
+    n.appendChild(typeof c === 'string' || typeof c === 'number' ? document.createTextNode(String(c)) : c);
+  }
+  return n;
+}
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function pad2(n) { return String(n).padStart(2, '0'); }
+function fmtClock(sec) {
+  sec = Math.max(0, Math.round(sec || 0));
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  return h ? `${h}:${pad2(m)}:${pad2(s)}` : `${m}:${pad2(s)}`;
+}
+function fmtDur(sec) {
+  sec = Math.round(sec || 0);
+  const h = Math.floor(sec / 3600), m = Math.round((sec % 3600) / 60);
+  if (sec < 60) return `${sec}s`;
+  return h ? `${h}h ${m}m` : `${m} min`;
+}
+function parseTime(str, kind) {
+  if (str == null) return null;
+  str = String(str).trim();
+  if (!str) return null;
+  if (str.includes(':')) {
+    const parts = str.split(':').map(p => parseFloat(p) || 0);
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    return parts[0] * 60 + parts[1];
+  }
+  const n = parseFloat(str.replace(',', '.'));
+  if (isNaN(n)) return null;
+  /* plain number: minutes for runs and rounds, seconds for holds */
+  return (kind === 'cardio' || kind === 'rounds') ? Math.round(n * 60) : Math.round(n);
+}
+function fmtPace(secPerKm) {
+  if (!secPerKm || !isFinite(secPerKm)) return '—';
+  const m = Math.floor(secPerKm / 60), s = Math.round(secPerKm % 60);
+  return `${m}:${pad2(s)}/km`;
+}
+function fmtNum(n, dp) {
+  if (n == null || isNaN(n)) return '—';
+  const s = Number(n).toFixed(dp == null ? 1 : dp);
+  return s.replace(/\.0+$/, '').replace(/(\.\d*?)0+$/, '$1');
+}
+function todayISO(d) { d = d || new Date(); return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`; }
+function fmtDate(iso, opts) {
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  return d.toLocaleDateString('en-GB', opts || { weekday: 'short', day: 'numeric', month: 'short' });
+}
+function fmtTimeOfDay(iso) { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); }
+function daysAgo(iso) {
+  const d = new Date(iso); if (isNaN(d)) return '';
+  const days = Math.floor((startOfDay(new Date()) - startOfDay(d)) / 86400000);
+  if (days === 0) return 'today'; if (days === 1) return 'yesterday'; if (days < 7) return `${days} days ago`;
+  if (days < 30) return `${Math.floor(days / 7)} wk${days >= 14 ? 's' : ''} ago`;
+  return fmtDate(iso, { day: 'numeric', month: 'short' });
+}
+function startOfDay(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
+function startOfWeek(d) { const x = startOfDay(d); const day = (x.getDay() + 6) % 7; x.setDate(x.getDate() - day); return x; }
+function hapticBeep() {
+  try { if (navigator.vibrate) navigator.vibrate([180, 90, 180]); } catch (e) {}
+  try {
+    if (!S.prefs.beep) return;
+    const ctx = Beeper.ctx || (Beeper.ctx = new (window.AudioContext || window.webkitAudioContext)());
+    if (ctx.state === 'suspended') ctx.resume();
+    [0, 0.22].forEach(t => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'square'; o.frequency.value = 880; g.gain.value = 0.0001;
+      o.connect(g); g.connect(ctx.destination);
+      const at = ctx.currentTime + t;
+      g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(0.25, at + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, at + 0.16);
+      o.start(at); o.stop(at + 0.18);
+    });
+  } catch (e) {}
+}
+const Beeper = { ctx: null, prime() { try { if (!Beeper.ctx) Beeper.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (Beeper.ctx.state === 'suspended') Beeper.ctx.resume(); } catch (e) {} } };
 
-function finish(){const a=state.active;if(!a||!a.logs.flat().some(s=>s.done))return;const completed={...clone(a),finished:Date.now(),emailDelivery:{status:emailSettings.enabled?'unconfigured':'off'}};state.history.push(completed);state.active=null;restUntil=0;const saved=save();view='history';render();toast(saved?'Session saved. Good work.':'Session recorded here — export a backup to keep it.');if(emailSettings.enabled)void sendWorkoutEmail(completed.id);}
-function historyView(){return intro('Every session counts','Your training history.')+emailSettingsView()+`<div class="layout"><section class="panel"><div class="row wrap"><h2>${state.history.length} sessions recorded</h2><div class="row"><button class="small" id="export">Export backup</button><label class="button small" for="import">Restore backup</label><input type="file" id="import" accept="application/json,.json" hidden></div></div><p class="hint">Backups include sessions, history and any workout in progress. Keep a copy somewhere safe. Restore replaces the data in this browser.</p>${state.history.length?state.history.slice().reverse().map(h=>`<details class="history-item"><summary><strong>${esc(h.programme.name)}</strong><span class="hint" style="display:block">${date(h.finished)} · ${Math.round((h.finished-h.started)/60000)} min elapsed · ${h.logs.flat().filter(s=>s.done).length}/${h.logs.flat().length} sets / steps</span></summary><ul>${h.programme.exercises.map((e,i)=>`<li>${esc(e.name)} — ${h.logs[i].map(s=>s.done?(e.kind==='strength'?`${esc(s.weight||'—')} kg × ${esc(s.reps||'—')} reps${s.rpe?' · RPE '+esc(s.rpe):''}`:`${esc(s.minutes||'—')} min${s.distance?' · '+esc(s.distance)+' km':''}${s.weight!==''?' · '+esc(s.weight)+' kg':''}${s.reps!==''?' · '+esc(s.reps)+' reps':''}${s.rpe?' · RPE '+esc(s.rpe):''}`):'Not completed').join('; ')}</li>`).join('')}</ul>${h.notes?`<p>${esc(h.notes)}</p>`:''}${emailControls(h)}</details>`).join(''):'<div class="empty"><div class="number">↗</div><h2 style="margin-top:20px">Your story starts with one session.</h2><p class="muted">Choose a session, log your work, and return here to see your progress.</p><button class="primary" onclick="switchView(\'train\')">Choose a session →</button></div>'}</section>${sidebar()}</div>`;}
-function programmesView(){return intro('Built around you','Your session library.')+(editing?editorView():`<section class="panel"><div class="row wrap"><p class="muted">Start with a template, or create your own.</p><button class="primary" id="new-session">+ New session</button></div>${state.programmes.map(p=>`<div class="exercise"><div class="number">${p.type==='Strength'?'S':p.type==='Running'?'R':p.type==='HYROX'?'H':p.type==='Cycling'?'C':'M'}</div><div><h3>${esc(p.name)}</h3><span class="hint">${esc(p.type)} · ${p.minutes} min · ${p.exercises.length} exercises / steps</span></div><button class="small" data-edit="${esc(p.id)}">Edit</button></div>`).join('')}</section>`);}
-function edit(id){editing=clone(state.programmes.find(p=>p.id===id)||make(crypto.randomUUID(),'My session','Strength',30,[['Exercise','3 × 10 reps',3]]));view='programmes';render();}
-function editorView(){return `<form id="editor" class="panel"><h2>Edit your session</h2><div class="edit-grid" style="grid-template-columns:2fr 1fr 1fr"><label class="field">Session name<input id="edit-name" required maxlength="120" value="${esc(editing.name)}"></label><label class="field">Type<select id="edit-type">${['Strength','Running','HYROX','Cycling','Mobility','Circuit','Other'].map(t=>`<option ${t===editing.type?'selected':''}>${t}</option>`).join('')}</select></label><label class="field">Minutes<input id="edit-minutes" type="number" min="1" max="1440" required value="${editing.minutes}"></label></div><div id="edit-exercises">${editing.exercises.map((e,i)=>`<fieldset style="border:1px solid var(--line);border-radius:8px;margin:18px 0;padding:16px"><legend class="eyebrow">Exercise / step ${i+1}</legend><div class="edit-grid"><label class="field">Name<input data-edit-index="${i}" data-prop="name" required maxlength="120" value="${esc(e.name)}"></label><label class="field">Target / instructions<input data-edit-index="${i}" data-prop="target" maxlength="400" value="${esc(e.target)}"></label><button type="button" class="small" data-remove="${i}" aria-label="Remove exercise ${i+1}" ${editing.exercises.length===1?'disabled':''}>×</button></div><div class="row"><label class="field" style="flex:1">Log as<select data-edit-index="${i}" data-prop="kind"><option value="strength" ${e.kind==='strength'?'selected':''}>Weight & reps</option><option value="cardio" ${e.kind==='cardio'?'selected':''}>Time & distance</option><option value="timed" ${e.kind==='timed'?'selected':''}>Timed activity</option></select></label><label class="field" style="width:100px">Sets / steps<input data-edit-index="${i}" data-prop="sets" type="number" min="1" max="30" required value="${e.sets}"></label></div></fieldset>`).join('')}</div><button type="button" id="add-exercise">+ Add exercise / step</button><div class="actions"><button class="primary" type="submit">Save session</button><button type="button" onclick="editing=null;render()">Cancel</button></div><p class="hint">Changes apply to future workouts. Your existing history stays as recorded.</p></form>`;}
-function restText(){let n=Math.max(0,Math.ceil((restUntil-Date.now())/1000));return `${Math.floor(n/60)}:${String(n%60).padStart(2,'0')}`;}
-function startRest(s){restUntil=s?Date.now()+s*1000:0;clearInterval(restTick);const update=()=>{if($('#timer'))$('#timer').textContent=restText();if(restUntil&&Date.now()>=restUntil){restUntil=0;clearInterval(restTick);toast('Rest complete. Ready for your next set.');}};update();if(s)restTick=setInterval(update,250);}
-function download(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`ab-29-training-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function bind(){bindEmail();if($('#session-select'))$('#session-select').onchange=e=>{selected=e.target.value;render();};if($('#start'))$('#start').onclick=()=>start(selected);if($('#edit-selected'))$('#edit-selected').onclick=()=>edit(selected);document.querySelectorAll('[data-set]').forEach(el=>el.oninput=()=>{if(!el.validity.valid)return;state.active.logs[state.active.index][Number(el.dataset.set)][el.dataset.key]=el.value;save();});document.querySelectorAll('[data-check]').forEach(el=>el.onclick=()=>{if([...document.querySelectorAll('[data-set]')].some(x=>!x.reportValidity()))return;const s=state.active.logs[state.active.index][Number(el.dataset.check)];s.done=!s.done;save();render();});if($('#notes'))$('#notes').oninput=e=>{state.active.notes=e.target.value;save();};if($('#next'))$('#next').onclick=()=>{state.active.index++;save();render();};if($('#prev'))$('#prev').onclick=()=>{state.active.index--;save();render();};if($('#finish'))$('#finish').onclick=()=>{const a=state.active,missing=a.logs.flat().filter(s=>!s.done).length;if(missing)ask('Finish this session?',`${missing} sets or steps are still unmarked. Save the work you have logged?`,finish);else finish();};if($('#discard'))$('#discard').onclick=()=>ask('Discard this session?','This removes your current workout and its logged sets. Saved history stays available.',()=>{state.active=null;save();startRest(0);render();});document.querySelectorAll('[data-rest]').forEach(b=>b.onclick=()=>startRest(Number(b.dataset.rest)));if($('#export'))$('#export').onclick=download;if($('#import'))$('#import').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(f.size>10000000){toast('Backup is too large (maximum 10 MB).');return;}try{const d=JSON.parse(await f.text());if(!validData(d))throw Error();ask('Restore this backup?',`Replace this browser’s data with ${d.history.length} saved sessions and ${d.programmes.length} session templates? Export your current backup first if you need it.`,()=>{state=clone(d);mergeSessionLibrary();storageBlocked=false;$('#storage-warning').hidden=true;const saved=save();startRest(0);render();toast(saved?'Backup restored.':'Restored here, but browser storage is unavailable.');});}catch{toast('That file is not a valid AB-29 Training backup. Nothing has changed.');}};if($('#new-session'))$('#new-session').onclick=()=>edit(null);document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>edit(b.dataset.edit));if($('#editor')){const sync=()=>{editing.name=$('#edit-name').value;editing.type=$('#edit-type').value;editing.minutes=Number($('#edit-minutes').value);document.querySelectorAll('[data-edit-index]').forEach(el=>{editing.exercises[Number(el.dataset.editIndex)][el.dataset.prop]=el.dataset.prop==='sets'?Number(el.value):el.value;});};$('#add-exercise').onclick=()=>{sync();if(editing.exercises.length>=100)return;editing.exercises.push({name:'',target:'',sets:1,kind:'strength'});render();};document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{sync();editing.exercises.splice(Number(b.dataset.remove),1);render();});$('#editor').onsubmit=e=>{e.preventDefault();sync();editing.name=editing.name.trim();editing.exercises.forEach(e=>e.name=e.name.trim());if(!validProgramme(editing)){toast('Add a session name and a name for each exercise.');return;}const i=state.programmes.findIndex(p=>p.id===editing.id);if(i<0)state.programmes.push(clone(editing));else state.programmes[i]=clone(editing);const saved=save();editing=null;render();toast(saved?'Session saved.':'Session updated here — export a backup to keep it.');};}}
-mergeSessionLibrary();save();render();
-if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'read_training_log',description:'Read session templates, saved history and the active workout in this browser.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>clone(state)})).catch(()=>{});}catch{}}
-</script></body></html>
+/* ================= State ================= */
+const S = {
+  sessions: {},   // id -> session override / custom session / {id, deleted:true}
+  logs: {},       // id -> completed session log
+  prefs: { units: 'kg', beep: true, setRpe: true, lastPick: '', updatedAt: 0 },
+  active: null,   // in-progress session
+  tab: 'today',
+  ui: { historyFilter: 'all', progressEx: '', editing: null, importOpen: false, libOpen: {} , expanded: {} },
+  synced: false,
+};
+
+/* ================= Storage: this device + the link's memory ================= */
+const LS_KEY = 'graft.v1';
+const Store = {
+  db: null,
+  loadLocal() {
+    try { const raw = localStorage.getItem(LS_KEY); if (!raw) return; const d = JSON.parse(raw);
+      S.sessions = d.sessions || {}; S.logs = d.logs || {}; S.prefs = Object.assign(S.prefs, d.prefs || {}); S.active = d.active || null;
+    } catch (e) {}
+  },
+  saveLocal() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify({ sessions: S.sessions, logs: S.logs, prefs: S.prefs, active: S.active })); } catch (e) {}
+  },
+  async remote(fn) {
+    if (!this.db) return;
+    try { await fn(this.db); }
+    catch (e) {
+      if (e && e.code === 'unavailable') { await new Promise(r => setTimeout(r, 400 + Math.random() * 600)); try { await fn(this.db); } catch (e2) { console.warn('db write failed', e2); } }
+      else if (e && e.code === 'quota_exceeded') toast('Storage full on the link — delete some old sessions from History');
+      else console.warn('db write failed', e);
+    }
+  },
+  putSession(s) { S.sessions[s.id] = s; this.saveLocal(); this.remote(db => db.doc('sessions/' + s.id).set(s)); },
+  putLog(l) { S.logs[l.id] = l; this.saveLocal(); this.remote(db => db.doc('logs/' + l.id).set(l)); },
+  delLog(id) { delete S.logs[id]; this.saveLocal(); this.remote(db => db.doc('logs/' + id).delete()); },
+  putPrefs() { S.prefs.updatedAt = Date.now(); this.saveLocal(); const p = clone(S.prefs); this.remote(db => db.doc('meta/prefs').set(p)); },
+  _activeTimer: null,
+  putActive(immediate) {
+    if (S.active) S.active.updatedAt = Date.now();
+    this.saveLocal();
+    clearTimeout(this._activeTimer);
+    const write = () => { const body = { active: S.active ? clone(S.active) : null, updatedAt: Date.now() }; this.remote(db => db.doc('meta/active').set(body)); };
+    if (immediate) write(); else this._activeTimer = setTimeout(write, 600);
+  },
+  async connect() {
+    if (!(window.claude && typeof window.claude.use === 'function')) return false;
+    let db = null;
+    try { db = await window.claude.use('db'); } catch (e) { db = null; }
+    if (!db) return false;
+    this.db = db;
+    try {
+      const [sessSnap, logSnap, prefSnap, actSnap] = await Promise.all([
+        db.collection('sessions').get(),
+        db.collection('logs').orderBy('finishedAt', 'desc').limit(1000).get(),
+        db.doc('meta/prefs').get(),
+        db.doc('meta/active').get(),
+      ]);
+      /* sessions: newer updatedAt wins; push anything only this device has */
+      const remoteSess = {}; sessSnap.docs.forEach(d => { if (d.exists) remoteSess[d.id] = d.data(); });
+      for (const [id, s] of Object.entries(S.sessions)) {
+        const r = remoteSess[id];
+        if (!r || (s.updatedAt || 0) > (r.updatedAt || 0)) await this.remote(db => db.doc('sessions/' + id).set(s));
+      }
+      for (const [id, r] of Object.entries(remoteSess)) { const l = S.sessions[id]; if (!l || (r.updatedAt || 0) >= (l.updatedAt || 0)) S.sessions[id] = r; }
+      /* logs: union */
+      const remoteLogs = {}; logSnap.docs.forEach(d => { if (d.exists) remoteLogs[d.id] = d.data(); });
+      for (const [id, l] of Object.entries(S.logs)) if (!remoteLogs[id]) await this.remote(db => db.doc('logs/' + id).set(l));
+      Object.assign(S.logs, remoteLogs);
+      /* prefs */
+      if (prefSnap.exists) { const r = prefSnap.data(); if ((r.updatedAt || 0) >= (S.prefs.updatedAt || 0)) S.prefs = Object.assign({}, S.prefs, r); else await this.remote(db => db.doc('meta/prefs').set(clone(S.prefs))); }
+      else if (S.prefs.updatedAt) await this.remote(db => db.doc('meta/prefs').set(clone(S.prefs)));
+      /* active session */
+      if (actSnap.exists) { const r = actSnap.data(); const localTs = S.active ? (S.active.updatedAt || 0) : 0;
+        if ((r.updatedAt || 0) > localTs) S.active = r.active || null; else if (S.active) this.putActive(true); }
+      else if (S.active) this.putActive(true);
+      this.saveLocal();
+      S.synced = true;
+      this.subscribe(db);
+      return true;
+    } catch (e) { console.warn('db connect failed', e); return false; }
+  },
+  subscribe(db) {
+    const quiet = () => (S.tab === 'today' && S.active) || S.ui.editing;
+    db.collection('logs').onSnapshot(snap => {
+      let changed = false;
+      snap.docChanges().forEach(c => {
+        if (c.type === 'removed') { if (S.logs[c.doc.id]) { delete S.logs[c.doc.id]; changed = true; } }
+        else { const d = c.doc.data(); if (JSON.stringify(S.logs[c.doc.id]) !== JSON.stringify(d)) { S.logs[c.doc.id] = d; changed = true; } }
+      });
+      if (changed) { this.saveLocal(); if (!quiet()) render(); }
+    }, e => console.warn('logs subscription ended', e));
+    db.collection('sessions').onSnapshot(snap => {
+      let changed = false;
+      snap.docChanges().forEach(c => {
+        if (c.type === 'removed') { if (S.sessions[c.doc.id]) { delete S.sessions[c.doc.id]; changed = true; } }
+        else { const d = c.doc.data(); if (JSON.stringify(S.sessions[c.doc.id]) !== JSON.stringify(d)) { S.sessions[c.doc.id] = d; changed = true; } }
+      });
+      if (changed) { this.saveLocal(); if (!quiet()) render(); }
+    }, e => console.warn('sessions subscription ended', e));
+    db.doc('meta/active').onSnapshot(snap => {
+      if (!snap.exists) return;
+      const r = snap.data(); const localTs = S.active ? (S.active.updatedAt || 0) : 0;
+      const remoteTs = r.active ? (r.active.updatedAt || 0) : (r.updatedAt || 0);
+      if (remoteTs > localTs && JSON.stringify(r.active || null) !== JSON.stringify(S.active)) {
+        if (document.activeElement && document.activeElement.tagName === 'INPUT' && S.tab === 'today') return; /* don't yank inputs mid-typing */
+        S.active = r.active || null; this.saveLocal(); render();
+      }
+    }, e => console.warn('active subscription ended', e));
+  },
+};
+
+/* ================= Derived data ================= */
+function allSessions() {
+  const out = [];
+  const seen = new Set();
+  for (const b of BUILTIN_SESSIONS) {
+    seen.add(b.id);
+    const o = S.sessions[b.id];
+    if (o && o.deleted) continue;
+    out.push(o ? Object.assign({}, b, o, { builtin: true }) : Object.assign({}, b, { builtin: true }));
+  }
+  for (const s of Object.values(S.sessions)) {
+    if (seen.has(s.id) || s.deleted) continue;
+    out.push(Object.assign({}, s, { builtin: false }));
+  }
+  const rank = p => { const i = PROGRAM_ORDER.indexOf(p); return i < 0 ? PROGRAM_ORDER.length - 0.5 : i; };
+  out.sort((a, b) => rank(a.program) - rank(b.program) || (a.order || 0) - (b.order || 0));
+  return out;
+}
+function sessionById(id) { return allSessions().find(s => s.id === id) || null; }
+function programs() {
+  const set = new Map();
+  for (const s of allSessions()) set.set(s.program || 'Other', true);
+  return Array.from(set.keys());
+}
+function logsSorted() { return Object.values(S.logs).filter(Boolean).sort((a, b) => (b.finishedAt || '').localeCompare(a.finishedAt || '')); }
+function normName(n) { return String(n || '').trim().toLowerCase(); }
+function doneSets(ex) { return (ex.sets || []).filter(s => s.done); }
+
+/* best value for a set by kind; higher is better unless noted */
+function setMetric(kind, s, ex) {
+  if (kind === 'weight') { const kg = +s.kg || 0, reps = +s.reps || 0; if (kg > 0 && reps > 0) return kg * (1 + reps / 30); if (kg > 0) return kg; return null; }
+  if (kind === 'reps') return s.reps > 0 ? +s.reps : null;
+  if (kind === 'time') return s.time > 0 ? +s.time : null;
+  if (kind === 'cardio') { const km = +s.km || 0, t = +s.time || 0; if (km > 0 && t > 0) return t / km; return null; }
+  if (kind === 'rounds') return s.rounds > 0 ? +s.rounds : null;
+  if (kind === 'carry') return s.kg > 0 ? +s.kg : null;
+  return null;
+}
+function lowerBetter(kind, ex) { return kind === 'cardio' || (kind === 'time' && ex && ex.lowerIsBetter); }
+function metricLabel(kind, ex) {
+  return { weight: 'Est. 1RM', reps: 'Best reps', time: (ex && ex.lowerIsBetter) ? 'Best time' : 'Longest hold', cardio: 'Best pace', rounds: 'Most rounds', carry: 'Heaviest' }[kind] || '';
+}
+function fmtMetric(kind, v, ex) {
+  if (v == null) return '—';
+  if (kind === 'weight' || kind === 'carry') return fmtNum(v, 1) + ' ' + S.prefs.units;
+  if (kind === 'reps') return fmtNum(v, 0) + ' reps';
+  if (kind === 'time') return fmtClock(v);
+  if (kind === 'cardio') return fmtPace(v);
+  if (kind === 'rounds') return fmtNum(v, 0) + ' rounds';
+  return String(v);
+}
+function fmtSet(kind, s, withRpe) {
+  const base = fmtSetBase(kind, s);
+  return withRpe && s.rpe != null ? `${base} @${fmtNum(s.rpe, 1)}` : base;
+}
+function fmtSetBase(kind, s) {
+  const u = S.prefs.units;
+  if (kind === 'weight') { if (!(+s.kg > 0)) return `BW×${fmtNum(s.reps, 0)}`; return `${fmtNum(s.kg, 1)}${s.reps ? '×' + fmtNum(s.reps, 0) : ' ' + u}`; }
+  if (kind === 'reps') return fmtNum(s.reps, 0);
+  if (kind === 'time') return fmtClock(s.time);
+  if (kind === 'cardio') return `${fmtNum(s.km, 2)}km${s.time ? ' ' + fmtClock(s.time) : ''}`;
+  if (kind === 'rounds') return `${fmtNum(s.rounds, 0)} rds${s.time ? ' ' + fmtClock(s.time) : ''}`;
+  if (kind === 'carry') return `${fmtNum(s.kg, 1)}×${fmtNum(s.m, 0)}m`;
+  return '';
+}
+function bestOfSets(kind, sets, ex) {
+  const vals = sets.map(s => setMetric(kind, s, ex)).filter(v => v != null);
+  if (!vals.length) return null;
+  return lowerBetter(kind, ex) ? Math.min(...vals) : Math.max(...vals);
+}
+/* most recent log entry for an exercise name, with done sets */
+function lastEntry(name, excludeId) {
+  const key = normName(name);
+  for (const l of logsSorted()) {
+    if (l.id === excludeId) continue;
+    const e = (l.exercises || []).find(x => normName(x.name) === key && doneSets(x).length);
+    if (e) return { log: l, ex: e };
+  }
+  return null;
+}
+/* all-time best for an exercise name */
+function bestEver(name, kind, exDef, excludeId) {
+  const key = normName(name); let best = null, at = null;
+  for (const l of logsSorted()) {
+    if (l.id === excludeId) continue;
+    for (const e of (l.exercises || [])) {
+      if (normName(e.name) !== key || e.kind !== kind) continue;
+      const v = bestOfSets(kind, doneSets(e), exDef || e);
+      if (v == null) continue;
+      if (best == null || (lowerBetter(kind, exDef || e) ? v < best : v > best)) { best = v; at = l; }
+    }
+  }
+  return best == null ? null : { value: best, log: at };
+}
+function volumeOf(log) {
+  let v = 0;
+  for (const e of (log.exercises || [])) if (e.kind === 'weight') for (const s of doneSets(e)) v += (+s.kg || 0) * (+s.reps || 0);
+  return v;
+}
+function distanceOf(log) {
+  let d = 0;
+  for (const e of (log.exercises || [])) if (e.kind === 'cardio') for (const s of doneSets(e)) d += (+s.km || 0);
+  return d;
+}
+function logHeadline(log) {
+  const v = volumeOf(log), d = distanceOf(log);
+  if (v > 0 && d === 0) return `${fmtNum(v, 0)} ${S.prefs.units}`;
+  if (d > 0 && v === 0) return `${fmtNum(d, 2)} km`;
+  if (v > 0 && d > 0) return `${fmtNum(d, 1)}km · ${fmtNum(v, 0)}${S.prefs.units}`;
+  const n = (log.exercises || []).reduce((a, e) => a + doneSets(e).length, 0);
+  return `${n} set${n === 1 ? '' : 's'}`;
+}
+function weekStats() {
+  const logs = logsSorted();
+  const now = new Date(); const wk = startOfWeek(now);
+  const thisWeek = logs.filter(l => new Date(l.finishedAt) >= wk).length;
+  const fourWk = new Date(wk); fourWk.setDate(fourWk.getDate() - 21);
+  const last4 = logs.filter(l => new Date(l.finishedAt) >= fourWk).length;
+  /* streak: consecutive weeks with a session, counting back from this week (or last week if this one is empty so far) */
+  let streak = 0; let cursor = new Date(wk);
+  const hasWeek = (start) => { const end = new Date(start); end.setDate(end.getDate() + 7); return logs.some(l => { const d = new Date(l.finishedAt); return d >= start && d < end; }); };
+  if (!hasWeek(cursor)) cursor.setDate(cursor.getDate() - 7);
+  while (hasWeek(cursor) && streak < 520) { streak++; cursor.setDate(cursor.getDate() - 7); }
+  return { thisWeek, last4, streak, total: logs.length };
+}
+function suggestedNext() {
+  const logs = logsSorted();
+  if (!logs.length) return null;
+  const last = logs[0];
+  const inProg = allSessions().filter(s => s.program === last.program);
+  if (inProg.length < 2) return null;
+  const i = inProg.findIndex(s => s.id === last.sessionId);
+  if (i < 0) return null;
+  return inProg[(i + 1) % inProg.length];
+}
+
+/* ================= Rest timer ================= */
+const Rest = {
+  end: 0, timer: null,
+  start(sec) {
+    if (!sec || sec <= 0) return;
+    this.end = Date.now() + sec * 1000;
+    $('#restBar').hidden = false;
+    this.tick();
+    clearInterval(this.timer);
+    this.timer = setInterval(() => this.tick(), 250);
+  },
+  add(sec) { if (this.end) { this.end += sec * 1000; this.tick(); } },
+  stop() { clearInterval(this.timer); this.timer = null; this.end = 0; $('#restBar').hidden = true; },
+  tick() {
+    const left = Math.ceil((this.end - Date.now()) / 1000);
+    if (left <= 0) { $('#restTime').textContent = 'GO'; hapticBeep(); clearInterval(this.timer); this.timer = null; this.end = 0; setTimeout(() => { if (!this.end) $('#restBar').hidden = true; }, 2500); return; }
+    $('#restTime').textContent = fmtClock(left);
+  },
+};
+
+/* ================= Toast & modal ================= */
+let toastTimer = null;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2600); }
+function openModal(content) {
+  const root = $('#modalRoot');
+  root.innerHTML = '';
+  const sheet = el('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true' }, content);
+  const wrap = el('div', { class: 'modal', onclick: e => { if (e.target === wrap) closeModal(); } }, sheet);
+  root.appendChild(wrap);
+  document.body.style.overflow = 'hidden';
+  return sheet;
+}
+function closeModal() { $('#modalRoot').innerHTML = ''; document.body.style.overflow = ''; }
+/* ================= Rendering ================= */
+function render() {
+  ['today', 'history', 'progress', 'library'].forEach(t => {
+    $('#view-' + t).hidden = S.tab !== t;
+    $('#tab-' + t).classList.toggle('on', S.tab === t);
+  });
+  const badge = $('#tab-today .badge'); if (S.active && !badge) $('#tab-today').appendChild(el('span', { class: 'badge', 'aria-hidden': 'true' })); if (!S.active && badge) badge.remove();
+  if (S.tab === 'today') (S.active ? renderWorkout : renderToday)();
+  if (S.tab === 'history') renderHistory();
+  if (S.tab === 'progress') renderProgress();
+  if (S.tab === 'library') renderLibrary();
+  updateSync();
+}
+function updateSync() {
+  const n = $('#sync'); n.classList.toggle('on', !!Store.db); n.classList.toggle('local', !Store.db);
+  $('#syncLabel').textContent = Store.db ? 'Synced to your link' : 'Saving on this device';
+  n.title = Store.db ? 'Your history is saved to this link and follows you on any device' : 'Your history is saved in this browser. Back it up from Library → Settings.';
+}
+function pillType(type) { return el('span', { class: 'pill' }, TYPES[type] || type || 'Other'); }
+
+/* ---------- Today ---------- */
+function renderToday() {
+  const v = $('#view-today'); v.innerHTML = '';
+  const st = weekStats();
+  const sessions = allSessions();
+  const next = suggestedNext();
+  let pick = S.prefs.lastPick && sessions.find(s => s.id === S.prefs.lastPick) ? S.prefs.lastPick : (next ? next.id : (sessions[0] && sessions[0].id));
+  const chosen = sessions.find(s => s.id === pick) || sessions[0];
+
+  v.appendChild(el('div', { class: 'today-head' },
+    el('div', { class: 'eyebrow' }, 'Today'),
+    el('div', { class: 'date' }, fmtDate(new Date().toISOString(), { weekday: 'long', day: 'numeric', month: 'long' })),
+  ));
+  v.appendChild(el('div', { class: 'stats' },
+    stat(st.thisWeek, 'This week'), stat(st.last4, 'Last 4 wks'), stat(st.streak, st.streak === 1 ? 'Week streak' : 'Week streak'), stat(st.total, 'Sessions'),
+  ));
+
+  /* picker */
+  const sel = el('select', { class: 'big', id: 'sessionPick', 'aria-label': 'Choose a session' });
+  for (const p of programs()) {
+    const g = el('optgroup', { label: p });
+    sessions.filter(s => (s.program || 'Other') === p).forEach(s => g.appendChild(el('option', { value: s.id, selected: s.id === (chosen && chosen.id) }, s.name)));
+    sel.appendChild(g);
+  }
+  sel.addEventListener('change', () => { S.prefs.lastPick = sel.value; Store.putPrefs(); renderToday(); });
+  const pickSec = el('section', { class: 'section' },
+    el('div', { class: 'section-head' }, el('h2', null, 'Pick a session'), next ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { S.prefs.lastPick = next.id; Store.putPrefs(); renderToday(); } }, `Up next: ${next.name}`) : null),
+    sel,
+  );
+  v.appendChild(pickSec);
+
+  if (chosen) {
+    const list = el('div', { class: 'preview-list' });
+    if (!chosen.exercises.length) list.appendChild(el('div', { class: 'item' }, el('span', { class: 'n muted' }, 'Blank session — add exercises as you go')));
+    chosen.exercises.forEach(e => {
+      const last = lastEntry(e.name);
+      list.appendChild(el('div', { class: 'item' },
+        el('span', { class: 'n' }, e.name),
+        el('span', { class: 't num' }, targetText(e)),
+        last ? el('span', { class: 'last' }, `Last: ${doneSets(last.ex).map(s => fmtSet(e.kind, s)).join(', ')} · ${daysAgo(last.log.finishedAt)}`) : null,
+      ));
+    });
+    const lastDone = logsSorted().find(l => l.sessionId === chosen.id);
+    v.appendChild(el('div', { class: 'card lift stack' },
+      el('div', { class: 'row between' },
+        el('div', { class: 'row' }, el('span', { class: 'pill solid' }, chosen.program), pillType(chosen.type)),
+        el('span', { class: 'small muted' }, lastDone ? `Last done ${daysAgo(lastDone.finishedAt)}` : 'Not done yet'),
+      ),
+      el('h2', null, chosen.name),
+      chosen.focus ? el('p', { class: 'muted' }, chosen.focus) : null,
+      list,
+      el('button', { class: 'btn primary block', type: 'button', onclick: () => startSession(chosen) }, 'Start session'),
+    ));
+  }
+
+  /* recent */
+  const recent = logsSorted().slice(0, 4);
+  const rec = el('section', { class: 'section' }, el('div', { class: 'section-head' }, el('h2', null, 'Recent'), recent.length ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { S.tab = 'history'; render(); } }, 'All history') : null));
+  if (!recent.length) rec.appendChild(el('div', { class: 'empty' }, 'Nothing logged yet. Pick a session above and get going.'));
+  else {
+    const wrap = el('div', { class: 'recent' });
+    recent.forEach(l => wrap.appendChild(el('div', { class: 'item' },
+      el('div', { class: 'd' }, fmtDate(l.finishedAt, { day: 'numeric', month: 'short' }), el('small', null, fmtDate(l.finishedAt, { weekday: 'short' }))),
+      el('div', null, el('div', { class: 'n' }, l.name), el('div', { class: 'm' }, `${l.program} · ${fmtDur(l.duration)}`)),
+      el('div', { class: 'num' }, logHeadline(l)),
+    )));
+    rec.appendChild(wrap);
+  }
+  v.appendChild(rec);
+}
+function stat(v, k) { return el('div', { class: 'stat' }, el('div', { class: 'v num' }, String(v)), el('div', { class: 'k' }, k)); }
+function targetText(e) {
+  const n = Array.isArray(e.sets) ? e.sets.length : (+e.sets || 0);
+  const sets = n > 1 ? `${n} × ` : '';
+  if (e.kind === 'cardio') return e.target ? `${sets}${e.target}` : (e.dist ? `${sets}${fmtNum(e.dist, 2)} km` : (n ? `${n} set${n === 1 ? '' : 's'}` : ''));
+  if (e.kind === 'carry' && !e.target && e.metres) return `${sets}${fmtNum(e.metres, 0)}m`;
+  return e.target ? `${sets}${e.target}` : (n ? `${n} set${n === 1 ? '' : 's'}` : '');
+}
+
+/* ---------- Workout ---------- */
+function buildActiveEx(e) {
+  const last = lastEntry(e.name);
+  const prevSets = last ? last.ex.sets.filter(s => s.done) : [];
+  const n = Math.max(1, +e.sets || 1);
+  const sets = [];
+  for (let i = 0; i < n; i++) {
+    const p = prevSets[i] || prevSets[prevSets.length - 1] || null;
+    const s = { kg: null, reps: null, time: null, km: null, rounds: null, m: null, rpe: null, done: false };
+    if (e.kind === 'weight') { if (p) { s.kg = p.kg; s.reps = p.reps; } }
+    else if (e.kind === 'reps') { if (p) s.reps = p.reps; }
+    else if (e.kind === 'time') { if (p && !e.lowerIsBetter) s.time = p.time; }
+    else if (e.kind === 'cardio') { s.km = e.dist != null ? e.dist : (p ? p.km : null); }
+    else if (e.kind === 'carry') { if (p) s.kg = p.kg; s.m = e.metres != null ? e.metres : (p ? p.m : null); }
+    sets.push(s);
+  }
+  return { id: e.id || slug(e.name), name: e.name, kind: e.kind, target: e.target || '', rest: e.rest == null ? 90 : +e.rest, note: e.note || '', lowerIsBetter: !!e.lowerIsBetter, dist: e.dist, metres: e.metres, sets, skipped: false, userNote: '' };
+}
+function startSession(def) {
+  Beeper.prime();
+  S.active = { id: uid(), sessionId: def.id, name: def.name, program: def.program || 'Other', type: def.type || 'other', startedAt: new Date().toISOString(), updatedAt: Date.now(), exercises: def.exercises.map(buildActiveEx) };
+  S.prefs.lastPick = def.id; Store.putPrefs();
+  Store.putActive(true);
+  S.tab = 'today'; render();
+  window.scrollTo({ top: 0 });
+}
+function renderWorkout() {
+  const v = $('#view-today'); v.innerHTML = '';
+  const a = S.active;
+  const total = a.exercises.filter(e => !e.skipped).length;
+  const done = a.exercises.filter(e => !e.skipped && e.sets.length && e.sets.every(s => s.done)).length;
+  const head = el('div', { class: 'wo-head' },
+    el('div', { class: 'wo-title' },
+      el('div', null, el('div', { class: 'row' }, el('span', { class: 'pill solid' }, a.program), pillType(a.type)), el('h2', null, a.name)),
+      el('button', { class: 'btn primary', type: 'button', onclick: finishSession }, 'Finish'),
+    ),
+    el('div', { class: 'wo-meta' },
+      el('span', { class: 'clock num', id: 'woClock' }, fmtClock((Date.now() - new Date(a.startedAt)) / 1000)),
+      el('span', { class: 'muted' }, `Started ${fmtTimeOfDay(a.startedAt)}`),
+      el('span', { class: 'muted num' }, `${done} of ${total} done`),
+    ),
+    el('div', { class: 'progress' }, el('div', { style: `width:${total ? Math.round(done / total * 100) : 0}%` })),
+  );
+  v.appendChild(head);
+
+  const list = el('div', { class: 'ex-list' });
+  a.exercises.forEach((e, i) => list.appendChild(exerciseCard(e, i)));
+  v.appendChild(list);
+
+  /* add exercise */
+  const nameIn = el('input', { type: 'text', id: 'addExName', placeholder: 'Exercise name', 'aria-label': 'Exercise name' });
+  const kindSel = el('select', { id: 'addExKind', 'aria-label': 'How to log it' }, Object.entries(KINDS).map(([k, d]) => el('option', { value: k }, d.label)));
+  v.appendChild(el('div', { class: 'card stack' },
+    el('div', { class: 'eyebrow' }, 'Add an exercise to this session'),
+    nameIn, kindSel,
+    el('button', { class: 'btn', type: 'button', onclick: () => {
+      const name = nameIn.value.trim(); if (!name) { nameIn.focus(); return; }
+      a.exercises.push(buildActiveEx({ name, kind: kindSel.value, sets: kindSel.value === 'cardio' || kindSel.value === 'rounds' ? 1 : 3, rest: 90 }));
+      Store.putActive(); renderWorkout();
+      setTimeout(() => { const cards = $$('.ex'); cards[cards.length - 1] && cards[cards.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 30);
+    } }, '+ Add exercise'),
+  ));
+  v.appendChild(el('div', { class: 'row between' },
+    el('button', { class: 'btn ghost', type: 'button', onclick: discardSession }, 'Discard session'),
+    el('button', { class: 'btn primary', type: 'button', onclick: finishSession }, 'Finish session'),
+  ));
+}
+function exerciseCard(e, i) {
+  const a = S.active;
+  const allDone = e.sets.length && e.sets.every(s => s.done);
+  const card = el('div', { class: 'ex' + (allDone ? ' done' : '') + (e.skipped ? ' skipped' : ''), 'data-i': i });
+  const last = lastEntry(e.name, a.id);
+  const best = bestEver(e.name, e.kind, e, a.id);
+  card.appendChild(el('div', { class: 'ex-head' },
+    el('div', null,
+      el('div', { class: 'ex-name' }, `${i + 1}. ${e.name}`),
+      el('div', { class: 'ex-target num' }, [targetText(e), e.rest ? `rest ${fmtClock(e.rest)}` : null].filter(Boolean).join(' · ')),
+    ),
+    el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e.skipped = !e.skipped; Store.putActive(); renderWorkout(); } }, e.skipped ? 'Unskip' : 'Skip'),
+  ));
+  if (e.note) card.appendChild(el('div', { class: 'ex-note' }, e.note));
+  const lastLine = [];
+  if (last) lastLine.push(el('span', null, el('b', null, 'Last: '), `${doneSets(last.ex).map(s => fmtSet(e.kind, s)).join(', ')} · ${daysAgo(last.log.finishedAt)}`));
+  if (best) lastLine.push(el('span', null, el('b', null, `${metricLabel(e.kind, e)}: `), fmtMetric(e.kind, best.value, e)));
+  if (lastLine.length) card.appendChild(el('div', { class: 'ex-last row' }, lastLine));
+  if (!e.skipped) {
+    const sets = el('div', { class: 'sets' });
+    const fields = setFields(e);
+    const cols = setCols(fields);
+    sets.appendChild(el('div', { class: 'set head', style: `grid-template-columns:${cols}` }, el('span', null, 'Set'), fields.map(f => el('span', null, f.key === 'kg' ? S.prefs.units : f.label)), el('span', null, '')));
+    e.sets.forEach((s, j) => sets.appendChild(setRow(e, s, j, i, fields, cols)));
+    card.appendChild(sets);
+    card.appendChild(el('div', { class: 'ex-actions' },
+      el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { const p = e.sets[e.sets.length - 1]; e.sets.push(Object.assign({}, p || {}, { done: false })); Store.putActive(); renderWorkout(); } }, '+ Set'),
+      e.sets.length > 1 ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e.sets.pop(); Store.putActive(); renderWorkout(); } }, '− Set') : null,
+      el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e._noteOpen = !e._noteOpen; renderWorkout(); } }, e.userNote ? 'Edit note' : 'Note'),
+    ));
+    if (e._noteOpen || e.userNote) {
+      const ta = el('input', { type: 'text', value: e.userNote || '', placeholder: 'How did it feel? Bell weight, tempo, niggles…', 'aria-label': 'Exercise note', id: `note-${a.id}-${i}` });
+      ta.addEventListener('input', () => { e.userNote = ta.value; Store.putActive(); });
+      card.appendChild(ta);
+    }
+  }
+  return card;
+}
+const RPE_FIELD = { key: 'rpe', label: 'RPE', type: 'num', step: '0.5', narrow: true };
+function setFields(e) {
+  const f = KINDS[e.kind].fields.slice();
+  if (S.prefs.setRpe !== false && e.kind !== 'cardio' && e.kind !== 'rounds') f.push(RPE_FIELD);
+  return f;
+}
+function setCols(fields) { return `32px ${fields.map(f => f.narrow ? '56px' : '1fr').join(' ')} 44px`; }
+function setRow(e, s, j, i, fields, cols) {
+  fields = fields || setFields(e); cols = cols || setCols(fields);
+  const row = el('div', { class: 'set' + (s.done ? ' done' : ''), style: `grid-template-columns:${cols}` });
+  row.appendChild(el('span', { class: 'idx' }, String(j + 1)));
+  const last = lastEntry(e.name, S.active.id);
+  const lastSet = last ? (doneSets(last.ex)[j] || doneSets(last.ex).slice(-1)[0]) : null;
+  fields.forEach(f => {
+    const isTime = f.type === 'time';
+    let placeholder = '';
+    if (isTime) placeholder = 'm:ss';
+    else if (f.key === 'reps') placeholder = firstNumber(e.target) || '';
+    else if (f.key === 'rpe') placeholder = lastSet && lastSet.rpe != null ? String(lastSet.rpe) : 'RPE';
+    const inp = el('input', {
+      type: 'text', inputmode: 'decimal', id: `set-${S.active.id}-${i}-${j}-${f.key}`,
+      value: s[f.key] == null ? '' : (isTime ? fmtClock(s[f.key]) : String(s[f.key])),
+      placeholder, 'aria-label': `Set ${j + 1} ${f.label}`,
+    });
+    inp.addEventListener('change', () => {
+      const raw = inp.value.trim();
+      s[f.key] = isTime ? parseTime(raw, e.kind) : (raw === '' ? null : parseFloat(raw.replace(',', '.')));
+      if (isTime && s[f.key] != null) inp.value = fmtClock(s[f.key]);
+      Store.putActive();
+    });
+    inp.addEventListener('focus', () => inp.select());
+    row.appendChild(el('div', { class: 'fld' + (f.narrow ? ' narrow' : '') }, inp));
+  });
+  row.appendChild(el('button', { class: 'tick' + (s.done ? ' on' : ''), type: 'button', 'aria-label': s.done ? 'Mark set not done' : 'Mark set done', 'aria-pressed': s.done ? 'true' : 'false', onclick: () => toggleSet(e, s, i, j) }));
+  return row;
+}
+function firstNumber(t) { const m = String(t || '').match(/\d+/); return m ? m[0] : ''; }
+function toggleSet(e, s, i, j) {
+  Beeper.prime();
+  s.done = !s.done;
+  if (s.done) {
+    if (e.kind === 'reps' && (s.reps == null || s.reps === '') && firstNumber(e.target)) s.reps = +firstNumber(e.target);
+    if (e.kind === 'weight' && (s.reps == null) && firstNumber(e.target)) s.reps = +firstNumber(e.target);
+    const a = S.active;
+    const isLastExercise = a.exercises.slice(i + 1).every(x => x.skipped || x.sets.every(t => t.done));
+    const isLastSet = e.sets.slice(j + 1).every(t => t.done);
+    if (e.rest > 0 && !(isLastExercise && isLastSet)) Rest.start(e.rest);
+    Store.putActive();
+    renderWorkout();
+    if (isLastSet) { const next = a.exercises.findIndex((x, k) => k > i && !x.skipped && !x.sets.every(t => t.done)); if (next >= 0) setTimeout(() => { const c = $(`.ex[data-i="${next}"]`); c && c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); }
+  } else { Store.putActive(); renderWorkout(); }
+}
+function discardSession() {
+  const sheet = openModal([
+    el('h2', null, 'Discard this session?'),
+    el('p', { class: 'muted' }, 'Nothing from it will be saved to your history.'),
+    el('div', { class: 'row between' },
+      el('button', { class: 'btn', type: 'button', onclick: closeModal }, 'Keep going'),
+      el('button', { class: 'btn danger', type: 'button', onclick: () => { S.active = null; Rest.stop(); Store.putActive(true); closeModal(); render(); toast('Session discarded'); } }, 'Discard'),
+    ),
+  ]);
+}
+function finishSession() {
+  const a = S.active;
+  const setsDone = a.exercises.reduce((n, e) => n + doneSets(e).length, 0);
+  const duration = Math.round((Date.now() - new Date(a.startedAt)) / 1000);
+  const setRpes = a.exercises.flatMap(e => doneSets(e).map(s => s.rpe).filter(r => r != null && r !== ''));
+  let rpe = a.rpe || (setRpes.length ? Math.min(10, Math.max(1, Math.round(setRpes.reduce((x, y) => x + +y, 0) / setRpes.length))) : 0);
+  const rpeRow = el('div', { class: 'rpe' });
+  for (let i = 1; i <= 10; i++) rpeRow.appendChild(el('button', { type: 'button', class: rpe === i ? 'on' : '', onclick: (ev) => { rpe = i; $$('.rpe button', rpeRow).forEach((b, k) => b.classList.toggle('on', k + 1 === i)); } }, String(i)));
+  const notes = el('textarea', { id: 'finishNotes', placeholder: 'Anything worth remembering next time?' }, a.notes || '');
+  const vol = volumeOf(a), dist = distanceOf(a);
+  openModal([
+    el('div', { class: 'eyebrow' }, 'Finish session'),
+    el('h2', null, a.name),
+    el('div', { class: 'stats', style: 'grid-template-columns:repeat(3,1fr)' },
+      stat(fmtDur(duration), 'Time'), stat(setsDone, 'Sets done'), vol > 0 ? stat(fmtNum(vol, 0), `${S.prefs.units} lifted`) : stat(dist > 0 ? fmtNum(dist, 1) : a.exercises.filter(e => !e.skipped && e.sets.every(s => s.done)).length, dist > 0 ? 'km' : 'Exercises'),
+    ),
+    setsDone === 0 ? el('p', { class: 'muted' }, 'Nothing is ticked yet — you can still save it, but the history will be empty.') : null,
+    el('div', { class: 'stack' }, el('div', { class: 'eyebrow' }, 'How hard was it? (RPE 1–10)'), rpeRow),
+    el('label', { class: 'field' }, el('span', null, 'Notes'), notes),
+    el('div', { class: 'row between' },
+      el('button', { class: 'btn', type: 'button', onclick: closeModal }, 'Back'),
+      el('button', { class: 'btn primary', type: 'button', onclick: () => saveSession(rpe, notes.value.trim(), duration) }, 'Save session'),
+    ),
+  ]);
+}
+function saveSession(rpe, notes, duration) {
+  const a = S.active;
+  const log = {
+    id: a.id, sessionId: a.sessionId, name: a.name, program: a.program, type: a.type,
+    startedAt: a.startedAt, finishedAt: new Date().toISOString(), date: todayISO(), duration, rpe: rpe || null, notes: notes || '',
+    exercises: a.exercises.filter(e => !e.skipped).map(e => ({ id: e.id, name: e.name, kind: e.kind, target: e.target, lowerIsBetter: !!e.lowerIsBetter, note: e.userNote || '', sets: e.sets.filter(s => s.done).map(s => { const o = { done: true }; KINDS[e.kind].fields.forEach(f => { o[f.key] = s[f.key] == null ? null : +s[f.key]; }); if (s.rpe != null && s.rpe !== '') o.rpe = +s.rpe; return o; }) })),
+  };
+  /* PBs: compare against everything before this session */
+  const pbs = [];
+  for (const e of log.exercises) {
+    const v = bestOfSets(e.kind, e.sets, e);
+    if (v == null) continue;
+    const prev = bestEver(e.name, e.kind, e, a.id);
+    const better = prev != null && (lowerBetter(e.kind, e) ? v < prev.value : v > prev.value);
+    if (better) pbs.push({ name: e.name, label: metricLabel(e.kind, e), value: fmtMetric(e.kind, v, e), prev: fmtMetric(e.kind, prev.value, e) });
+    if (e.kind === 'weight') {
+      const maxKg = Math.max(...e.sets.map(s => +s.kg || 0));
+      const prevMax = maxKgEver(e.name, a.id);
+      if (maxKg > 0 && prevMax != null && maxKg > prevMax) pbs.push({ name: e.name, label: 'Heaviest set', value: `${fmtNum(maxKg, 1)} ${S.prefs.units}`, prev: `${fmtNum(prevMax, 1)} ${S.prefs.units}` });
+    }
+  }
+  Store.putLog(log);
+  S.active = null; Rest.stop(); Store.putActive(true);
+  closeModal();
+  const body = [el('div', { class: 'eyebrow' }, 'Saved'), el('h2', null, pbs.length ? (pbs.length === 1 ? 'New personal best' : `${pbs.length} personal bests`) : 'Session logged')];
+  if (pbs.length) body.push(el('div', { class: 'pb-list' }, pbs.map(p => el('div', { class: 'pb' }, el('span', null, el('div', null, p.name), el('div', { class: 'small muted' }, `${p.label} · was ${p.prev}`)), el('b', null, p.value)))));
+  else body.push(el('p', { class: 'muted' }, logsSorted().length <= 1 ? 'First one in the book. Every session from here has something to beat.' : 'No PBs this time — showing up is the bit that compounds.'));
+  body.push(el('button', { class: 'btn primary block', type: 'button', onclick: () => { closeModal(); render(); } }, 'Done'));
+  openModal(body);
+  render();
+}
+function maxKgEver(name, excludeId) {
+  const key = normName(name); let best = null;
+  for (const l of logsSorted()) { if (l.id === excludeId) continue; for (const e of (l.exercises || [])) { if (normName(e.name) !== key || e.kind !== 'weight') continue; for (const s of doneSets(e)) { const kg = +s.kg || 0; if (kg > 0 && (best == null || kg > best)) best = kg; } } }
+  return best;
+}
+
+/* ---------- History ---------- */
+function renderHistory() {
+  const v = $('#view-history'); v.innerHTML = '';
+  const logs = logsSorted();
+  const progs = Array.from(new Set(logs.map(l => l.program)));
+  const sel = el('select', { id: 'histFilter', 'aria-label': 'Filter by program' }, el('option', { value: 'all' }, 'All programs'), progs.map(p => el('option', { value: p, selected: S.ui.historyFilter === p }, p)));
+  sel.addEventListener('change', () => { S.ui.historyFilter = sel.value; renderHistory(); });
+  v.appendChild(el('div', { class: 'section-head' }, el('h2', null, 'History'), el('span', { class: 'muted small num' }, `${logs.length} session${logs.length === 1 ? '' : 's'}`)));
+  v.appendChild(sel);
+  const shown = logs.filter(l => S.ui.historyFilter === 'all' || l.program === S.ui.historyFilter);
+  if (!shown.length) { v.appendChild(el('div', { class: 'empty' }, 'No sessions here yet.')); return; }
+  const list = el('div', { class: 'hist' });
+  shown.forEach(l => {
+    const open = !!S.ui.expanded[l.id];
+    const item = el('div', { class: 'item' });
+    item.appendChild(el('button', { class: 'head', type: 'button', 'aria-expanded': open ? 'true' : 'false', onclick: () => { S.ui.expanded[l.id] = !open; renderHistory(); } },
+      el('div', { class: 'd' }, fmtDate(l.finishedAt, { day: 'numeric', month: 'short' }), el('small', null, fmtDate(l.finishedAt, { weekday: 'short' }))),
+      el('div', null, el('div', { class: 'n' }, l.name), el('div', { class: 'm' }, [l.program, fmtDur(l.duration), l.rpe ? `RPE ${l.rpe}` : null].filter(Boolean).join(' · '))),
+      el('div', { class: 'v num' }, logHeadline(l)),
+    ));
+    if (open) {
+      const body = el('div', { class: 'body' });
+      (l.exercises || []).forEach(e => body.appendChild(el('div', { class: 'log-ex' },
+        el('span', null, e.name, e.note ? el('span', { class: 'small faint' }, ` — ${e.note}`) : null),
+        el('span', { class: 'sets-str' }, e.sets.length ? e.sets.map(s => fmtSet(e.kind, s, true)).join(', ') : '—'),
+      )));
+      if (l.notes) body.appendChild(el('p', { class: 'muted small' }, l.notes));
+      const del = el('button', { class: 'btn ghost sm', type: 'button' }, 'Delete');
+      let armed = false;
+      del.addEventListener('click', () => { if (!armed) { armed = true; del.textContent = 'Tap again to delete'; del.classList.add('danger'); setTimeout(() => { armed = false; del.textContent = 'Delete'; del.classList.remove('danger'); }, 3000); return; } Store.delLog(l.id); toast('Session deleted'); renderHistory(); });
+      body.appendChild(el('div', { class: 'row between' }, el('span', { class: 'small faint' }, `${fmtTimeOfDay(l.startedAt)}–${fmtTimeOfDay(l.finishedAt)}`), del));
+      item.appendChild(body);
+    }
+    list.appendChild(item);
+  });
+  v.appendChild(list);
+}
+
+/* ---------- Progress ---------- */
+function exerciseIndex() {
+  const map = new Map();
+  for (const l of logsSorted()) for (const e of (l.exercises || [])) {
+    if (!doneSets(e).length) continue;
+    const key = normName(e.name) + '|' + e.kind;
+    const cur = map.get(key) || { name: e.name, kind: e.kind, count: 0, lowerIsBetter: !!e.lowerIsBetter };
+    cur.count++; map.set(key, cur);
+  }
+  return Array.from(map.values()).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+function renderProgress() {
+  const v = $('#view-progress'); v.innerHTML = '';
+  const idx = exerciseIndex();
+  v.appendChild(el('div', { class: 'section-head' }, el('h2', null, 'Progress'), el('span', { class: 'muted small num' }, `${idx.length} exercise${idx.length === 1 ? '' : 's'} tracked`)));
+  if (!idx.length) { v.appendChild(el('div', { class: 'empty' }, 'Finish a session and your numbers will start plotting here.')); return; }
+  let cur = idx.find(x => normName(x.name) + '|' + x.kind === S.ui.progressEx) || idx[0];
+  const sel = el('select', { id: 'progressEx', 'aria-label': 'Exercise' }, idx.map(x => el('option', { value: normName(x.name) + '|' + x.kind, selected: x === cur }, `${x.name} (${x.count})`)));
+  sel.addEventListener('change', () => { S.ui.progressEx = sel.value; renderProgress(); });
+  v.appendChild(sel);
+
+  /* series: one point per session */
+  const pts = [];
+  for (const l of logsSorted().slice().reverse()) for (const e of (l.exercises || [])) {
+    if (normName(e.name) !== normName(cur.name) || e.kind !== cur.kind) continue;
+    const val = bestOfSets(e.kind, doneSets(e), cur); if (val == null) continue;
+    pts.push({ date: l.finishedAt, value: val, sets: doneSets(e), log: l, ex: e });
+  }
+  const lb = lowerBetter(cur.kind, cur);
+  const bestPt = pts.reduce((b, p) => (b == null || (lb ? p.value < b.value : p.value > b.value)) ? p : b, null);
+  const lastPt = pts[pts.length - 1];
+  v.appendChild(el('div', { class: 'stats', style: 'grid-template-columns:repeat(3,1fr)' },
+    stat(fmtMetric(cur.kind, bestPt.value, cur).replace(' ' + S.prefs.units, '').replace(' reps', '').replace(' rounds', ''), `${metricLabel(cur.kind, cur)} PB`),
+    stat(fmtMetric(cur.kind, lastPt.value, cur).replace(' ' + S.prefs.units, '').replace(' reps', '').replace(' rounds', ''), 'Latest'),
+    stat(pts.length, 'Sessions'),
+  ));
+  v.appendChild(el('p', { class: 'small muted' }, `${metricLabel(cur.kind, cur)} per session${lb ? ' — lower is better' : ''}${cur.kind === 'weight' ? ' · est. 1RM = kg × (1 + reps ÷ 30)' : ''}`));
+  v.appendChild(chart(pts, cur));
+
+  const tbl = el('table', { class: 'table' }, el('thead', null, el('tr', null, el('th', null, 'Date'), el('th', null, 'Sets'), el('th', { class: 'r' }, metricLabel(cur.kind, cur)))));
+  const tb = el('tbody');
+  pts.slice().reverse().slice(0, 12).forEach(p => tb.appendChild(el('tr', null, el('td', null, fmtDate(p.date, { day: 'numeric', month: 'short', year: '2-digit' })), el('td', { class: 'muted' }, p.sets.map(s => fmtSet(cur.kind, s)).join(', ')), el('td', { class: 'r' }, fmtMetric(cur.kind, p.value, cur)))));
+  tbl.appendChild(tb);
+  v.appendChild(el('div', { style: 'overflow-x:auto' }, tbl));
+}
+function chart(pts, ex) {
+  const W = 640, H = 240, L = 52, R = 20, T = 18, B = 34;
+  const wrap = el('div', { class: 'chart-wrap' });
+  if (pts.length < 2) { wrap.appendChild(el('p', { class: 'muted small', style: 'padding:8px 6px' }, 'One data point so far — the line appears after your second session.')); return wrap; }
+  const vals = pts.map(p => p.value);
+  let lo = Math.min(...vals), hi = Math.max(...vals);
+  if (lo === hi) { lo = lo * 0.9; hi = hi * 1.1 || 1; }
+  const pad = (hi - lo) * 0.15; lo -= pad; hi += pad; if (ex.kind !== 'cardio' && lo < 0) lo = 0;
+  const x = i => L + (i / (pts.length - 1)) * (W - L - R);
+  const y = v => T + (1 - (v - lo) / (hi - lo)) * (H - T - B);
+  const fmtY = v => ex.kind === 'cardio' ? fmtPace(v).replace('/km', '') : (ex.kind === 'time' ? fmtClock(v) : fmtNum(v, ex.kind === 'weight' ? 0 : 0));
+  const ticks = [lo, (lo + hi) / 2, hi].map(v => ex.kind === 'cardio' || ex.kind === 'time' ? v : Math.round(v));
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(ex.name)} over time">`;
+  ticks.forEach(t => { const yy = y(t); svg += `<line x1="${L}" x2="${W - R}" y1="${yy.toFixed(1)}" y2="${yy.toFixed(1)}" stroke="#2B2619" stroke-width="1"/><text x="${L - 8}" y="${(yy + 4).toFixed(1)}" text-anchor="end" font-size="12" fill="#B8933A" font-family="Barlow, Arial, sans-serif">${esc(fmtY(t))}</text>`; });
+  const path = pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(' ');
+  svg += `<path d="${path} L${x(pts.length - 1).toFixed(1)},${(H - B).toFixed(1)} L${x(0).toFixed(1)},${(H - B).toFixed(1)} Z" fill="rgba(242,194,48,0.10)"/>`;
+  svg += `<path d="${path}" fill="none" stroke="#F2C230" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+  pts.forEach((p, i) => { const last = i === pts.length - 1; svg += `<circle cx="${x(i).toFixed(1)}" cy="${y(p.value).toFixed(1)}" r="${last ? 6 : 4}" fill="${last ? '#FFD84D' : '#0B0A08'}" stroke="#F2C230" stroke-width="2"/>`; });
+  /* x labels: first, last, and a few between */
+  const step = Math.max(1, Math.ceil(pts.length / 5));
+  pts.forEach((p, i) => { if (i % step === 0 || i === pts.length - 1) svg += `<text x="${x(i).toFixed(1)}" y="${H - 10}" text-anchor="${i === 0 ? 'start' : i === pts.length - 1 ? 'end' : 'middle'}" font-size="12" fill="#B8933A" font-family="Barlow, Arial, sans-serif">${esc(fmtDate(p.date, { day: 'numeric', month: 'short' }))}</text>`; });
+  const lastP = pts[pts.length - 1];
+  svg += `<text x="${(x(pts.length - 1) - 10).toFixed(1)}" y="${(y(lastP.value) - 12).toFixed(1)}" text-anchor="end" font-size="13" font-weight="600" fill="#FFD84D" font-family="Barlow, Arial, sans-serif">${esc(fmtMetric(ex.kind, lastP.value, ex))}</text>`;
+  /* hover targets */
+  pts.forEach((p, i) => { const x0 = i === 0 ? L : (x(i - 1) + x(i)) / 2, x1 = i === pts.length - 1 ? W - R : (x(i) + x(i + 1)) / 2; svg += `<rect data-i="${i}" x="${x0.toFixed(1)}" y="${T}" width="${(x1 - x0).toFixed(1)}" height="${H - T - B}" fill="transparent"/>`; });
+  svg += '</svg>';
+  wrap.innerHTML = svg;
+  const tip = el('div', { class: 'tip' }); wrap.appendChild(tip);
+  const svgEl = $('svg', wrap);
+  const show = (i, cx) => { const p = pts[i]; tip.innerHTML = `<b>${esc(fmtMetric(ex.kind, p.value, ex))}</b><br>${esc(fmtDate(p.date, { day: 'numeric', month: 'short', year: '2-digit' }))} · ${esc(p.sets.map(s => fmtSet(ex.kind, s)).join(', '))}`; tip.style.display = 'block'; const r = svgEl.getBoundingClientRect(); const px = r.left + (x(i) / W) * r.width - wrap.getBoundingClientRect().left; const py = (y(p.value) / H) * r.height + (r.top - wrap.getBoundingClientRect().top); tip.style.left = Math.max(70, Math.min(px, wrap.clientWidth - 70)) + 'px'; tip.style.top = py + 'px'; };
+  svgEl.addEventListener('pointermove', ev => { const t = ev.target.closest('rect[data-i]'); if (t) show(+t.getAttribute('data-i')); });
+  svgEl.addEventListener('pointerleave', () => { tip.style.display = 'none'; });
+  svgEl.addEventListener('click', ev => { const t = ev.target.closest('rect[data-i]'); if (t) show(+t.getAttribute('data-i')); });
+  return wrap;
+}
+
+/* ---------- Library ---------- */
+function renderLibrary() {
+  const v = $('#view-library'); v.innerHTML = '';
+  if (S.ui.editing) { renderEditor(v); return; }
+  v.appendChild(el('div', { class: 'section-head' }, el('h2', null, 'Library'), el('div', { class: 'row' },
+    el('button', { class: 'btn sm', type: 'button', onclick: () => { S.ui.importOpen = !S.ui.importOpen; renderLibrary(); } }, S.ui.importOpen ? 'Close paste' : 'Paste sessions'),
+    el('button', { class: 'btn sm', type: 'button', onclick: () => openEditor(null) }, '+ New session'),
+  )));
+  if (S.ui.importOpen) v.appendChild(importer());
+  const sessions = allSessions();
+  for (const p of programs()) {
+    const group = el('section', { class: 'section' }, el('div', { class: 'eyebrow' }, p));
+    const list = el('div', { class: 'lib-group' });
+    sessions.filter(s => (s.program || 'Other') === p).forEach(s => {
+      const lastDone = logsSorted().find(l => l.sessionId === s.id);
+      list.appendChild(el('div', { class: 'item' },
+        el('div', null, el('div', { class: 'n' }, s.name), el('div', { class: 'm' }, [`${s.exercises.length} exercise${s.exercises.length === 1 ? '' : 's'}`, TYPES[s.type] || s.type, lastDone ? `last ${daysAgo(lastDone.finishedAt)}` : null, !s.builtin ? 'yours' : (S.sessions[s.id] && S.sessions[s.id].exercises ? 'edited' : null)].filter(Boolean).join(' · '))),
+        el('div', { class: 'row' },
+          el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { S.prefs.lastPick = s.id; Store.putPrefs(); S.tab = 'today'; render(); } }, 'Use'),
+          el('button', { class: 'btn sm', type: 'button', onclick: () => openEditor(s) }, 'Edit'),
+        ),
+      ));
+    });
+    group.appendChild(list); v.appendChild(group);
+  }
+  const hidden = BUILTIN_SESSIONS.filter(b => S.sessions[b.id] && S.sessions[b.id].deleted);
+  if (hidden.length) v.appendChild(el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { hidden.forEach(b => { const o = { id: b.id, deleted: false, updatedAt: Date.now() }; Store.putSession(o); }); toast(`Restored ${hidden.length} session${hidden.length === 1 ? '' : 's'}`); renderLibrary(); } }, `Restore ${hidden.length} hidden built-in session${hidden.length === 1 ? '' : 's'}`));
+  v.appendChild(settings());
+}
+function importer() {
+  const ta = el('textarea', { id: 'pasteBox', placeholder: 'Push Day\nBench Press 4x8\nIncline DB Press 3x10\nPlank 3x45s\n\nEasy Run\nRun 5km', style: 'min-height:150px' });
+  return el('div', { class: 'card stack' },
+    el('h3', null, 'Paste your sessions'),
+    el('p', { class: 'help' }, 'One session per block, blank line between blocks. First line is the session name; then one exercise per line, like ', el('code', null, 'Bench Press 4x8'), ', ', el('code', null, 'Plank 3x45s'), ', ', el('code', null, 'Row 500m'), ', ', el('code', null, 'Run 5km'), ' or ', el('code', null, 'EMOM 20 …'), '. Add ', el('code', null, 'rest 120'), ' at the end of a line to set the rest. Optional ', el('code', null, 'Program: Strength'), ' line puts it in a group.'),
+    ta,
+    el('div', { class: 'row between' },
+      el('span', { class: 'small faint' }, 'One session opens in the editor to check; several save straight in.'),
+      el('button', { class: 'btn primary', type: 'button', onclick: () => {
+        const found = parsePaste(ta.value);
+        if (!found.length) { toast('Could not find any sessions in that — check the format above'); return; }
+        if (found.length === 1) { S.ui.importOpen = false; openEditor(null, found[0]); return; }
+        found.forEach((s, i) => Store.putSession(normaliseSession(Object.assign({ id: 'my-' + uid(), order: 100 + i }, s))));
+        S.ui.importOpen = false; toast(`Added ${found.length} sessions — tap Edit on any to tweak`); renderLibrary();
+      } }, 'Add'),
+    ),
+  );
+}
+function normaliseSession(s) {
+  s.exercises = (s.exercises || []).map(e => ({ id: e.id || (slug(e.name) + '-' + Math.random().toString(36).slice(2, 5)), name: String(e.name || '').trim(), kind: KINDS[e.kind] ? e.kind : 'weight', sets: Math.max(1, parseInt(e.sets) || 1), target: e.target || '', rest: e.rest == null || e.rest === '' ? 90 : Math.max(0, parseInt(e.rest) || 0), note: e.note || '', lowerIsBetter: !!e.lowerIsBetter, dist: e.dist != null && e.dist !== '' ? +e.dist : undefined, metres: e.metres != null && e.metres !== '' ? +e.metres : undefined })).filter(e => e.name);
+  s.exercises.forEach(e => { if (e.dist === undefined) delete e.dist; if (e.metres === undefined) delete e.metres; });
+  s.name = String(s.name || 'Untitled').trim(); s.program = String(s.program || 'My Sessions').trim(); s.type = TYPES[s.type] ? s.type : 'strength';
+  s.updatedAt = Date.now();
+  return s;
+}
+/* ----- paste parser ----- */
+const BW_REPS = /\b(push[\s-]?ups?|press[\s-]?ups?|pull[\s-]?ups?|chin[\s-]?ups?|dips?|sit[\s-]?ups?|burpees?|air squats?|mountain climbers?|crunch(es)?|leg raises?|knee raises?|inverted rows?|wall balls?|box jumps?|lunges?|step[\s-]?ups?|toes to bar|hollow rocks?|glute bridges?|bird dogs?|dead bugs?|superman)\b/i;
+const TIME_NAMES = /\b(plank|hold|hang|stretch|wall sit|bike|row(er)?|ski|erg|walk|jog|run|assault|bridge)\b/i;
+function parseExerciseLine(line) {
+  let rest = null, dist = null, note = '';
+  let m;
+  if ((m = line.match(/[,·\-–(]*\s*rest\s*:?\s*(\d+(?::\d+)?)\s*(s|secs?|m|mins?)?\)?\s*$/i))) { const n = m[1].includes(':') ? parseTime(m[1]) : (+m[1] * (/^m/i.test(m[2] || '') ? 60 : 1)); rest = n; line = line.slice(0, m.index).trim(); }
+  if ((m = line.match(/@\s*(\d+(?:\.\d+)?)\s*(kg|lbs?)?/i))) { note = `Plan: ${m[1]}${m[2] || 'kg'}`; line = (line.slice(0, m.index) + line.slice(m.index + m[0].length)).trim(); }
+  let lowerIsBetter = false;
+  if (/\bfor time\b/i.test(line)) lowerIsBetter = true;
+  /* name  N x REPS unit  tail */
+  if ((m = line.match(/^(.*?)\s*[-–:]?\s*(\d+)\s*(?:x|×|\*)\s*(\d+(?:\s*[-–]\s*\d+)?|amrap|max)\s*(secs?|s|mins?|m|reps?|km|k|cal(?:orie)?s?|metres?|meters?)?\b\s*(.*)$/i))) {
+    let name = m[1].trim().replace(/[-–:]$/, '').trim(); const sets = +m[2]; let reps = m[3].replace(/\s+/g, ''); let unit = (m[4] || '').toLowerCase(); let tail = m[5].trim();
+    let kind = 'weight', target = reps;
+    if (/^s/.test(unit) && unit !== '') { kind = 'time'; target = reps + 's'; }
+    else if (/^min/.test(unit)) { kind = 'time'; target = reps + ' min'; }
+    else if (unit === 'm' || /^met/.test(unit)) { if (+reps >= 50) { kind = 'cardio'; dist = +reps / 1000; target = reps + 'm'; } else { kind = 'time'; target = reps + ' min'; } }
+    else if (unit === 'km' || unit === 'k') { kind = 'cardio'; dist = +reps; target = reps + ' km'; }
+    else if (/^cal/.test(unit)) { kind = 'reps'; target = reps + ' cal'; }
+    else if (/^rep/.test(unit)) { kind = BW_REPS.test(name) ? 'reps' : 'weight'; }
+    else if (BW_REPS.test(name)) kind = 'reps';
+    if (kind === 'weight' && TIME_NAMES.test(name) && !BW_REPS.test(name) && /plank|hold|hang|wall sit/i.test(name)) kind = 'time';
+    if (/amrap|max/i.test(reps)) { kind = BW_REPS.test(name) || kind === 'reps' ? 'reps' : kind; target = 'AMRAP'; }
+    if (tail) target = target + (tail.startsWith('(') ? ' ' : ' ') + tail;
+    if (!name) return null;
+    const out = { name, kind, sets, target, rest: rest == null ? (kind === 'cardio' ? 60 : 90) : rest, note, lowerIsBetter };
+    if (dist != null) out.dist = dist;
+    return out;
+  }
+  /* EMOM / AMRAP */
+  if ((m = line.match(/^(.*?)(EMOM|AMRAP|E2MOM|every\s+\d+\s+min[a-z]*)\s*(\d+)?(.*)$/i))) {
+    const name = (m[1].trim() ? m[1].trim() + ' ' : '') + m[2].toUpperCase() + (m[3] ? ' ' + m[3] : '');
+    return { name: name.trim(), kind: 'rounds', sets: 1, target: m[4].replace(/^[\s:·\-–]+/, '').trim(), rest: rest == null ? 0 : rest, note };
+  }
+  /* name N sets of REPS */
+  if ((m = line.match(/^(.*?)\s*[-–:]?\s*(\d+)\s*sets?\s*(?:of|x|×)?\s*(\d+(?:\s*[-–]\s*\d+)?)?\s*(reps?)?\s*(.*)$/i))) {
+    const name = m[1].trim(); if (!name) return null;
+    return { name, kind: BW_REPS.test(name) ? 'reps' : 'weight', sets: +m[2], target: (m[3] || '').replace(/\s+/g, '') + (m[5] ? ' ' + m[5].trim() : ''), rest: rest == null ? 90 : rest, note, lowerIsBetter };
+  }
+  /* distance-only: Run 5km / 5k run / Row 500m */
+  if ((m = line.match(/^(.*?)(\d+(?:\.\d+)?)\s*(km|k)\b(.*)$/i))) {
+    const name = (m[1] + ' ' + m[4]).replace(/\s+/g, ' ').trim() || 'Run';
+    return { name, kind: 'cardio', sets: 1, target: `${m[2]} km${m[4].trim() ? ' ' + m[4].trim() : ''}`, rest: rest == null ? 0 : rest, note, dist: +m[2] };
+  }
+  if ((m = line.match(/^(.*?)(\d{2,5})\s*m\b(.*)$/i))) {
+    const name = (m[1] + ' ' + m[3]).replace(/\s+/g, ' ').trim();
+    if (!name) return null;
+    return { name, kind: 'cardio', sets: 1, target: `${m[2]}m`, rest: rest == null ? 0 : rest, note, dist: +m[2] / 1000 };
+  }
+  /* time-only: Plank 45s / Bike 10 min */
+  if ((m = line.match(/^(.*?)\s*[-–:]?\s*(\d+)\s*(secs?|s|mins?|minutes?)\b(.*)$/i))) {
+    const name = m[1].trim(); if (!name) return null;
+    const isMin = /^m/i.test(m[3]);
+    return { name, kind: TIME_NAMES.test(name) && /run|jog|walk|bike|row|ski|erg|assault/i.test(name) ? 'cardio' : 'time', sets: 1, target: `${m[2]}${isMin ? ' min' : 's'}${m[4].trim() ? ' ' + m[4].trim() : ''}`, rest: rest == null ? 0 : rest, note, lowerIsBetter };
+  }
+  if (lowerIsBetter) return { name: line.replace(/\bfor time\b/i, '').replace(/[-–:,]\s*$/, '').trim(), kind: 'time', sets: 1, target: 'For time', rest: 0, note, lowerIsBetter: true };
+  return null;
+}
+const SETS_PATTERN = /\d+\s*(?:x|×|\*)\s*(?:\d|amrap|max)|\d+\s*sets?\b/i;
+function parsePaste(text) {
+  const blocks = String(text || '').replace(/\r/g, '').split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
+  const out = []; let stickyProgram = '';
+  for (const block of blocks) {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    let name = null, program = '', type = null; const exercises = []; let first = true;
+    for (const line of lines) {
+      let m;
+      if ((m = line.match(/^program\s*:\s*(.+)$/i))) { program = m[1].trim(); stickyProgram = program; continue; }
+      if ((m = line.match(/^type\s*:\s*(.+)$/i))) { type = guessType(m[1]); continue; }
+      const isFirst = first; first = false;
+      if (isFirst && name == null && lines.length > 1 && !SETS_PATTERN.test(line)) { name = line.replace(/^#+\s*/, '').replace(/:\s*$/, '').trim(); continue; }
+      const e = parseExerciseLine(line);
+      if (e) exercises.push(e);
+      else if (name == null) name = line.replace(/^#+\s*/, '').replace(/:\s*$/, '').trim();
+      else exercises.push({ name: line.replace(/^[-•*]\s*/, ''), kind: BW_REPS.test(line) ? 'reps' : 'weight', sets: 3, target: '', rest: 90 });
+    }
+    if (!exercises.length && !name) continue;
+    if (!name) name = exercises[0].name;
+    if (!type) { const kinds = new Set(exercises.map(e => e.kind)); const forTime = exercises.some(e => e.lowerIsBetter || e.kind === 'rounds');
+      type = kinds.size && Array.from(kinds).every(k => k === 'cardio') ? 'run' : (kinds.has('cardio') || forTime) ? 'hybrid' : /home|bodyweight/i.test((program || stickyProgram) + ' ' + name) ? 'home' : 'strength'; }
+    out.push({ name, program: program || stickyProgram || 'My Sessions', type, exercises });
+  }
+  return out;
+}
+function guessType(s) { s = s.toLowerCase(); if (/run|cardio/.test(s)) return 'run'; if (/hybrid|hyrox|cross|condition/.test(s)) return 'hybrid'; if (/home|body/.test(s)) return 'home'; if (/gym|strength|weight/.test(s)) return 'strength'; return 'other'; }
+
+/* ----- editor ----- */
+function openEditor(session, draftFromPaste) {
+  let draft;
+  if (draftFromPaste) draft = normaliseSession(Object.assign({ id: 'my-' + uid(), order: 100 }, draftFromPaste));
+  else if (session) draft = clone(session);
+  else draft = { id: 'my-' + uid(), name: '', program: 'My Sessions', type: 'strength', focus: '', order: 100, exercises: [{ id: 'e' + uid(), name: '', kind: 'weight', sets: 3, target: '8', rest: 90, note: '' }] };
+  S.ui.editing = { draft, isNew: !session, builtin: !!(session && session.builtin) };
+  S.tab = 'library'; render(); window.scrollTo({ top: 0 });
+}
+function renderEditor(v) {
+  const { draft, isNew, builtin } = S.ui.editing;
+  const field = (label, input) => el('label', { class: 'field' }, el('span', null, label), input);
+  const nameIn = el('input', { type: 'text', id: 'edName', value: draft.name, placeholder: 'e.g. Push Day' }); nameIn.addEventListener('input', () => draft.name = nameIn.value);
+  const progIn = el('input', { type: 'text', id: 'edProgram', value: draft.program, list: 'programList', placeholder: 'Group it under…' }); progIn.addEventListener('input', () => draft.program = progIn.value);
+  const dl = el('datalist', { id: 'programList' }, programs().map(p => el('option', { value: p })));
+  const typeSel = el('select', { id: 'edType' }, Object.entries(TYPES).map(([k, l]) => el('option', { value: k, selected: draft.type === k }, l))); typeSel.addEventListener('change', () => draft.type = typeSel.value);
+  const focusIn = el('input', { type: 'text', id: 'edFocus', value: draft.focus || '', placeholder: 'One line on what the session is for' }); focusIn.addEventListener('input', () => draft.focus = focusIn.value);
+
+  const exWrap = el('div', { class: 'stack' });
+  const drawEx = () => {
+    exWrap.innerHTML = '';
+    draft.exercises.forEach((e, i) => {
+      const n = el('input', { type: 'text', id: `edEx${i}Name`, value: e.name, placeholder: 'Exercise' }); n.addEventListener('input', () => e.name = n.value);
+      const k = el('select', { id: `edEx${i}Kind` }, Object.entries(KINDS).map(([kk, d]) => el('option', { value: kk, selected: e.kind === kk }, d.label))); k.addEventListener('change', () => { e.kind = k.value; drawEx(); });
+      const sets = el('input', { type: 'text', inputmode: 'numeric', id: `edEx${i}Sets`, value: e.sets, placeholder: 'sets' }); sets.addEventListener('input', () => e.sets = sets.value);
+      const tgt = el('input', { type: 'text', id: `edEx${i}Target`, value: e.target || '', placeholder: e.kind === 'weight' ? 'reps, e.g. 6–8' : e.kind === 'time' ? 'e.g. 45s' : e.kind === 'cardio' ? 'e.g. 5 km easy' : 'target' }); tgt.addEventListener('input', () => e.target = tgt.value);
+      const rest = el('input', { type: 'text', inputmode: 'numeric', id: `edEx${i}Rest`, value: e.rest == null ? 90 : e.rest, placeholder: 'rest s' }); rest.addEventListener('input', () => e.rest = rest.value);
+      const note = el('input', { type: 'text', id: `edEx${i}Note`, value: e.note || '', placeholder: 'Cue or note (optional)' }); note.addEventListener('input', () => e.note = note.value);
+      const extras = [];
+      if (e.kind === 'cardio') { const d = el('input', { type: 'text', inputmode: 'decimal', id: `edEx${i}Dist`, value: e.dist == null ? '' : e.dist, placeholder: 'km per set' }); d.addEventListener('input', () => e.dist = d.value); extras.push(field('Distance (km)', d)); }
+      if (e.kind === 'carry') { const d = el('input', { type: 'text', inputmode: 'decimal', id: `edEx${i}Metres`, value: e.metres == null ? '' : e.metres, placeholder: 'metres per set' }); d.addEventListener('input', () => e.metres = d.value); extras.push(field('Distance (m)', d)); }
+      if (e.kind === 'time') { const c = el('input', { type: 'checkbox', id: `edEx${i}Lower`, checked: !!e.lowerIsBetter }); c.addEventListener('change', () => e.lowerIsBetter = c.checked); extras.push(el('label', { class: 'check' }, c, el('span', null, 'Faster is better (for-time effort)'))); }
+      exWrap.appendChild(el('div', { class: 'ed-ex' },
+        el('div', { class: 'row between' }, el('span', { class: 'eyebrow' }, `Exercise ${i + 1}`), el('div', { class: 'tools' },
+          el('button', { class: 'btn ghost sm', type: 'button', disabled: i === 0, 'aria-label': 'Move up', onclick: () => { [draft.exercises[i - 1], draft.exercises[i]] = [draft.exercises[i], draft.exercises[i - 1]]; drawEx(); } }, '↑'),
+          el('button', { class: 'btn ghost sm', type: 'button', disabled: i === draft.exercises.length - 1, 'aria-label': 'Move down', onclick: () => { [draft.exercises[i + 1], draft.exercises[i]] = [draft.exercises[i], draft.exercises[i + 1]]; drawEx(); } }, '↓'),
+          el('button', { class: 'btn ghost sm', type: 'button', 'aria-label': 'Remove exercise', onclick: () => { draft.exercises.splice(i, 1); drawEx(); } }, '✕'),
+        )),
+        field('Name', n),
+        el('div', { class: 'grid' }, field('Log as', k), field('Sets', sets)),
+        el('div', { class: 'grid' }, field(e.kind === 'weight' || e.kind === 'reps' ? 'Target reps' : 'Target', tgt), field('Rest (seconds)', rest)),
+        extras,
+        field('Note', note),
+      ));
+    });
+  };
+  drawEx();
+  const actions = el('div', { class: 'row between' });
+  actions.appendChild(el('button', { class: 'btn', type: 'button', onclick: () => { S.ui.editing = null; render(); } }, 'Cancel'));
+  const right = el('div', { class: 'row' });
+  if (!isNew) {
+    const del = el('button', { class: 'btn ghost sm', type: 'button' }, builtin ? 'Hide session' : 'Delete session');
+    let armed = false;
+    del.addEventListener('click', () => { if (!armed) { armed = true; del.textContent = 'Tap again to confirm'; del.classList.add('danger'); setTimeout(() => { armed = false; del.textContent = builtin ? 'Hide session' : 'Delete session'; del.classList.remove('danger'); }, 3000); return; }
+      Store.putSession({ id: draft.id, deleted: true, updatedAt: Date.now() }); S.ui.editing = null; toast(builtin ? 'Hidden — restore it from the Library any time' : 'Session deleted'); render(); });
+    right.appendChild(del);
+    if (builtin && S.sessions[draft.id]) right.appendChild(el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { Store.putSession({ id: draft.id, deleted: false, updatedAt: Date.now() }); S.ui.editing = null; toast('Back to the default version'); render(); } }, 'Reset to default'));
+  }
+  right.appendChild(el('button', { class: 'btn primary', type: 'button', onclick: () => {
+    if (!draft.name.trim()) { toast('Give the session a name'); nameIn.focus(); return; }
+    const s = normaliseSession(clone(draft));
+    if (!s.exercises.length && s.id !== 'free') { toast('Add at least one exercise'); return; }
+    delete s.builtin;
+    Store.putSession(s); S.ui.editing = null; S.prefs.lastPick = s.id; Store.putPrefs(); toast('Saved'); render();
+  } }, 'Save'));
+  actions.appendChild(right);
+
+  v.appendChild(el('div', { class: 'section-head' }, el('h2', null, isNew ? 'New session' : `Edit · ${draft.name}`), builtin ? el('span', { class: 'pill' }, 'Built-in') : null));
+  v.appendChild(el('div', { class: 'card stack' }, field('Session name', nameIn), field('Program / group', progIn), dl, el('div', { class: 'ed-ex-grid', style: 'display:grid;grid-template-columns:1fr 1fr;gap:8px' }, field('Type', typeSel)), field('Focus (optional)', focusIn)));
+  v.appendChild(el('div', { class: 'section-head' }, el('h3', null, 'Exercises'), el('button', { class: 'btn sm', type: 'button', onclick: () => { draft.exercises.push({ id: 'e' + uid(), name: '', kind: 'weight', sets: 3, target: '', rest: 90, note: '' }); drawEx(); setTimeout(() => { const last = $$('.ed-ex input[type="text"]', exWrap); const inp = $(`#edEx${draft.exercises.length - 1}Name`); inp && inp.focus(); }, 20); } }, '+ Exercise')));
+  v.appendChild(exWrap);
+  v.appendChild(actions);
+}
+
+/* ----- settings ----- */
+function settings() {
+  const units = el('select', { id: 'prefUnits' }, el('option', { value: 'kg', selected: S.prefs.units === 'kg' }, 'Kilograms (kg)'), el('option', { value: 'lb', selected: S.prefs.units === 'lb' }, 'Pounds (lb)'));
+  units.addEventListener('change', () => { S.prefs.units = units.value; Store.putPrefs(); toast(`Showing weights in ${units.value}`); });
+  const beep = el('input', { type: 'checkbox', id: 'prefBeep', checked: !!S.prefs.beep }); beep.addEventListener('change', () => { S.prefs.beep = beep.checked; Store.putPrefs(); });
+  const setRpe = el('input', { type: 'checkbox', id: 'prefSetRpe', checked: S.prefs.setRpe !== false }); setRpe.addEventListener('change', () => { S.prefs.setRpe = setRpe.checked; Store.putPrefs(); });
+  const importBox = el('textarea', { id: 'importBox', placeholder: 'Paste an AB29 Training backup (JSON) here', style: 'min-height:80px' });
+  const fileIn = el('input', { type: 'file', id: 'importFile', accept: 'application/json,.json', style: 'display:none' });
+  fileIn.addEventListener('change', () => { const f = fileIn.files[0]; if (!f) return; f.text().then(t => importJSON(t)); });
+  return el('div', { class: 'card stack', id: 'settings' },
+    el('h3', null, 'Settings & backup'),
+    el('p', { class: 'small muted' }, Store.db ? 'Your history is saved to this link. Open it on your phone or laptop and it is all there.' : 'Your history is saved in this browser only. Export a backup now and then, or import one to move devices.'),
+    el('div', { style: 'display:grid;grid-template-columns:1fr 1fr;gap:8px' }, el('label', { class: 'field' }, el('span', null, 'Units'), units), el('label', { class: 'check', style: 'align-self:end' }, beep, el('span', null, 'Beep when rest ends'))),
+    el('label', { class: 'check' }, setRpe, el('span', null, 'Log RPE on every set (how hard it felt, 1–10)')),
+    el('div', { class: 'row' },
+      el('button', { class: 'btn sm', type: 'button', onclick: exportJSON }, 'Export backup'),
+      el('button', { class: 'btn sm', type: 'button', onclick: copyBackup }, 'Copy backup'),
+      el('button', { class: 'btn sm', type: 'button', onclick: () => fileIn.click() }, 'Import file'),
+      fileIn,
+    ),
+    importBox,
+    el('button', { class: 'btn sm', type: 'button', onclick: () => importJSON(importBox.value) }, 'Import pasted backup'),
+  );
+}
+function backupPayload() { return JSON.stringify({ app: 'graft', version: 1, exportedAt: new Date().toISOString(), sessions: S.sessions, logs: S.logs, prefs: S.prefs }); }
+async function exportJSON() {
+  const data = backupPayload(); const filename = `ab29-training-backup-${todayISO()}.json`;
+  let dl = null;
+  try { if (window.claude && typeof window.claude.use === 'function') dl = await window.claude.use('downloads'); } catch (e) { dl = null; }
+  if (dl) { try { await dl.save({ filename, data }); toast('Backup saved'); } catch (e) { if (e && e.code === 'declined') return; toast('Could not save here — use Copy backup instead'); } return; }
+  try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' })); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); toast('Backup downloaded'); }
+  catch (e) { copyBackup(); }
+}
+async function copyBackup() { try { await navigator.clipboard.writeText(backupPayload()); toast('Backup copied — paste it somewhere safe'); } catch (e) { toast('Copy failed — try Export instead'); } }
+function importJSON(text) {
+  let d; try { d = JSON.parse(text); } catch (e) { toast('That is not a valid backup'); return; }
+  if (!d || d.app !== 'graft') { toast('That is not an AB29 Training backup'); return; }
+  let n = 0;
+  for (const s of Object.values(d.sessions || {})) { const cur = S.sessions[s.id]; if (!cur || (s.updatedAt || 0) > (cur.updatedAt || 0)) { Store.putSession(s); n++; } }
+  for (const l of Object.values(d.logs || {})) { if (!S.logs[l.id]) { Store.putLog(l); n++; } }
+  if (d.prefs && (d.prefs.updatedAt || 0) > (S.prefs.updatedAt || 0)) { S.prefs = Object.assign({}, S.prefs, d.prefs); Store.putPrefs(); }
+  toast(n ? `Imported ${n} item${n === 1 ? '' : 's'}` : 'Nothing new in that backup'); render();
+}
+
+/* ================= Boot ================= */
+function bindGlobal() {
+  $$('.tab').forEach(b => b.addEventListener('click', () => { S.tab = b.dataset.tab; if (S.tab !== 'library') S.ui.editing = null; render(); window.scrollTo({ top: 0 }); }));
+  $('#restPlus').addEventListener('click', () => Rest.add(30));
+  $('#restSkip').addEventListener('click', () => Rest.stop());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#modalRoot').children.length) closeModal(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && Rest.end) Rest.tick(); });
+}
+function clockTick() { const c = $('#woClock'); if (c && S.active) c.textContent = fmtClock((Date.now() - new Date(S.active.startedAt)) / 1000); }
+function start() {
+  Store.loadLocal();
+  bindGlobal();
+  render();
+  setInterval(clockTick, 1000);
+  Store.connect().then(ok => { updateSync(); if (ok && !(S.tab === 'today' && S.active && document.activeElement && document.activeElement.tagName === 'INPUT')) render(); });
+}
+if (window.claude && window.claude.hot && typeof window.claude.hot.ready === 'function') window.claude.hot.ready(start); else start();
+</script>
+</body>
+</html>
