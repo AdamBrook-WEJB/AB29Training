@@ -278,6 +278,30 @@ pre.example { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Conso
 .empty { text-align: center; color: var(--gold-dim); padding: 24px 12px; border: 1px dashed var(--line-strong); border-radius: var(--radius); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* a value copied down from the set above flashes once */
+.set .fld input.carried { border-color: var(--gold); background: var(--gold-wash-2); transition: background 0.5s ease, border-color 0.5s ease; }
+
+/* ---- Week strip ---- */
+.weekstrip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.wd { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 2px 7px; display: grid; gap: 4px; justify-items: center; min-height: 60px; align-content: start; }
+.wd .l { font-family: var(--display); font-size: 16px; letter-spacing: 0.06em; color: var(--gold-dim); line-height: 1; }
+.wd .t { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold-faint); font-weight: 600; text-align: center; line-height: 1.15; }
+.wd.today { border-color: var(--gold); background: var(--gold-wash); }
+.wd.today .l { color: var(--gold-bright); }
+.wd.today .t { color: var(--gold); }
+.wd.done { border-color: var(--good); }
+.wd.done .t { color: var(--good); }
+.wd:hover { border-color: var(--gold-dim); }
+
+/* ---- Week plan editor ---- */
+.plan-grid { display: grid; gap: 8px; }
+.plan-row { display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: center; }
+.plan-row .dn { font-family: var(--display); font-size: 18px; letter-spacing: 0.03em; color: var(--gold-bright); }
+@media (max-width: 400px) { .plan-row { grid-template-columns: 78px 1fr; } }
+
+/* keep the header on one line on narrow phones — the dot still carries the meaning */
+@media (max-width: 460px) { .sync span:not(.dot) { display: none; } .sync { gap: 0; } }
 </style>
 </head>
 <body>
@@ -627,6 +651,20 @@ const BUILTIN_SESSIONS = [
   { id:'free', program:'Other', name:'Free Session', type:'other', focus:'Blank — add exercises as you go', exercises:[] },
 ];
 
+const DAY_KEYS = ['mon','tue','wed','thu','fri','sat','sun'];
+const DAY_NAMES = { mon:'Monday', tue:'Tuesday', wed:'Wednesday', thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday' };
+const DAY_LETTERS = { mon:'M', tue:'T', wed:'W', thu:'T', fri:'F', sat:'S', sun:'S' };
+/* Adam's week. Editable in Library → My Week. */
+const DEFAULT_PLAN = {
+  mon: 'ppl-push',
+  tue: 'run-easy',
+  wed: 'ppl-pull',
+  thu: 'ppl-legs',
+  fri: 'ul-upper-a',
+  sat: 'run-long',
+  sun: 'rest',
+};
+
 const PROGRAM_ORDER = ['Push / Pull / Legs','Upper / Lower','Full Body','Running','Bike','HYROX','Conditioning','Home / Bodyweight','Other'];
 /* ================= Utilities ================= */
 const $ = (sel, root) => (root || document).querySelector(sel);
@@ -726,7 +764,7 @@ const Beeper = { ctx: null, prime() { try { if (!Beeper.ctx) Beeper.ctx = new (w
 const S = {
   sessions: {},   // id -> session override / custom session / {id, deleted:true}
   logs: {},       // id -> completed session log
-  prefs: { units: 'kg', beep: true, setRpe: true, lastPick: '', emailOn: true, emailTo: 'adam.brook94@gmail.com', emailKey: 'e2d1ba2a-cbe0-4212-b7ae-69ece96d96e2', updatedAt: 0 },
+  prefs: { units: 'kg', beep: true, setRpe: true, plan: null, lastPick: '', emailOn: true, emailTo: 'adam.brook94@gmail.com', emailKey: 'e2d1ba2a-cbe0-4212-b7ae-69ece96d96e2', updatedAt: 0 },
   active: null,   // in-progress session
   tab: 'today',
   ui: { historyFilter: 'all', progressEx: '', editing: null, importOpen: false, libOpen: {} , expanded: {} },
@@ -963,6 +1001,23 @@ function weekStats() {
   while (hasWeek(cursor) && streak < 520) { streak++; cursor.setDate(cursor.getDate() - 7); }
   return { thisWeek, last4, streak, total: logs.length };
 }
+function getPlan() { return Object.assign({}, DEFAULT_PLAN, S.prefs.plan || {}); }
+function dayKeyOf(d) { return DAY_KEYS[(new Date(d).getDay() + 6) % 7]; }
+function plannedIdFor(iso) { return getPlan()[dayKeyOf(iso)]; }
+function plannedFor(iso) { const id = plannedIdFor(iso); return id === 'rest' ? 'rest' : (sessionById(id) || null); }
+function logsOn(iso) { return logsSorted().filter(l => l.date === iso); }
+function weekDates() {
+  const s = startOfWeek(new Date());
+  return DAY_KEYS.map((_, i) => { const d = new Date(s); d.setDate(d.getDate() + i); return todayISO(d); });
+}
+function shortLabel(sess) {
+  if (sess === 'rest' || !sess) return 'Rest';
+  if (sess.type === 'run') return 'Run';
+  if (sess.type === 'bike') return 'Bike';
+  if (sess.type === 'hybrid') return 'HYROX';
+  if (sess.type === 'home') return 'Home';
+  return String(sess.name).split(/[ ·]/)[0];
+}
 function suggestedNext() {
   const logs = logsSorted();
   if (!logs.length) return null;
@@ -1113,14 +1168,19 @@ function renderToday() {
   const v = $('#view-today'); v.innerHTML = '';
   const st = weekStats();
   const sessions = allSessions();
+  const iso = todayISO();
+  const planned = plannedFor(iso);
+  const doneToday = logsOn(iso);
   const next = suggestedNext();
-  let pick = S.prefs.lastPick && sessions.find(s => s.id === S.prefs.lastPick) ? S.prefs.lastPick : (next ? next.id : (sessions[0] && sessions[0].id));
+  let pick = S.prefs.lastPick && sessions.find(s => s.id === S.prefs.lastPick) ? S.prefs.lastPick
+    : (planned && planned !== 'rest' ? planned.id : (next ? next.id : (sessions[0] && sessions[0].id)));
   const chosen = sessions.find(s => s.id === pick) || sessions[0];
 
   v.appendChild(el('div', { class: 'today-head' },
     el('div', { class: 'eyebrow' }, 'Today'),
     el('div', { class: 'date' }, fmtDate(new Date().toISOString(), { weekday: 'long', day: 'numeric', month: 'long' })),
   ));
+  v.appendChild(weekStrip());
   v.appendChild(el('div', { class: 'stats' },
     stat(st.thisWeek, 'This week'), stat(st.last4, 'Last 4 wks'), stat(st.streak, st.streak === 1 ? 'Week streak' : 'Week streak'), stat(st.total, 'Sessions'),
   ));
@@ -1133,8 +1193,11 @@ function renderToday() {
     sel.appendChild(g);
   }
   sel.addEventListener('change', () => { S.prefs.lastPick = sel.value; Store.putPrefs(); renderToday(); });
+  const planNote = planned === 'rest'
+    ? el('span', { class: 'small muted' }, doneToday.length ? 'Rest day — and you trained anyway' : 'Rest day on your plan')
+    : (planned ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { S.prefs.lastPick = planned.id; Store.putPrefs(); renderToday(); } }, doneToday.length ? `Planned: ${planned.name} ✓` : `Planned: ${planned.name}`) : null);
   const pickSec = el('section', { class: 'section' },
-    el('div', { class: 'section-head' }, el('h2', null, 'Pick a session'), next ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { S.prefs.lastPick = next.id; Store.putPrefs(); renderToday(); } }, `Up next: ${next.name}`) : null),
+    el('div', { class: 'section-head' }, el('h2', null, 'Pick a session'), planNote),
     sel,
   );
   v.appendChild(pickSec);
@@ -1178,6 +1241,45 @@ function renderToday() {
   }
   v.appendChild(rec);
 }
+function weekStrip() {
+  const dates = weekDates(); const today = todayISO();
+  const wrap = el('div', { class: 'weekstrip' });
+  DAY_KEYS.forEach((k, i) => {
+    const sess = plannedFor(dates[i]);
+    const done = logsOn(dates[i]);
+    const isToday = dates[i] === today;
+    const label = done.length ? shortLabel(sessionById(done[0].sessionId) || { type: done[0].type, name: done[0].name }) : shortLabel(sess);
+    const cls = ['wd', isToday ? 'today' : '', done.length ? 'done' : '', sess === 'rest' && !done.length ? 'rest' : ''].filter(Boolean).join(' ');
+    wrap.appendChild(el('button', { class: cls, type: 'button', 'aria-label': `${DAY_NAMES[k]}: ${done.length ? done[0].name + ' (done)' : (sess === 'rest' ? 'rest day' : (sess ? sess.name : 'nothing planned'))}`,
+      onclick: () => { S.tab = 'library'; S.ui.planOpen = true; render(); setTimeout(() => { const n = document.getElementById('my-week'); if (n) n.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); } },
+      el('span', { class: 'l' }, DAY_LETTERS[k]),
+      el('span', { class: 't' }, label),
+    ));
+  });
+  return wrap;
+}
+function planEditor() {
+  const plan = getPlan();
+  const sessions = allSessions();
+  const grid = el('div', { class: 'plan-grid' });
+  DAY_KEYS.forEach(k => {
+    const sel = el('select', { 'aria-label': `Session for ${DAY_NAMES[k]}`, id: 'plan-' + k });
+    sel.appendChild(el('option', { value: 'rest', selected: plan[k] === 'rest' }, 'Rest day'));
+    for (const p of programs()) {
+      const g = el('optgroup', { label: p });
+      sessions.filter(s => (s.program || 'Other') === p).forEach(s => g.appendChild(el('option', { value: s.id, selected: s.id === plan[k] }, s.name)));
+      sel.appendChild(g);
+    }
+    sel.addEventListener('change', () => { const p = getPlan(); p[k] = sel.value; S.prefs.plan = p; Store.putPrefs(); renderLibrary(); });
+    grid.appendChild(el('div', { class: 'plan-row' }, el('span', { class: 'dn' }, DAY_NAMES[k]), sel));
+  });
+  return el('div', { class: 'card stack', id: 'my-week' },
+    el('div', { class: 'row between' }, el('h3', null, 'My week'),
+      el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { S.prefs.plan = null; Store.putPrefs(); toast('Back to the default week'); renderLibrary(); } }, 'Reset')),
+    el('p', { class: 'small muted' }, 'Today’s session is suggested from this. Change any day — you can still pick anything you like on the day.'),
+    grid,
+  );
+}
 function stat(v, k) { return el('div', { class: 'stat' }, el('div', { class: 'v num' }, String(v)), el('div', { class: 'k' }, k)); }
 function targetText(e) {
   const n = Array.isArray(e.sets) ? e.sets.length : (+e.sets || 0);
@@ -1201,6 +1303,8 @@ function buildActiveEx(e) {
     else if (e.kind === 'time') { if (p && !e.lowerIsBetter) s.time = p.time; }
     else if (e.kind === 'cardio') { s.km = e.dist != null ? e.dist : (p ? p.km : null); }
     else if (e.kind === 'carry') { if (p) s.kg = p.kg; s.m = e.metres != null ? e.metres : (p ? p.m : null); }
+    s.pre = {};
+    for (const k of Object.keys(s)) if (k !== 'done' && k !== 'pre' && s[k] != null) s.pre[k] = true;
     sets.push(s);
   }
   return { id: e.id || slug(e.name), name: e.name, kind: e.kind, target: e.target || '', rest: e.rest == null ? 90 : +e.rest, note: e.note || '', lowerIsBetter: !!e.lowerIsBetter, dist: e.dist, metres: e.metres, sets, skipped: false, userNote: '' };
@@ -1280,7 +1384,7 @@ function exerciseCard(e, i) {
     e.sets.forEach((s, j) => sets.appendChild(setRow(e, s, j, i, fields, cols)));
     card.appendChild(sets);
     card.appendChild(el('div', { class: 'ex-actions' },
-      el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { const p = e.sets[e.sets.length - 1]; e.sets.push(Object.assign({}, p || {}, { done: false })); Store.putActive(); renderWorkout(); } }, '+ Set'),
+      el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { const p = e.sets[e.sets.length - 1]; const n = Object.assign({}, p || {}, { done: false }); n.pre = {}; for (const k of Object.keys(n)) if (k !== 'done' && k !== 'pre' && n[k] != null) n.pre[k] = true; e.sets.push(n); Store.putActive(); renderWorkout(); } }, '+ Set'),
       e.sets.length > 1 ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e.sets.pop(); Store.putActive(); renderWorkout(); } }, '− Set') : null,
       el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e._noteOpen = !e._noteOpen; renderWorkout(); } }, e.userNote ? 'Edit note' : 'Note'),
     ));
@@ -1320,6 +1424,9 @@ function setRow(e, s, j, i, fields, cols) {
       const raw = inp.value.trim();
       s[f.key] = isTime ? parseTime(raw, e.kind) : (raw === '' ? null : parseFloat(raw.replace(',', '.')));
       if (isTime && s[f.key] != null) inp.value = fmtClock(s[f.key]);
+      if (!s.pre) s.pre = {};
+      s.pre[f.key] = false;
+      carryDown(e, i, j, f.key, isTime);
       Store.putActive();
     });
     inp.addEventListener('focus', () => inp.select());
@@ -1327,6 +1434,26 @@ function setRow(e, s, j, i, fields, cols) {
   });
   row.appendChild(el('button', { class: 'tick' + (s.done ? ' on' : ''), type: 'button', 'aria-label': s.done ? 'Mark set not done' : 'Mark set done', 'aria-pressed': s.done ? 'true' : 'false', onclick: () => toggleSet(e, s, i, j) }));
   return row;
+}
+/* Copy a value you have just typed into the set below, so similar sets need typing once.
+   Only fills the next row, and never overwrites a number you typed there yourself. */
+function carryDown(e, i, j, key, isTime) {
+  const from = e.sets[j], next = e.sets[j + 1];
+  if (!from || !next || next.done) return;
+  const val = from[key];
+  if (val == null) return;
+  const typedThere = next.pre && next.pre[key] === false && next[key] != null;
+  if (typedThere) return;
+  if (next[key] === val) return;
+  next[key] = val;
+  if (!next.pre) next.pre = {};
+  next.pre[key] = true;
+  const box = document.getElementById(`set-${S.active.id}-${i}-${j + 1}-${key}`);
+  if (box) {
+    box.value = isTime ? fmtClock(val) : String(val);
+    box.classList.add('carried');
+    setTimeout(() => box.classList.remove('carried'), 800);
+  }
 }
 function firstNumber(t) { const m = String(t || '').match(/\d+/); return m ? m[0] : ''; }
 function toggleSet(e, s, i, j) {
@@ -1563,6 +1690,7 @@ function renderLibrary() {
   }
   const hidden = BUILTIN_SESSIONS.filter(b => S.sessions[b.id] && S.sessions[b.id].deleted);
   if (hidden.length) v.appendChild(el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { hidden.forEach(b => { const o = { id: b.id, deleted: false, updatedAt: Date.now() }; Store.putSession(o); }); toast(`Restored ${hidden.length} session${hidden.length === 1 ? '' : 's'}`); renderLibrary(); } }, `Restore ${hidden.length} hidden built-in session${hidden.length === 1 ? '' : 's'}`));
+  v.appendChild(planEditor());
   v.appendChild(settings());
 }
 function importer() {
