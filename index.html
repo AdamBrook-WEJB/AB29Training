@@ -302,6 +302,16 @@ pre.example { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Conso
 
 /* keep the header on one line on narrow phones — the dot still carries the meaning */
 @media (max-width: 460px) { .sync span:not(.dot) { display: none; } .sync { gap: 0; } }
+
+/* ---- Swap ---- */
+.ex-top-actions { display: flex; gap: 2px; align-items: flex-start; }
+.swap-list { display: grid; gap: 8px; max-height: 52vh; overflow-y: auto; }
+.swap { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; text-align: left;
+  background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 12px 14px; color: inherit; }
+.swap:hover { border-color: var(--gold); background: var(--surface-3); }
+.swap .n { font-family: var(--display); font-size: 20px; letter-spacing: 0.02em; color: var(--gold-bright); line-height: 1.1; }
+.swap .m { font-size: 12.5px; color: var(--gold-faint); margin-top: 3px; }
+.swap .kit { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--gold-dim); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 9px; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -1062,6 +1072,156 @@ function openModal(content) {
   return sheet;
 }
 function closeModal() { $('#modalRoot').innerHTML = ''; document.body.style.overflow = ''; }
+/* ---------- Swap suggestions ----------
+   If a bench is taken or a machine is broken, offer moves that hit the same thing
+   with different kit. Keyed by exercise id, with a muscle-group fallback. */
+const MUSCLE_ALTS = {
+  Chest: [
+    ['Dumbbell Bench Press','Dumbbell'], ['Machine Chest Press','Machine'], ['Incline Barbell Press','Barbell'],
+    ['Cable Chest Fly','Cable'], ['Dumbbell Floor Press','Dumbbell'], ['Push-Ups','Bodyweight'],
+  ],
+  Shoulders: [
+    ['Barbell Overhead Press','Barbell'], ['Machine Shoulder Press','Machine'], ['Arnold Press','Dumbbell'],
+    ['Landmine Press','Barbell'], ['Seated Dumbbell Shoulder Press','Dumbbell'], ['Pike Push-Ups','Bodyweight'],
+  ],
+  'Side Delts': [
+    ['Dumbbell Lateral Raise','Dumbbell'], ['Machine Lateral Raise','Machine'], ['Cable Lateral Raise','Cable'],
+    ['Band Lateral Raise','Band'], ['Upright Row','Barbell'],
+  ],
+  'Rear Delts': [
+    ['Reverse Pec Deck','Machine'], ['Bent-Over Rear Delt Fly','Dumbbell'], ['Face Pulls','Cable'],
+    ['Band Pull-Aparts','Band'], ['Rear Delt Cable Fly','Cable'],
+  ],
+  Triceps: [
+    ['Rope Tricep Push Down','Cable'], ['Cable Tricep Push Down (Bar)','Cable'], ['Skull Crushers','Barbell'],
+    ['Close-Grip Bench Press','Barbell'], ['Dips','Bodyweight'], ['Overhead Dumbbell Extension','Dumbbell'],
+  ],
+  Back: [
+    ['Wide Grip Lat Pulldown','Machine'], ['Pull-Ups','Bodyweight'], ['Seated Cable Row','Cable'],
+    ['Chest Supported Rows','Machine'], ['Barbell Row','Barbell'], ['Single Arm Rows','Dumbbell'],
+  ],
+  Lats: [
+    ['Wide Grip Lat Pulldown','Machine'], ['Pull-Ups','Bodyweight'], ['Neutral Grip Pulldown','Machine'],
+    ['Straight-Arm Pulldown','Cable'], ['Single-Arm Lat Pulldown','Cable'],
+  ],
+  Biceps: [
+    ['EZ Bar Curl','Barbell'], ['Dumbbell Curl','Dumbbell'], ['Cable Curl','Cable'],
+    ['Preacher Curl','Machine'], ['Hammer Curl','Dumbbell'], ['Chin-Ups','Bodyweight'],
+  ],
+  Quads: [
+    ['Leg Press','Machine'], ['Hack Squat','Machine'], ['Front Squat','Barbell'],
+    ['Goblet Squat','Dumbbell'], ['Bulgarian Split Squat','Dumbbell'], ['Leg Extension','Machine'],
+  ],
+  Hamstrings: [
+    ['Seated Leg Curl','Machine'], ['Lying Leg Curl','Machine'], ['Romanian Deadlift','Barbell'],
+    ['Dumbbell Romanian Deadlift','Dumbbell'], ['Cable Pull-Through','Cable'], ['Good Mornings','Barbell'],
+  ],
+  Glutes: [
+    ['Hip Thrust','Barbell'], ['Bulgarian Split Squat','Dumbbell'], ['Reverse Lunge','Dumbbell'],
+    ['Step-Ups','Dumbbell'], ['Cable Kickback','Cable'], ['Glute Bridge','Bodyweight'],
+  ],
+  Calves: [
+    ['Seated Calf Raise','Machine'], ['Standing Calf Raise Machine','Machine'], ['Leg Press Calf Raise','Machine'],
+    ['Single-Leg Dumbbell Calf Raise','Dumbbell'], ['Smith Machine Calf Raise','Machine'],
+  ],
+  Core: [
+    ['Hanging Leg Raise','Bodyweight'], ['Cable Crunch','Cable'], ['Plank','Bodyweight'],
+    ['Ab Wheel Rollout','Bodyweight'], ['Dead Bug','Bodyweight'],
+  ],
+};
+
+/* per-exercise: which muscle it belongs to, and the best few swaps first */
+const SWAPS = {
+  'barbell-bench-press': { muscle:'Chest', alts:[['Dumbbell Bench Press','Dumbbell'],['Machine Chest Press','Machine'],['Incline Barbell Press','Barbell'],['Dumbbell Floor Press','Dumbbell'],['Push-Ups','Bodyweight']] },
+  'incline-dumbbell-chest-press': { muscle:'Chest', alts:[['Incline Barbell Press','Barbell'],['Incline Machine Press','Machine'],['Cable Chest Fly','Cable'],['Dumbbell Bench Press','Dumbbell'],['Decline Push-Ups','Bodyweight']] },
+  'seated-dumbbell-shoulder-press': { muscle:'Shoulders', alts:[['Barbell Overhead Press','Barbell'],['Machine Shoulder Press','Machine'],['Arnold Press','Dumbbell'],['Landmine Press','Barbell'],['Pike Push-Ups','Bodyweight']] },
+  'overhead-press': { muscle:'Shoulders' },
+  'cable-lateral-raises': { muscle:'Side Delts', alts:[['Dumbbell Lateral Raise','Dumbbell'],['Machine Lateral Raise','Machine'],['Band Lateral Raise','Band'],['Upright Row','Barbell']] },
+  'dumbbell-lateral-raise': { muscle:'Side Delts' },
+  'cable-tricep-push-down-bar': { muscle:'Triceps', alts:[['Rope Tricep Push Down','Cable'],['Tricep Push Down Machine','Machine'],['Skull Crushers','Barbell'],['Close-Grip Bench Press','Barbell'],['Dips','Bodyweight']] },
+  'tricep-push-down-machine': { muscle:'Triceps', alts:[['Cable Tricep Push Down (Bar)','Cable'],['Rope Tricep Push Down','Cable'],['Skull Crushers','Barbell'],['Dips','Bodyweight']] },
+  'rope-tricep-push-down': { muscle:'Triceps', alts:[['Cable Tricep Push Down (Bar)','Cable'],['Overhead Dumbbell Extension','Dumbbell'],['Skull Crushers','Barbell'],['Dips','Bodyweight']] },
+  'overhead-tricep-extension-rope': { muscle:'Triceps', alts:[['Skull Crushers','Barbell'],['Dips','Bodyweight'],['Close-Grip Bench Press','Barbell'],['Single-Arm Dumbbell Extension','Dumbbell']] },
+  'wide-grip-lat-pulldown': { muscle:'Lats', alts:[['Pull-Ups','Bodyweight'],['Neutral Grip Pulldown','Machine'],['Assisted Pull-Up Machine','Machine'],['Single-Arm Lat Pulldown','Cable'],['Straight-Arm Pulldown','Cable']] },
+  'weighted-pull-ups': { muscle:'Lats', alts:[['Wide Grip Lat Pulldown','Machine'],['Assisted Pull-Up Machine','Machine'],['Chin-Ups','Bodyweight'],['Neutral Grip Pull-Ups','Bodyweight']] },
+  'chest-supported-rows': { muscle:'Back', alts:[['Seated Cable Row','Cable'],['Barbell Row','Barbell'],['T-Bar Row','Barbell'],['Single Arm Rows','Dumbbell'],['Seated Row Machine','Machine']] },
+  'single-arm-rows': { muscle:'Back', alts:[['Chest Supported Rows','Machine'],['Seated Cable Row','Cable'],['Barbell Row','Barbell'],['Seated Row Machine','Machine']] },
+  'seated-row-machine': { muscle:'Back', alts:[['Seated Cable Row','Cable'],['Chest Supported Rows','Machine'],['Barbell Row','Barbell'],['Single Arm Rows','Dumbbell']] },
+  'rear-delt-cable-fly': { muscle:'Rear Delts', alts:[['Reverse Pec Deck','Machine'],['Bent-Over Rear Delt Fly','Dumbbell'],['Face Pulls','Cable'],['Band Pull-Aparts','Band']] },
+  'wide-grip-ez-bar-curls': { muscle:'Biceps', alts:[['Dumbbell Curl','Dumbbell'],['Cable Curl','Cable'],['Preacher Curl','Machine'],['Barbell Curl','Barbell'],['Chin-Ups','Bodyweight']] },
+  'seated-alternating-hammer-curls': { muscle:'Biceps', alts:[['Rope Hammer Curl','Cable'],['Cross-Body Hammer Curl','Dumbbell'],['Reverse Curl','Barbell'],['Dumbbell Curl','Dumbbell']] },
+  'rotating-alternate-incline-bicep-curls': { muscle:'Biceps', alts:[['Incline Dumbbell Curl','Dumbbell'],['Dumbbell Curl','Dumbbell'],['Cable Curl','Cable'],['EZ Bar Curl','Barbell']] },
+  'heel-elevated-barbell-back-squat': { muscle:'Quads', alts:[['Hack Squat','Machine'],['Front Squat','Barbell'],['Leg Press','Machine'],['Goblet Squat','Dumbbell'],['Smith Machine Squat','Machine'],['Bulgarian Split Squat','Dumbbell']] },
+  'back-squat': { muscle:'Quads' },
+  'front-squat': { muscle:'Quads' },
+  'leg-press': { muscle:'Quads', alts:[['Hack Squat','Machine'],['Goblet Squat','Dumbbell'],['Bulgarian Split Squat','Dumbbell'],['Step-Ups','Dumbbell'],['Leg Extension','Machine']] },
+  'narrow-stance-dumbbell-romanian-deadlifts': { muscle:'Hamstrings', alts:[['Romanian Deadlift','Barbell'],['Single-Leg Romanian Deadlift','Dumbbell'],['Cable Pull-Through','Cable'],['Good Mornings','Barbell'],['Seated Leg Curl','Machine']] },
+  'romanian-deadlift': { muscle:'Hamstrings' },
+  'dumbbell-romanian-deadlift': { muscle:'Hamstrings' },
+  'seated-leg-curl': { muscle:'Hamstrings', alts:[['Lying Leg Curl','Machine'],['Romanian Deadlift','Barbell'],['Cable Pull-Through','Cable'],['Nordic Curl','Bodyweight'],['Good Mornings','Barbell']] },
+  'lying-leg-curl': { muscle:'Hamstrings' },
+  'dumbbell-walking-lunges': { muscle:'Glutes', alts:[['Reverse Lunge','Dumbbell'],['Bulgarian Split Squat','Dumbbell'],['Step-Ups','Dumbbell'],['Split Squat','Dumbbell'],['Leg Press (single leg)','Machine']] },
+  'walking-lunges': { muscle:'Glutes' },
+  'reverse-lunge': { muscle:'Glutes' },
+  'bulgarian-split-squat': { muscle:'Glutes' },
+  'hip-thrust': { muscle:'Glutes' },
+  'standing-calf-raise-machine': { muscle:'Calves', alts:[['Seated Calf Raise','Machine'],['Leg Press Calf Raise','Machine'],['Single-Leg Dumbbell Calf Raise','Dumbbell'],['Smith Machine Calf Raise','Machine']] },
+  'standing-calf-raise': { muscle:'Calves' },
+  'seated-calf-raise': { muscle:'Calves' },
+  'deadlift': { muscle:'Hamstrings', alts:[['Trap Bar Deadlift','Barbell'],['Romanian Deadlift','Barbell'],['Rack Pulls','Barbell'],['Dumbbell Romanian Deadlift','Dumbbell'],['Cable Pull-Through','Cable']] },
+  'lat-pulldown': { muscle:'Lats' },
+  'barbell-row': { muscle:'Back' },
+  'seated-cable-row': { muscle:'Back' },
+  'machine-chest-press': { muscle:'Chest' },
+  'incline-barbell-press': { muscle:'Chest' },
+  'bench-press': { muscle:'Chest' },
+  'dumbbell-floor-press': { muscle:'Chest' },
+  'cable-curl': { muscle:'Biceps' },
+  'barbell-curl': { muscle:'Biceps' },
+  'hammer-curl': { muscle:'Biceps' },
+  'ez-bar-curl': { muscle:'Biceps' },
+  'face-pulls': { muscle:'Rear Delts' },
+  'rear-delt-fly': { muscle:'Rear Delts' },
+  'cable-tricep-pushdown': { muscle:'Triceps' },
+  'dips': { muscle:'Triceps' },
+  'leg-extension': { muscle:'Quads' },
+  'goblet-squat': { muscle:'Quads' },
+  'dumbbell-goblet-squat': { muscle:'Quads' },
+  'hanging-leg-raise': { muscle:'Core' },
+  'hanging-knee-raise': { muscle:'Core' },
+  'cable-crunch': { muscle:'Core' },
+  'plank': { muscle:'Core' },
+  'ab-wheel-rollout': { muscle:'Core' },
+  'dead-bug': { muscle:'Core' },
+};
+
+/* Returns { muscle, options:[{name, kit, last}] } or null when we have nothing sensible. */
+function swapsFor(ex) {
+  if (!ex || (ex.kind !== 'weight' && ex.kind !== 'reps')) return null;
+  const key = slug(ex.name);
+  const entry = SWAPS[key] || SWAPS[slug(String(ex.name).replace(/\s*\(.*?\)\s*/g, ' ').trim())];
+  const muscle = entry && entry.muscle;
+  let list = (entry && entry.alts) || (muscle && MUSCLE_ALTS[muscle]) || null;
+  if (!list) return null;
+  const here = normName(ex.name);
+  const seen = new Set([here]);
+  const options = [];
+  for (const [name, kit] of list) {
+    if (seen.has(normName(name))) continue;
+    seen.add(normName(name));
+    options.push({ name, kit, last: lastEntry(name, S.active && S.active.id) });
+  }
+  /* top up from the muscle group if a bespoke list is short */
+  if (muscle && MUSCLE_ALTS[muscle]) {
+    for (const [name, kit] of MUSCLE_ALTS[muscle]) {
+      if (options.length >= 6) break;
+      if (seen.has(normName(name))) continue;
+      seen.add(normName(name));
+      options.push({ name, kit, last: lastEntry(name, S.active && S.active.id) });
+    }
+  }
+  return options.length ? { muscle: muscle || 'Same muscles', options } : null;
+}
 /* ================= Email a session summary =================
    Inside the Claude link: sends through the viewer's Gmail connector (mcp capability).
    On the GitHub copy (or anywhere fetch is allowed): posts to Web3Forms with the access key in Settings. */
@@ -1369,7 +1529,10 @@ function exerciseCard(e, i) {
       el('div', { class: 'ex-name' }, `${i + 1}. ${e.name}`),
       el('div', { class: 'ex-target num' }, [targetText(e), e.rest ? `rest ${fmtClock(e.rest)}` : null].filter(Boolean).join(' · ')),
     ),
-    el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e.skipped = !e.skipped; Store.putActive(); renderWorkout(); } }, e.skipped ? 'Unskip' : 'Skip'),
+    el('div', { class: 'ex-top-actions' },
+      swapsFor(e) ? el('button', { class: 'btn ghost sm', type: 'button', onclick: () => openSwap(e, i) }, 'Swap') : null,
+      el('button', { class: 'btn ghost sm', type: 'button', onclick: () => { e.skipped = !e.skipped; Store.putActive(); renderWorkout(); } }, e.skipped ? 'Unskip' : 'Skip'),
+    ),
   ));
   if (e.note) card.appendChild(el('div', { class: 'ex-note' }, e.note));
   const lastLine = [];
@@ -1470,6 +1633,48 @@ function toggleSet(e, s, i, j) {
     renderWorkout();
     if (isLastSet) { const next = a.exercises.findIndex((x, k) => k > i && !x.skipped && !x.sets.every(t => t.done)); if (next >= 0) setTimeout(() => { const c = $(`.ex[data-i="${next}"]`); c && c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); }
   } else { Store.putActive(); renderWorkout(); }
+}
+function openSwap(e, i) {
+  const info = swapsFor(e);
+  if (!info) return;
+  const list = el('div', { class: 'swap-list' });
+  info.options.forEach(o => {
+    list.appendChild(el('button', { class: 'swap', type: 'button', onclick: () => doSwap(e, i, o) },
+      el('span', null,
+        el('div', { class: 'n' }, o.name),
+        el('div', { class: 'm' }, o.last ? `Last: ${doneSets(o.last.ex).map(x => fmtSet(o.last.ex.kind, x)).join(', ')} · ${daysAgo(o.last.log.finishedAt)}` : 'Not logged before'),
+      ),
+      el('span', { class: 'kit' }, o.kit),
+    ));
+  });
+  openModal([
+    el('div', { class: 'eyebrow' }, `Swap · ${info.muscle}`),
+    el('h2', null, e.name),
+    el('p', { class: 'muted small' }, 'Same muscles, different kit. Your sets, reps and rest stay as they are.'),
+    list,
+    el('button', { class: 'btn block', type: 'button', onclick: closeModal }, 'Keep it as it is'),
+  ]);
+}
+function doSwap(e, i, opt) {
+  const a = S.active;
+  const wasName = e.name;
+  e.name = opt.name;
+  e.id = slug(opt.name);
+  e.note = `Swapped in for ${wasName}`;
+  e.swappedFrom = wasName;
+  /* refill the sets from whatever you last did on the new move */
+  const prev = opt.last ? doneSets(opt.last.ex) : [];
+  e.sets.forEach((s, j) => {
+    if (s.done) return;
+    const p = prev[j] || prev[prev.length - 1] || null;
+    s.pre = {};
+    KINDS[e.kind].fields.forEach(f => { s[f.key] = p ? p[f.key] : null; if (s[f.key] != null) s.pre[f.key] = true; });
+    s.rpe = null;
+  });
+  Store.putActive();
+  closeModal();
+  renderWorkout();
+  toast(`Swapped to ${opt.name}`);
 }
 function discardSession() {
   const sheet = openModal([
