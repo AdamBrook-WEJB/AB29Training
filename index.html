@@ -36,6 +36,7 @@
   --body: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
   --radius: 6px;
   --tabbar-h: 64px;
+  --sat: env(safe-area-inset-top, 0px);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -69,11 +70,13 @@ a { color: var(--gold-bright); }
 [hidden] { display: none !important; }
 
 /* ---- Shell ---- */
-.app { max-width: 720px; margin: 0 auto; padding-inline: 16px; padding-block: 0 calc(var(--tabbar-h) + 32px + env(safe-area-inset-bottom)); }
+.app { max-width: 720px; margin: 0 auto;
+  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+  padding-block: 0 calc(var(--tabbar-h) + 32px + env(safe-area-inset-bottom)); }
 .top {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding-block: 12px 10px;
+  padding-block: calc(12px + var(--sat)) 10px;
   background: linear-gradient(var(--bg) 82%, rgba(11, 10, 8, 0));
 }
 .wordmark { display: flex; align-items: baseline; gap: 10px; }
